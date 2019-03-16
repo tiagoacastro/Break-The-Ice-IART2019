@@ -2,7 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
-public class GameNode extends Node
+public class GameNode extends Node implements GameBoard
 {
     private char[][] board;
 
@@ -59,10 +59,22 @@ public class GameNode extends Node
                     pieceCoords[1] -= 1;
 
                     newBoard[pieceCoords[0]][pieceCoords[1] + 1] = '_'; //Old position
-                    newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] + 1];
+                    newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] + 1]; //Switch place
 
+                    //Make piece in question fall if that's the case
                     if(pieceCoords[0] < this.board.length - 1 && this.board[pieceCoords[0] + 1][pieceCoords[1]] == '_')
                         newBoard = dropPiece(newBoard, pieceCoords);
+
+                    //Make the other pieces above the original one fall if they exist
+                    if(newBoard[pieceCoords[0] - 1][pieceCoords[1] + 1] != '_')
+                    {
+                        int[] abovePieceCoords = pieceCoords.clone();
+
+                        abovePieceCoords[0] -= 1;
+                        abovePieceCoords[1] += 1;
+                        newBoard = dropPiece(newBoard, abovePieceCoords);
+                    }
+                        
                 }
 
             break;
@@ -80,18 +92,45 @@ public class GameNode extends Node
     public char[][] dropPiece(char[][] board, int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(board);
-        char piece = newBoard[pieceCoords[0]][pieceCoords[1]];
-
-        newBoard[pieceCoords[0]][pieceCoords[1]] = '_';
+        int[] coords = pieceCoords.clone();
+        char piece = newBoard[coords[0]][coords[1]];
+        
+        newBoard[coords[0]][coords[1]] = '_';
 
         do
         {
-            pieceCoords[0] += 1;
+            coords[0] += 1;
         }
-        while(pieceCoords[0] < board.length - 1 && newBoard[pieceCoords[0] + 1][pieceCoords[1]] != '_');
+        while(coords[0] < board.length - 1 && newBoard[coords[0] + 1][coords[1]] == '_');
 
-        newBoard[pieceCoords[0]][pieceCoords[1]] = piece;
+        newBoard[coords[0]][coords[1]] = piece;
 
+        return newBoard;
+    }
+
+    public char[][] dropColumn(char[][] board, int column)
+    {
+        int i;
+        char[][] newBoard = copyBoard(board);
+        int[] pieceCoords = {0, column};
+
+        for(i = 0; i < board.length; i++)
+            if(board[i][column] != '_')
+                break;
+
+        for(; i < board.length - 1; i++)
+            if(board[i + 1][column] == '_')
+            {
+                pieceCoords[0] = i;
+
+                while(newBoard[pieceCoords[0]][pieceCoords[1]] != '_')
+                {
+                    newBoard = dropPiece(newBoard, pieceCoords);
+                    pieceCoords[0]--;
+                }
+
+            }
+                
         return newBoard;
     }
 
@@ -106,6 +145,11 @@ public class GameNode extends Node
     }
 
     public void printBoard()
+    {
+        printBoard(board);
+    }
+
+    public void printBoard(char[][] board)
     {
         for(int i = 0; i < board.length; i++)
         {
@@ -122,5 +166,15 @@ public class GameNode extends Node
         }
 
         System.out.println("-------------------------------------");
+    }
+
+    public char[][] getBoard()
+    {
+        return this.board;
+    }
+
+    public void setBoard(char[][] board)
+    {
+        this.board = board;
     }
 }

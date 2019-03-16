@@ -14,25 +14,22 @@ public class BreakTheIce
             {'_', '_', '_', '_', '_', '_', '_'},
             {'_', '_', '_', '_', '_', '_', '_'},
             {'_', '_', '_', '_', '_', '_', '_'},
-            {'_', '_', '_', '_', '_', '_', '_'},
-            {'_', '_', '_', '_', '_', '_', '_'},
-            {'_', '_', '_', '_', '_', '_', '_'},
-            {'_', '_', '_', '_', '_', '_', '_'},
             {'_', '_', '_', 'b', '_', '_', '_'},
-            {'_', '_', 'b', 'b', '_', 'b', '_'}
+            {'_', '_', '_', 'b', '_', '_', '_'},
+            {'_', '_', '_', 'b', '_', '_', '_'},
+            {'_', '_', '_', 'b', '_', '_', '_'},
+            {'_', '_', '_', 'b', '_', '_', '_'},
+            {'_', '_', 'b', '_', '_', 'b', '_'}
         };
 
         GameNode root = new GameNode(null, 0, 0, "root", board);
+        int[] coords = {6, 3};
 
         root.printBoard();
 
-        int[] pieceCoords = {10, 3};
-        GameNode node = root.move("left", pieceCoords);
+        char[][] newBoard = root.dropColumn(board, 3);
 
-        node.printBoard();
-
-        pieceCoords[1] = 2;
-
-        node.move("left", pieceCoords).printBoard();
+        root.setBoard(newBoard);
+        root.printBoard();
     }
 }
