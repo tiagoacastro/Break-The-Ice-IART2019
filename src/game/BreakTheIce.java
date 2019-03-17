@@ -19,17 +19,16 @@ public class BreakTheIce
             {'_', '_', '_', 'b', '_', '_', '_'},
             {'_', '_', '_', 'b', '_', '_', '_'},
             {'_', '_', '_', 'b', '_', '_', '_'},
-            {'_', '_', 'b', '_', '_', 'b', '_'}
+            {'_', 'b', '_', 'b', '_', 'b', '_'}
         };
 
         GameNode root = new GameNode(null, 0, 0, "root", board);
-        int[] coords = {6, 3};
+        int[] coords = {11, 3};
 
         root.printBoard();
 
-        char[][] newBoard = root.dropColumn(board, 3);
+        root.move("right", coords).printBoard();
 
-        root.setBoard(newBoard);
-        root.printBoard();
+        
     }
 }

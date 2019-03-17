@@ -37,8 +37,6 @@ public class GameNode extends Node implements GameBoard
 
     public GameNode move(String direction, int[] pieceCoords)
     {
-        char[][] newBoard = copyBoard(this.board);
-        
         if(testPieceCoords(pieceCoords))
         {
             System.out.println("Invalid piece in move " + direction);
@@ -48,36 +46,72 @@ public class GameNode extends Node implements GameBoard
         switch(direction)
         {
             case "left":
+                return moveLeft(pieceCoords);
+
+            case "right":
+                return moveRight(pieceCoords);
+
+            default:
+                System.out.println("Invalid move direction: " + direction);
+                return null;
+        }
+    }
+
+    // Pretty much cpy pasted from move left, needs to be altered
+    public GameNode moveRight(int[] pieceCoords)
+    {
+        char[][] newBoard = copyBoard(this.board);
+
+        if (pieceCoords[1] == board[0].length - 1 || this.board[pieceCoords[0]][pieceCoords[1] + 1] != '_') 
+        {
+            System.out.println("Can't move right");
+            return null;
+        } 
+        else 
+        {
+            pieceCoords[1] += 1;
+
+            newBoard[pieceCoords[0]][pieceCoords[1] - 1] = '_'; // Old position
+            newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] - 1]; // Switch place
+
+            // Make piece in question fall if that's the case
+            if (pieceCoords[0] < this.board.length - 1 && this.board[pieceCoords[0] + 1][pieceCoords[1]] == '_')
+                newBoard = dropPiece(newBoard, pieceCoords);
+
+            // Make the other pieces above the original one fall if they exist
+            if (newBoard[pieceCoords[0] - 1][pieceCoords[1] - 1] != '_') 
+                newBoard = dropColumn(newBoard, pieceCoords[1] - 1); 
+            
+        }
+
+        return new GameNode(this, "Move Left", newBoard);
+    }
+
+    public GameNode moveLeft(int[] pieceCoords)
+    {
+        char[][] newBoard = copyBoard(this.board);
+
+        if(pieceCoords[1] == 0 || this.board[pieceCoords[0]][pieceCoords[1] - 1] != '_')
+        {
+            System.out.println("Can't move left");
+            return null;
+        }
+        else
+        {
+            pieceCoords[1] -= 1;
+
+            newBoard[pieceCoords[0]][pieceCoords[1] + 1] = '_'; //Old position
+            newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] + 1]; //Switch place
+
+            //Make piece in question fall if that's the case
+            if(pieceCoords[0] < this.board.length - 1 && this.board[pieceCoords[0] + 1][pieceCoords[1]] == '_')
+                newBoard = dropPiece(newBoard, pieceCoords);
+
+            //Make the other pieces above the original one fall if they exist
+            if(newBoard[pieceCoords[0] - 1][pieceCoords[1] + 1] != '_')    
+                newBoard = dropColumn(newBoard, pieceCoords[1] + 1);
+            
                 
-                if(pieceCoords[1] <= 0 || this.board[pieceCoords[0]][pieceCoords[1] - 1] != '_')
-                {
-                    System.out.println("Can't move left");
-                    return null;
-                }
-                else
-                {
-                    pieceCoords[1] -= 1;
-
-                    newBoard[pieceCoords[0]][pieceCoords[1] + 1] = '_'; //Old position
-                    newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] + 1]; //Switch place
-
-                    //Make piece in question fall if that's the case
-                    if(pieceCoords[0] < this.board.length - 1 && this.board[pieceCoords[0] + 1][pieceCoords[1]] == '_')
-                        newBoard = dropPiece(newBoard, pieceCoords);
-
-                    //Make the other pieces above the original one fall if they exist
-                    if(newBoard[pieceCoords[0] - 1][pieceCoords[1] + 1] != '_')
-                    {
-                        int[] abovePieceCoords = pieceCoords.clone();
-
-                        abovePieceCoords[0] -= 1;
-                        abovePieceCoords[1] += 1;
-                        newBoard = dropPiece(newBoard, abovePieceCoords);
-                    }
-                        
-                }
-
-            break;
         }
 
         return new GameNode(this, "Move Left", newBoard);
@@ -86,7 +120,7 @@ public class GameNode extends Node implements GameBoard
     public boolean testPieceCoords(int[] pieceCoords)
     {
         return pieceCoords[0] >= this.board.length || pieceCoords[1] >= this.board[0].length 
-        || this.board[pieceCoords[0]][pieceCoords[1]] == '_';
+        || pieceCoords[0] < 0 || pieceCoords[1] < 0 || this.board[pieceCoords[0]][pieceCoords[1]] == '_';
     }
 
     public char[][] dropPiece(char[][] board, int[] pieceCoords)
