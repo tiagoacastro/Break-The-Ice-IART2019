@@ -84,7 +84,7 @@ public class GameNode extends Node implements GameBoard
             
         }
 
-        return new GameNode(this, "Move Left", newBoard);
+        return new GameNode(this, "Move Right", newBoard);
     }
 
     public GameNode moveLeft(int[] pieceCoords)
@@ -110,11 +110,109 @@ public class GameNode extends Node implements GameBoard
             //Make the other pieces above the original one fall if they exist
             if(newBoard[pieceCoords[0] - 1][pieceCoords[1] + 1] != '_')    
                 newBoard = dropColumn(newBoard, pieceCoords[1] + 1);
-            
-                
         }
 
         return new GameNode(this, "Move Left", newBoard);
+    }
+
+    public GameNode switchBlock(String direction, int[] pieceCoords)
+    {
+        if(testPieceCoords(pieceCoords))
+        {
+            System.out.println("Invalid piece in move " + direction);
+            return null;
+        }
+
+        switch(direction)
+        {
+            case "left":
+                return switchLeft(pieceCoords);
+
+            case "right":
+                return switchRight(pieceCoords);
+
+            case "up":
+                return switchUp(pieceCoords);
+
+            case "down":
+                return switchDown(pieceCoords);
+
+            default:
+                System.out.println("Invalid switch direction: " + direction);
+                return null;
+        }
+    }
+
+    public GameNode switchLeft(int[] pieceCoords)
+    {
+        char[][] newBoard = copyBoard(this.board);
+
+        if(pieceCoords[1] == 0 || this.board[pieceCoords[0]][pieceCoords[1] - 1] == '_')
+        {
+            System.out.println("Can't switch left");
+            return null;
+        }
+        else
+        {
+            newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] - 1]; 
+            newBoard[pieceCoords[0]][pieceCoords[1] - 1] = board[pieceCoords[0]][pieceCoords[1]]; 
+        }
+
+        return new GameNode(this, "Switch Left", newBoard);
+    }
+
+    public GameNode switchRight(int[] pieceCoords)
+    {
+        char[][] newBoard = copyBoard(this.board);
+
+        if(pieceCoords[1] == board[0].length - 1 || this.board[pieceCoords[0]][pieceCoords[1] + 1] == '_')
+        {
+            System.out.println("Can't switch right");
+            return null;
+        }
+        else
+        {
+            newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] + 1];
+            newBoard[pieceCoords[0]][pieceCoords[1] + 1] = board[pieceCoords[0]][pieceCoords[1]]; 
+        }
+
+        return new GameNode(this, "Switch Right", newBoard);
+    }
+
+    public GameNode switchUp(int[] pieceCoords)
+    {
+        char[][] newBoard = copyBoard(this.board);
+
+        if(pieceCoords[0] == 0 || this.board[pieceCoords[0] - 1][pieceCoords[1]] == '_')
+        {
+            System.out.println("Can't switch up");
+            return null;
+        }
+        else
+        {
+            newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] - 1][pieceCoords[1]];
+            newBoard[pieceCoords[0] - 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]]; 
+        }
+
+        return new GameNode(this, "Switch Up", newBoard);
+    }
+
+    public GameNode switchDown(int[] pieceCoords)
+    {
+        char[][] newBoard = copyBoard(this.board);
+
+        if(pieceCoords[0] == board.length - 1|| this.board[pieceCoords[0] + 1][pieceCoords[1]] == '_')
+        {
+            System.out.println("Can't switch down");
+            return null;
+        }
+        else
+        {
+            newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] + 1][pieceCoords[1]];
+            newBoard[pieceCoords[0] + 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]]; 
+        }
+
+        return new GameNode(this, "Switch Down", newBoard);
     }
 
     public boolean testPieceCoords(int[] pieceCoords)
