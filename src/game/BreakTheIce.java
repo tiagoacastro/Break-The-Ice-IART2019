@@ -15,19 +15,19 @@ public class BreakTheIce
             {'_', '_', '_', '_', '_', '_', '_'},
             {'_', '_', '_', '_', '_', '_', '_'},
             {'_', '_', '_', 'b', '_', '_', '_'},
+            {'_', '_', '_', 'c', '_', '_', '_'},
+            {'_', '_', '_', 'a', '_', '_', '_'},
+            {'_', '_', '_', 'x', '_', '_', '_'},
             {'_', '_', '_', 'b', '_', '_', '_'},
-            {'_', '_', '_', 'b', '_', '_', '_'},
-            {'_', '_', '_', 'b', '_', '_', '_'},
-            {'_', '_', '_', 'b', '_', '_', '_'},
-            {'_', 'b', 'x', 'c', 'a', 'b', '_'}
+            {'_', 'b', '_', 'c', '_', 'b', '_'}
         };
 
-        GameNode root = new GameNode(null, 0, 0, "root", board);
-        int[] coords = {11, 3};
+        GameNode root = new GameNode(null, 0, 0, "root", new GameBoard(board));
+        int[] coords = {10, 3};
 
-        root.printBoard();
+        root.getBoard().printBoard();
 
-        root.switchBlock("down", coords).printBoard();
+        root.move("left", coords).getBoard().printBoard();
 
         
     }
