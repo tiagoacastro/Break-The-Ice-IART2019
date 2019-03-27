@@ -3,6 +3,14 @@ package game;
 public class GameBoard
 {
     private char[][] board;
+    private int maxMoves;
+    private static boolean showMove = false;
+
+    public GameBoard(char[][] board, int maxMoves)
+    {
+        this.board = board;
+        this.maxMoves = maxMoves;
+    }
 
     public GameBoard(char[][] board)
     {
@@ -28,23 +36,42 @@ public class GameBoard
             newBoard[pieceCoords[0]][pieceCoords[1]] = '_'; // Old position
             newBoard[newPieceCoords[0]][newPieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]]; // Switch place
 
+            if(showMove)
+                printBoard(newBoard);
+
             // Make piece in question fall if that's the case
             if (newPieceCoords[0] < this.board.length - 1 && this.board[newPieceCoords[0] + 1][newPieceCoords[1]] == '_')
             {
                 newBoard = dropPiece(newBoard, newPieceCoords);
                 droppedPieceCoords = getDroppedPieceCoords(newPieceCoords[1], newBoard);
                 searchDrop = true;
+
+                if(showMove)
+                    printBoard(newBoard);
             }
                 
-
             // Make the other pieces above the original one fall if they exist
-            if (pieceCoords[0] > 0 && newBoard[pieceCoords[0] - 1][pieceCoords[1]] != '_') 
+            if (pieceCoords[0] > 0 && newBoard[pieceCoords[0] - 1][pieceCoords[1]] != '_')
+            {
                 newBoard = dropColumn(newBoard, pieceCoords[1]); 
 
+                if(showMove)
+                    printBoard(newBoard);
+            } 
+                
             newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
 
+            if(showMove)
+                printBoard(newBoard); 
+
             if(searchDrop)
+            {
                 newBoard = explodeAround(droppedPieceCoords[0], droppedPieceCoords[1], newBoard);
+
+                if(showMove)
+                    printBoard(newBoard);
+            }
+                
         }
 
         return new GameBoard(newBoard);
@@ -69,23 +96,42 @@ public class GameBoard
             newBoard[pieceCoords[0]][pieceCoords[1]] = '_'; //Old position
             newBoard[newPieceCoords[0]][newPieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]]; //Switch place
 
+            if(showMove)
+                printBoard(newBoard);
+
             //Make piece in question fall if that's the case
             if(newPieceCoords[0] < this.board.length - 1 && this.board[newPieceCoords[0] + 1][newPieceCoords[1]] == '_')
             {
                 newBoard = dropPiece(newBoard, newPieceCoords);
                 droppedPieceCoords = getDroppedPieceCoords(newPieceCoords[1], newBoard);
                 searchDrop = true;
+
+                if(showMove)
+                    printBoard(newBoard);
             }
         
             //Make the other pieces above the original one fall if they exist
-            if(pieceCoords[0] > 0 && newBoard[pieceCoords[0] - 1][pieceCoords[1]] != '_')    
+            if(pieceCoords[0] > 0 && newBoard[pieceCoords[0] - 1][pieceCoords[1]] != '_')
+            {
                 newBoard = dropColumn(newBoard, pieceCoords[1]);
 
-
+                if(showMove)
+                    printBoard(newBoard);
+            }    
+                
             newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
 
-            if(searchDrop) 
+            if(showMove)
+                printBoard(newBoard);
+
+            if(searchDrop)
+            {
                 newBoard = explodeAround(droppedPieceCoords[0], droppedPieceCoords[1], newBoard);
+
+                if(showMove)
+                    printBoard(newBoard);
+            } 
+                
             
         }
 
@@ -107,11 +153,17 @@ public class GameBoard
                 return new GameBoard(newBoard);
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] - 1]; 
-            newBoard[pieceCoords[0]][pieceCoords[1] - 1] = board[pieceCoords[0]][pieceCoords[1]]; 
+            newBoard[pieceCoords[0]][pieceCoords[1] - 1] = board[pieceCoords[0]][pieceCoords[1]];
+            
+            if(showMove)
+                printBoard(newBoard);
         }
 
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1] - 1, newBoard);
+
+        if(showMove)
+            printBoard(newBoard);
 
         return new GameBoard(newBoard);
     }
@@ -131,11 +183,17 @@ public class GameBoard
                 return new GameBoard(newBoard);
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] + 1];
-            newBoard[pieceCoords[0]][pieceCoords[1] + 1] = board[pieceCoords[0]][pieceCoords[1]]; 
+            newBoard[pieceCoords[0]][pieceCoords[1] + 1] = board[pieceCoords[0]][pieceCoords[1]];
+            
+            if(showMove)
+                printBoard(newBoard);
         }
 
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1] + 1, newBoard);
+
+        if(showMove)
+            printBoard(newBoard);
 
         return new GameBoard(newBoard);
     }
@@ -155,11 +213,17 @@ public class GameBoard
                 return new GameBoard(newBoard);
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] - 1][pieceCoords[1]];
-            newBoard[pieceCoords[0] - 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]]; 
+            newBoard[pieceCoords[0] - 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]];
+            
+            if(showMove)
+                printBoard(newBoard);
         }
 
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
         newBoard = explodeAround(pieceCoords[0] - 1, pieceCoords[1], newBoard);
+
+        if(showMove)
+            printBoard(newBoard);
 
         return new GameBoard(newBoard);
     }
@@ -179,11 +243,17 @@ public class GameBoard
                 return new GameBoard(newBoard);
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] + 1][pieceCoords[1]];
-            newBoard[pieceCoords[0] + 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]]; 
+            newBoard[pieceCoords[0] + 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]];
+
+            if(showMove)
+                printBoard(newBoard); 
         }
 
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
         newBoard = explodeAround(pieceCoords[0] + 1, pieceCoords[1], newBoard);
+
+        if(showMove)
+            printBoard(newBoard);
 
         return new GameBoard(newBoard);
     }
@@ -258,6 +328,7 @@ public class GameBoard
     public char[][] explodeAll(char[][] board)
     {
         char[][] newBoard = copyBoard(board), testBoard;
+        boolean recalculate = false;
         
         for(int i = 0; i < board.length; i++)
         {
@@ -266,7 +337,42 @@ public class GameBoard
             if(testBoard != null)
             {
                 newBoard = copyBoard(testBoard);
-                printBoard(newBoard);
+                recalculate = true;
+
+                if(showMove)
+                    printBoard(newBoard);
+            }
+
+            if(i < newBoard[i].length)
+            {
+                testBoard = explodeColumn(i, newBoard);
+
+                if(testBoard != null)
+                {
+                    newBoard = copyBoard(testBoard);
+                    recalculate = true;
+
+                    if(showMove)
+                        printBoard(newBoard);
+                }
+            }
+                
+            if(i == board.length - 1 && recalculate)
+            {
+                recalculate = false;
+                i = 0;
+                continue;
+            }
+
+
+            /*
+            if(testBoard != null)
+            {
+                newBoard = copyBoard(testBoard);
+                
+                if(showMove)
+                    printBoard(newBoard);
+
                 i = 0;
                 continue;
             }
@@ -279,12 +385,15 @@ public class GameBoard
                     if(testBoard != null)
                     {
                         newBoard = copyBoard(testBoard);
-                        printBoard(newBoard);
+                        
+                        if(showMove)
+                            printBoard(newBoard);
+
                         i = 0;
                         continue;
                     }
                 }
-            }        
+            } */       
         }
 
         return newBoard;
@@ -330,22 +439,39 @@ public class GameBoard
                         foundPattern = true;
 
                         //Destroy previous blocks
-                        for(int j = 0; j < 3; j++)
+                        if(showMove)
                         {
-                            newBoard[line][i - 2 + j] = '_';
-
-                            if(line > 0 && newBoard[line - 1][i - 2 + j] != '_')
-                                newBoard = dropColumn(newBoard, i - 2 + j);
+                            for(int j = 0; j < 3; j++)
+                                newBoard[line][i - 2 + j] = '*';
                         }
+                        else
+                        {
+                            for(int j = 0; j < 3; j++)
+                            {
+                                newBoard[line][i - 2 + j] = '_';
+    
+                                if(line > 0 && newBoard[line - 1][i - 2 + j] != '_')
+                                    newBoard = dropColumn(newBoard, i - 2 + j);
+                            }
+                        }
+                        
                     }
                     else
                         if(counter > 3)
                         {
-                            newBoard[line][i] = '_';
+                            if(showMove)
+                            {
+                                newBoard[line][i] = '*';
+                            }
+                            else
+                            {
+                                newBoard[line][i] = '_';
 
-                            if(line > 0 && newBoard[line - 1][i] != '_')
-                                newBoard = dropColumn(newBoard, i);
-                        }
+                                if(line > 0 && newBoard[line - 1][i] != '_')
+                                    newBoard = dropColumn(newBoard, i);
+                            }
+                            
+                        } 
                 }
                 else
                 {
@@ -360,7 +486,23 @@ public class GameBoard
         }
 
         if(foundPattern)
+        {
+            if(showMove)
+            {
+                printBoard(newBoard);
+
+                for(int i = 0; i < newBoard[line].length; i++)
+                    if(newBoard[line][i] == '*')
+                    {
+                        newBoard[line][i] = '_';
+
+                        if(line > 0 && newBoard[line - 1][i] != '_')
+                            newBoard = dropColumn(newBoard, i);
+                    }
+            }
+
             return newBoard;
+        }
         else
             return null;
     }
@@ -373,43 +515,56 @@ public class GameBoard
         boolean foundPattern = false;
 
         for(int i = newBoard.length - 1; i >= 0; i--)
-            if(newBoard[i][column] != '_')
+            if(newBoard[i][column] == currentColor && newBoard[i][column] != '_')
             {
-                if(newBoard[i][column] == currentColor)
-                {
-                    counter++;
+                counter++;
 
-                    if(counter == 3)
+                if(counter == 3)
+                {
+                    foundPattern = true;
+
+                    if(showMove)
                     {
-                        foundPattern = true;
+                        newBoard[i + 2][column] = '*';
+                        newBoard[i + 1][column] = '*';
+                        newBoard[i][column] = '*';
+                    }
+                    else
+                    {
                         newBoard[i + 2][column] = '_';
                         newBoard[i + 1][column] = '_';
                         newBoard[i][column] = '_';
                     }
-                    else
-                        if(counter > 3)
-                            newBoard[i][column] = '_';
                         
                 }
                 else
+                    if(counter > 3)
+                        if(showMove)
+                            newBoard[i][column] = '*';
+                        else
+                            newBoard[i][column] = '_';
+            }
+            else 
+            {
+                if(counter >= 3)
                 {
-                    if(counter >= 3)
+                    if(showMove)
                     {
                         printBoard(newBoard);
-                        newBoard = dropColumn(newBoard, column);
-                        i += counter;
-                        printBoard(newBoard);
+
+                        for(int j = 0; j < newBoard.length; j++)
+                            if(newBoard[j][column] == '*')
+                                newBoard[j][column] = '_';
+
+                        
                     }
 
-                    counter = 1;
-                    currentColor =  newBoard[i][column];
+                    newBoard = dropColumn(newBoard, column);
+                    i += counter;
                 }
 
-                
-            }
-            else
-            {
-                currentColor = 'X';
+                counter = 1;
+                currentColor =  newBoard[i][column];
             }
 
         if(foundPattern)
@@ -434,6 +589,16 @@ public class GameBoard
         return board;
     }
 
+    public int getMaxMoves()
+    {
+        return maxMoves;
+    }
+
+    public static void setShowMove(boolean showMove)
+    {
+        GameBoard.showMove = showMove;
+    }
+
     public void printBoard()
     {
         printBoard(board);
@@ -455,7 +620,7 @@ public class GameBoard
             System.out.print("\n");
         }
 
-        System.out.println("-------------------------------------");
+        System.out.println("---------------");
     }
 
     public boolean testPieceCoords(int[] pieceCoords)

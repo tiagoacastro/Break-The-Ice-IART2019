@@ -5,19 +5,22 @@ import java.util.ArrayList;
 public class GameNode extends Node
 {
     private GameBoard board;
+    private int moves;
 
-    public GameNode(Node parentNode, int depth, int pathCost, String operator, GameBoard board)
+    public GameNode(Node parentNode, int depth, int pathCost, String operator, int moves, GameBoard board)
     {
         super(parentNode, depth, pathCost, operator);
 
         this.board = board;
+        this.moves = moves;
     }
 
-    public GameNode(Node parentNode, String operator, GameBoard board)
+    public GameNode(Node parentNode, String operator, int moves, GameBoard board)
     {
         super(parentNode, operator);
 
         this.board = board;
+        this.moves = moves;
     }
 
     public ArrayList<Node> expandNode()
@@ -38,8 +41,6 @@ public class GameNode extends Node
                 {
                     if(j > 0)
                     {
-                        
-
                         if(board[i][j - 1] != '_')
                             nodeList.add(this.switchBlock("left", pieceCoords));
                         else
@@ -67,7 +68,30 @@ public class GameNode extends Node
 
     public boolean depthSearch()
     {
-        return false;
+        if(!this.testGoal())
+        {
+            if(this.moves > board.getMaxMoves())
+                return false;
+
+            ArrayList<Node> children = this.expandNode();
+
+            for(int i = 0; i < children.size(); i++)
+            {
+                if(children.get(i).depthSearch())
+                {
+                    Node.solution.add(this.operator);
+                    return true;
+                }
+                    
+            }
+
+            return false;
+        }
+        else
+        {
+            Node.solution.add(this.operator);
+            return true;
+        }
     }
 
     public boolean testGoal()
@@ -87,7 +111,6 @@ public class GameNode extends Node
         GameBoard newBoard = null;
         String op = "null";
         
-
         if(!board.testPieceCoords(pieceCoords))
         {
             System.out.println("Invalid piece in move " + direction);
@@ -98,12 +121,12 @@ public class GameNode extends Node
         {
             case "left":
                 newBoard = board.movePieceLeft(pieceCoords);
-                op = "Move piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") left";
+                op = "move left " + pieceCoords[0] + " " +  pieceCoords[1];
                 break;
 
             case "right":
                 newBoard = board.movePieceRight(pieceCoords);
-                op = "Move piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") right";
+                op = "move right " + pieceCoords[0] + " " + pieceCoords[1];
                 break;
 
             default:
@@ -111,7 +134,7 @@ public class GameNode extends Node
                 return null;
         }
 
-        return new GameNode(this, op, newBoard);
+        return new GameNode(this, op, this.moves + 1, newBoard);
     }
 
     public GameNode switchBlock(String direction, int[] pieceCoords)
@@ -125,28 +148,26 @@ public class GameNode extends Node
             return null;
         }
 
-        
-
         switch(direction)
         {
             case "left":
                 newBoard = board.switchPieceLeft(pieceCoords);
-                op = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") left";
+                op = "switch left " + pieceCoords[0] + " " + pieceCoords[1];
                 break;
 
             case "right":
                 newBoard = board.switchPieceRight(pieceCoords);
-                op = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") right";
+                op = "switch right " + pieceCoords[0] + " " + pieceCoords[1];
                 break;
 
             case "up":
                 newBoard = board.switchPieceUp(pieceCoords);
-                op = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") up";
+                op = "switch up " + pieceCoords[0] + " " + pieceCoords[1];
                 break;
 
             case "down":
                 newBoard = board.switchPieceDown(pieceCoords);
-                op = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") down";
+                op = "switch down " + pieceCoords[0] + " " + pieceCoords[1];
                 break;
 
             default:
@@ -154,7 +175,39 @@ public class GameNode extends Node
                 return null;
         }
 
-        return new GameNode(this, op, newBoard);
+        return new GameNode(this, op, this.moves + 1, newBoard);
+    }
+
+    public void traceSolution()
+    {
+        String[] move;
+        String op, direction;
+        int[] pieceCoords = new int[2];
+
+        GameBoard.setShowMove(true);
+
+        for(int i = 0; i < Node.solution.size() - 1; i++)
+        {
+            move = Node.solution.get(i).split("\\s+");
+
+            if(move.length != 4)
+            {
+                System.out.println("Invalid Solution: " + Node.solution.get(i));
+                continue;
+            }
+
+            op = move[0];
+            direction = move[1];
+            pieceCoords[0] = Integer.parseInt(move[2]);
+            pieceCoords[1] = Integer.parseInt(move[3]);
+
+            System.out.println("\n" + op + " " + direction + "(" + move[2] + "," + move[3] + ")\n");
+
+            if(op.equals("move"))
+                this.move(direction, pieceCoords);
+            else
+                this.switchBlock(direction, pieceCoords);
+        }
     }
 
     public void printBoard()
