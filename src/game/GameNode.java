@@ -186,15 +186,18 @@ public class GameNode extends Node
 
         GameBoard.setShowMove(true);
 
-        for(int i = 0; i < Node.solution.size() - 1; i++)
+        for(int i = 0; i < Node.solution.size(); i++)
         {
             move = Node.solution.get(i).split("\\s+");
 
             if(move.length != 4)
             {
-                System.out.println("Invalid Solution: " + Node.solution.get(i));
+                if(!move[0].equals("root"))
+                    System.out.println("Invalid Solution: " + Node.solution.get(i));
+                    
                 continue;
             }
+            
 
             op = move[0];
             direction = move[1];
@@ -207,6 +210,15 @@ public class GameNode extends Node
                 this.move(direction, pieceCoords);
             else
                 this.switchBlock(direction, pieceCoords);
+        }
+    }
+
+    public void traceSolutionUp()
+    {
+        if(!operator.equals("root"))
+        {
+            solution.add(0, operator);
+            ((GameNode) parentNode).traceSolutionUp();
         }
     }
 

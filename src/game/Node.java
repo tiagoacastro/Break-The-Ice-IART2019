@@ -28,6 +28,8 @@ public abstract class Node
     public abstract ArrayList<Node> expandNode();
     public abstract boolean depthSearch();
     public abstract boolean testGoal();
+    public abstract void traceSolution();
+    public abstract void traceSolutionUp();
 
     public Node getParentNode()
     {

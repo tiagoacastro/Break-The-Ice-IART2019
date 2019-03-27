@@ -44,7 +44,7 @@ public class BreakTheIce
         int[] coords = {10, 3};
 
         Bot bot = new Bot(root);
-        bot.search(0);
+        bot.search(1);
 
         
         /*
