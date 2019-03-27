@@ -72,7 +72,14 @@ public class GameNode extends Node
 
     public boolean testGoal()
     {
-        return false;
+        char[][] board = getBoard();
+
+        for(int i = 0; i < board.length; i++)
+            for(int j = 0; j < board[i].length; j++)
+                if(board[i][j] != '_')
+                    return false;
+
+        return true;
     }
 
     public GameNode move(String direction, int[] pieceCoords)
