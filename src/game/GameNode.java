@@ -22,7 +22,45 @@ public class GameNode extends Node
 
     public ArrayList<Node> expandNode()
     {
-        return null;
+        ArrayList<Node> nodeList = new ArrayList<Node>();
+        char[][] board = getBoard();
+        char piece;
+        int[] pieceCoords = new int[2];
+
+        for(int i = 0; i < board.length; i++)
+            for(int j = 0; j < board.length; j++)
+            {
+                piece = board[i][j];
+                pieceCoords[0] = i;
+                pieceCoords[1] = j;
+
+                if(piece != '_')
+                {
+                    if(j > 0)
+                    {
+                        nodeList.add(this.move("left", pieceCoords));
+
+                        if(board[i][j - 1] != '_')
+                            nodeList.add(this.switchBlock("left", pieceCoords));
+                    }
+
+                    if(j < board[i].length - 1)
+                    {
+                        nodeList.add(this.move("right", pieceCoords));
+
+                        if(board[i][j + 1] != '_')
+                            nodeList.add(this.switchBlock("right", pieceCoords));
+                    }
+
+                    if(i < board.length - 1 && board[i + 1][j] != '_')
+                        nodeList.add(this.switchBlock("down", pieceCoords));
+
+                    if(i > 0 && board[i - 1][j] != '_')
+                        nodeList.add(this.switchBlock("down", pieceCoords));
+                }
+            }
+
+        return nodeList;
     }
 
     public boolean depthSearch()
@@ -112,12 +150,17 @@ public class GameNode extends Node
         board.printBoard();
     }
 
-    public GameBoard getBoard()
+    public GameBoard getGameBoard()
     {
         return this.board;
     }
 
-    public void setBoard(GameBoard board)
+    public char[][] getBoard()
+    {
+        return board.getBoard();
+    }
+
+    public void setGameBoard(GameBoard board)
     {
         this.board = board;
     }

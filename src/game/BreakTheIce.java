@@ -25,7 +25,7 @@ public class BreakTheIce
         GameNode root = new GameNode(null, 0, 0, "root", new GameBoard(board));
         int[] coords = {10, 3};
 
-        root.getBoard().printBoard();
+        root.printBoard();
 
         GameNode node = root.switchBlock("down", coords);
 
