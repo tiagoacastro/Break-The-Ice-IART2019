@@ -15,7 +15,7 @@ public class GameBoard
 
         if (pieceCoords[1] == board[0].length - 1 || this.board[pieceCoords[0]][pieceCoords[1] + 1] != '_') 
         {
-            System.out.println("Can't move right");
+            System.out.println("Can't move right: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
         } 
         else 
@@ -32,7 +32,7 @@ public class GameBoard
             if (newPieceCoords[0] < this.board.length - 1 && this.board[newPieceCoords[0] + 1][newPieceCoords[1]] == '_')
             {
                 newBoard = dropPiece(newBoard, newPieceCoords);
-                droppedPieceCoords = getDroppedPieceCoords(newPieceCoords[1]);
+                droppedPieceCoords = getDroppedPieceCoords(newPieceCoords[1], newBoard);
                 searchDrop = true;
             }
                 
@@ -56,7 +56,7 @@ public class GameBoard
 
         if(pieceCoords[1] == 0 || this.board[pieceCoords[0]][pieceCoords[1] - 1] != '_')
         {
-            System.out.println("Can't move left");
+            System.out.println("Can't move left: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
         }
         else
@@ -73,7 +73,7 @@ public class GameBoard
             if(newPieceCoords[0] < this.board.length - 1 && this.board[newPieceCoords[0] + 1][newPieceCoords[1]] == '_')
             {
                 newBoard = dropPiece(newBoard, newPieceCoords);
-                droppedPieceCoords = getDroppedPieceCoords(newPieceCoords[1]);
+                droppedPieceCoords = getDroppedPieceCoords(newPieceCoords[1], newBoard);
                 searchDrop = true;
             }
         
@@ -98,7 +98,7 @@ public class GameBoard
 
         if(pieceCoords[1] == 0 || this.board[pieceCoords[0]][pieceCoords[1] - 1] == '_')
         {
-            System.out.println("Can't switch left");
+            System.out.println("Can't switch left: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
         }
         else
@@ -122,7 +122,7 @@ public class GameBoard
 
         if(pieceCoords[1] == board[0].length - 1 || this.board[pieceCoords[0]][pieceCoords[1] + 1] == '_')
         {
-            System.out.println("Can't switch right");
+            System.out.println("Can't switch right: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
         }
         else
@@ -146,7 +146,7 @@ public class GameBoard
 
         if(pieceCoords[0] == 0 || this.board[pieceCoords[0] - 1][pieceCoords[1]] == '_')
         {
-            System.out.println("Can't switch up");
+            System.out.println("Can't switch up: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
         }
         else
@@ -170,7 +170,7 @@ public class GameBoard
 
         if(pieceCoords[0] == board.length - 1|| this.board[pieceCoords[0] + 1][pieceCoords[1]] == '_')
         {
-            System.out.println("Can't switch down");
+            System.out.println("Can't switch down: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
         }
         else
@@ -207,7 +207,7 @@ public class GameBoard
         return newBoard;
     }
 
-    public int[] getDroppedPieceCoords(int column)
+    public int[] getDroppedPieceCoords(int column, char[][] board)
     {
         int[] droppedPieceCoords = new int[2];
 
@@ -219,6 +219,8 @@ public class GameBoard
 
                 return droppedPieceCoords;
             }
+
+        System.out.println("Couldn't find dropped piece at column " + column);
 
         droppedPieceCoords[0] = -1;
         droppedPieceCoords[1] = -1;
@@ -291,9 +293,6 @@ public class GameBoard
     public char[][] explodeAround(int line, int column, char[][] board)
     {
         char[][] newBoard = copyBoard(board), testBoard;
-
-        System.out.print("" + line + " | ");
-        System.out.println(column);
 
         testBoard = explodeLine(line, newBoard);
         

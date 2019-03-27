@@ -28,7 +28,7 @@ public class GameNode extends Node
         int[] pieceCoords = new int[2];
 
         for(int i = 0; i < board.length; i++)
-            for(int j = 0; j < board.length; j++)
+            for(int j = 0; j < board[i].length; j++)
             {
                 piece = board[i][j];
                 pieceCoords[0] = i;
@@ -38,25 +38,27 @@ public class GameNode extends Node
                 {
                     if(j > 0)
                     {
-                        nodeList.add(this.move("left", pieceCoords));
+                        
 
                         if(board[i][j - 1] != '_')
                             nodeList.add(this.switchBlock("left", pieceCoords));
+                        else
+                            nodeList.add(this.move("left", pieceCoords));
                     }
 
                     if(j < board[i].length - 1)
                     {
-                        nodeList.add(this.move("right", pieceCoords));
-
                         if(board[i][j + 1] != '_')
                             nodeList.add(this.switchBlock("right", pieceCoords));
+                        else
+                            nodeList.add(this.move("right", pieceCoords));
                     }
 
                     if(i < board.length - 1 && board[i + 1][j] != '_')
                         nodeList.add(this.switchBlock("down", pieceCoords));
 
                     if(i > 0 && board[i - 1][j] != '_')
-                        nodeList.add(this.switchBlock("down", pieceCoords));
+                        nodeList.add(this.switchBlock("up", pieceCoords));
                 }
             }
 
@@ -76,7 +78,8 @@ public class GameNode extends Node
     public GameNode move(String direction, int[] pieceCoords)
     {
         GameBoard newBoard = null;
-        String operator = "null";
+        String op = "null";
+        
 
         if(!board.testPieceCoords(pieceCoords))
         {
@@ -88,12 +91,12 @@ public class GameNode extends Node
         {
             case "left":
                 newBoard = board.movePieceLeft(pieceCoords);
-                operator = "Move piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") left";
+                op = "Move piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") left";
                 break;
 
             case "right":
                 newBoard = board.movePieceRight(pieceCoords);
-                operator = "Move piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") right";
+                op = "Move piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") right";
                 break;
 
             default:
@@ -101,13 +104,13 @@ public class GameNode extends Node
                 return null;
         }
 
-        return new GameNode(this, operator, newBoard);
+        return new GameNode(this, op, newBoard);
     }
 
     public GameNode switchBlock(String direction, int[] pieceCoords)
     {
         GameBoard newBoard = null;
-        String operator = "null";
+        String op = "null";
 
         if(!board.testPieceCoords(pieceCoords))
         {
@@ -115,26 +118,28 @@ public class GameNode extends Node
             return null;
         }
 
+        
+
         switch(direction)
         {
             case "left":
                 newBoard = board.switchPieceLeft(pieceCoords);
-                operator = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") left";
+                op = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") left";
                 break;
 
             case "right":
                 newBoard = board.switchPieceRight(pieceCoords);
-                operator = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") right";
+                op = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") right";
                 break;
 
             case "up":
                 newBoard = board.switchPieceUp(pieceCoords);
-                operator = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") up";
+                op = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") up";
                 break;
 
             case "down":
                 newBoard = board.switchPieceDown(pieceCoords);
-                operator = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") down";
+                op = "Switch piece at (" + pieceCoords[0] + ", " + pieceCoords[1] + ") down";
                 break;
 
             default:
@@ -142,7 +147,7 @@ public class GameNode extends Node
                 return null;
         }
 
-        return new GameNode(this, operator, newBoard);
+        return new GameNode(this, op, newBoard);
     }
 
     public void printBoard()

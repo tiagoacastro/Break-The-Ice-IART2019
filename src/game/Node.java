@@ -21,6 +21,8 @@ public abstract class Node
     {
         this.depth = parentNode.depth + 1;
         this.pathCost = 1;
+        this.parentNode = parentNode;
+        this.operator = operator;
     }
 
     public abstract ArrayList<Node> expandNode();
