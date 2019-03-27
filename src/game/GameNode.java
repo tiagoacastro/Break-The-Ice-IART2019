@@ -107,7 +107,10 @@ public class GameNode extends Node
         return new GameNode(this, operator, newBoard);
     }
 
-    
+    public void printBoard()
+    {
+        board.printBoard();
+    }
 
     public GameBoard getBoard()
     {

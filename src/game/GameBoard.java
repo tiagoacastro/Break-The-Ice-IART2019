@@ -20,7 +20,8 @@ public class GameBoard
         } 
         else 
         {
-            int[] newPieceCoords = pieceCoords.clone();
+            int[] newPieceCoords = pieceCoords.clone(), droppedPieceCoords = new int[2];
+            boolean searchDrop = false;
 
             newPieceCoords[1] += 1;
 
@@ -29,12 +30,21 @@ public class GameBoard
 
             // Make piece in question fall if that's the case
             if (newPieceCoords[0] < this.board.length - 1 && this.board[newPieceCoords[0] + 1][newPieceCoords[1]] == '_')
+            {
                 newBoard = dropPiece(newBoard, newPieceCoords);
+                droppedPieceCoords = getDroppedPieceCoords(newPieceCoords[1]);
+                searchDrop = true;
+            }
+                
 
             // Make the other pieces above the original one fall if they exist
             if (pieceCoords[0] > 0 && newBoard[pieceCoords[0] - 1][pieceCoords[1]] != '_') 
                 newBoard = dropColumn(newBoard, pieceCoords[1]); 
-            
+
+            newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
+
+            if(searchDrop)
+                newBoard = explodeAround(droppedPieceCoords[0], droppedPieceCoords[1], newBoard);
         }
 
         return new GameBoard(newBoard);
@@ -51,7 +61,8 @@ public class GameBoard
         }
         else
         {
-            int[] newPieceCoords = pieceCoords.clone();
+            int[] newPieceCoords = pieceCoords.clone(), droppedPieceCoords = new int[2];
+            boolean searchDrop = false;
 
             newPieceCoords[1] -= 1;
 
@@ -60,11 +71,22 @@ public class GameBoard
 
             //Make piece in question fall if that's the case
             if(newPieceCoords[0] < this.board.length - 1 && this.board[newPieceCoords[0] + 1][newPieceCoords[1]] == '_')
+            {
                 newBoard = dropPiece(newBoard, newPieceCoords);
-
+                droppedPieceCoords = getDroppedPieceCoords(newPieceCoords[1]);
+                searchDrop = true;
+            }
+        
             //Make the other pieces above the original one fall if they exist
             if(pieceCoords[0] > 0 && newBoard[pieceCoords[0] - 1][pieceCoords[1]] != '_')    
                 newBoard = dropColumn(newBoard, pieceCoords[1]);
+
+
+            newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
+
+            if(searchDrop) 
+                newBoard = explodeAround(droppedPieceCoords[0], droppedPieceCoords[1], newBoard);
+            
         }
 
         return new GameBoard(newBoard);
@@ -81,9 +103,15 @@ public class GameBoard
         }
         else
         {
+            if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0]][pieceCoords[1] - 1])
+                return new GameBoard(newBoard);
+
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] - 1]; 
             newBoard[pieceCoords[0]][pieceCoords[1] - 1] = board[pieceCoords[0]][pieceCoords[1]]; 
         }
+
+        newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
+        newBoard = explodeAround(pieceCoords[0], pieceCoords[1] - 1, newBoard);
 
         return new GameBoard(newBoard);
     }
@@ -99,9 +127,15 @@ public class GameBoard
         }
         else
         {
+            if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0]][pieceCoords[1] + 1])
+                return new GameBoard(newBoard);
+
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] + 1];
             newBoard[pieceCoords[0]][pieceCoords[1] + 1] = board[pieceCoords[0]][pieceCoords[1]]; 
         }
+
+        newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
+        newBoard = explodeAround(pieceCoords[0], pieceCoords[1] + 1, newBoard);
 
         return new GameBoard(newBoard);
     }
@@ -117,9 +151,15 @@ public class GameBoard
         }
         else
         {
+            if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0] - 1][pieceCoords[1]])
+                return new GameBoard(newBoard);
+
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] - 1][pieceCoords[1]];
             newBoard[pieceCoords[0] - 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]]; 
         }
+
+        newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
+        newBoard = explodeAround(pieceCoords[0] - 1, pieceCoords[1], newBoard);
 
         return new GameBoard(newBoard);
     }
@@ -135,9 +175,15 @@ public class GameBoard
         }
         else
         {
+            if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0] + 1][pieceCoords[1]])
+                return new GameBoard(newBoard);
+
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] + 1][pieceCoords[1]];
             newBoard[pieceCoords[0] + 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]]; 
         }
+
+        newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
+        newBoard = explodeAround(pieceCoords[0] + 1, pieceCoords[1], newBoard);
 
         return new GameBoard(newBoard);
     }
@@ -161,6 +207,25 @@ public class GameBoard
         return newBoard;
     }
 
+    public int[] getDroppedPieceCoords(int column)
+    {
+        int[] droppedPieceCoords = new int[2];
+
+        for(int i = 0; i < board.length; i++)
+            if(board[i][column] != '_')
+            {
+                droppedPieceCoords[0] = i;
+                droppedPieceCoords[1] = column;
+
+                return droppedPieceCoords;
+            }
+
+        droppedPieceCoords[0] = -1;
+        droppedPieceCoords[1] = -1;
+
+        return droppedPieceCoords;
+    }
+
     public char[][] dropColumn(char[][] board, int column)
     {
         int i;
@@ -182,22 +247,177 @@ public class GameBoard
                     pieceCoords[0]--;
                 }
 
+                break;
             }
                 
         return newBoard;
     }
 
-    public char[][] explodeBlocks()
+    public char[][] explodeAll(char[][] board)
     {
-        char[][] newBoard = copyBoard(board);
+        char[][] newBoard = copyBoard(board), testBoard;
+        
+        for(int i = 0; i < board.length; i++)
+        {
+            testBoard = explodeLine(i, newBoard);
 
-        for(int i = 0; i < newBoard.length; i++)
-            for(int j = 0; j < newBoard[j].length; j++)
+            if(testBoard != null)
             {
-                
+                newBoard = copyBoard(testBoard);
+                printBoard(newBoard);
+                i = 0;
+                continue;
             }
+            else
+            {
+                if(i < newBoard[i].length)
+                {
+                    testBoard = explodeColumn(i, newBoard);
+
+                    if(testBoard != null)
+                    {
+                        newBoard = copyBoard(testBoard);
+                        printBoard(newBoard);
+                        i = 0;
+                        continue;
+                    }
+                }
+            }        
+        }
 
         return newBoard;
+    }
+
+    public char[][] explodeAround(int line, int column, char[][] board)
+    {
+        char[][] newBoard = copyBoard(board), testBoard;
+
+        System.out.print("" + line + " | ");
+        System.out.println(column);
+
+        testBoard = explodeLine(line, newBoard);
+        
+        if(testBoard != null)
+            return explodeAll(testBoard);
+        else
+        {
+            testBoard = explodeColumn(column, newBoard);
+
+            if(testBoard != null)
+                return explodeAll(testBoard);
+            else
+                return board;
+        }
+        
+    }
+
+    public char[][] explodeLine(int line, char[][] board)
+    {
+        char[][] newBoard = copyBoard(board);
+        char currentColor = 'X';
+        int counter = 1;
+        boolean foundPattern = false;
+
+        for(int i = 0; i < newBoard[line].length; i++)
+        {
+            if(newBoard[line][i] != '_')
+            {
+                if(newBoard[line][i] == currentColor)
+                {
+                    counter++;
+
+                    if(counter == 3)
+                    {
+                        foundPattern = true;
+
+                        //Destroy previous blocks
+                        for(int j = 0; j < 3; j++)
+                        {
+                            newBoard[line][i - 2 + j] = '_';
+
+                            if(line > 0 && newBoard[line - 1][i - 2 + j] != '_')
+                                newBoard = dropColumn(newBoard, i - 2 + j);
+                        }
+                    }
+                    else
+                        if(counter > 3)
+                        {
+                            newBoard[line][i] = '_';
+
+                            if(line > 0 && newBoard[line - 1][i] != '_')
+                                newBoard = dropColumn(newBoard, i);
+                        }
+                }
+                else
+                {
+                    currentColor = newBoard[line][i];
+                    counter = 1;
+                }
+            }
+            else
+            {
+                currentColor = 'X';
+            }
+        }
+
+        if(foundPattern)
+            return newBoard;
+        else
+            return null;
+    }
+
+    public char[][] explodeColumn(int column, char[][] board)
+    {
+        char[][] newBoard = copyBoard(board);
+        char currentColor = 'X';
+        int counter = 1;
+        boolean foundPattern = false;
+
+        for(int i = newBoard.length - 1; i >= 0; i--)
+            if(newBoard[i][column] != '_')
+            {
+                if(newBoard[i][column] == currentColor)
+                {
+                    counter++;
+
+                    if(counter == 3)
+                    {
+                        foundPattern = true;
+                        newBoard[i + 2][column] = '_';
+                        newBoard[i + 1][column] = '_';
+                        newBoard[i][column] = '_';
+                    }
+                    else
+                        if(counter > 3)
+                            newBoard[i][column] = '_';
+                        
+                }
+                else
+                {
+                    if(counter >= 3)
+                    {
+                        printBoard(newBoard);
+                        newBoard = dropColumn(newBoard, column);
+                        i += counter;
+                        printBoard(newBoard);
+                    }
+
+                    counter = 1;
+                    currentColor =  newBoard[i][column];
+                }
+
+                
+            }
+            else
+            {
+                currentColor = 'X';
+            }
+
+        if(foundPattern)
+            return newBoard;
+        else
+            return null;
+
     }
 
     public char[][] copyBoard(char[][] board)
@@ -216,6 +436,11 @@ public class GameBoard
     }
 
     public void printBoard()
+    {
+        printBoard(board);
+    }
+
+    public void printBoard(char[][] board)
     {
         for(int i = 0; i < board.length; i++)
         {
