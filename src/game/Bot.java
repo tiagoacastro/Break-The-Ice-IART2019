@@ -26,6 +26,9 @@ public class Bot
             case 1:
                 solutionFound = this.widthSearch();
                 break;
+            case 2:
+                solutionFound = root.iterativeDepthSearch();
+                break;
 
             default:
                 System.out.println("Invalid search option: " + searchMode);

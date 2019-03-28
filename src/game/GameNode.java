@@ -94,6 +94,46 @@ public class GameNode extends Node
         }
     }
 
+    public boolean iterativeDepthSearch() {
+        //maximum limit -> max number of moves ?
+
+        int maxDepth = board.getMaxMoves();
+
+        for (int i = 0; i < maxDepth; i++) {
+            if (depthLimitedSearch(depth)) {
+                return true;
+            } 
+        }
+
+        return false;
+    } 
+
+    public boolean depthLimitedSearch(int depth) {
+
+        if(!this.testGoal()) {
+            Node.solution.add(this.operator);
+            return true;
+        }
+
+        if(depth == 0) {
+            return false;
+        }
+
+        ArrayList<Node> children = this.expandNode();
+
+        for(int i = 0; i < children.size(); i++)
+        {
+            if(children.get(i).depthLimitedSearch(depth-1))
+            {
+                Node.solution.add(this.operator);
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
     public boolean testGoal()
     {
         char[][] board = getBoard();
