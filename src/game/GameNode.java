@@ -110,7 +110,7 @@ public class GameNode extends Node
 
     public boolean depthLimitedSearch(int depth) {
 
-        if(!this.testGoal()) {
+        if(this.testGoal()) {
             Node.solution.add(this.operator);
             return true;
         }
