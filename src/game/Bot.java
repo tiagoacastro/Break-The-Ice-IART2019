@@ -27,7 +27,7 @@ public class Bot
             case 2:
                 solutionFound = root.depthSearch();
                 break;
-            case 2:
+            case 3:
                 solutionFound = root.iterativeDepthSearch();
                 break;
 
