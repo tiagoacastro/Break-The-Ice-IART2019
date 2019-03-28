@@ -14,17 +14,18 @@ public class Bot
     public boolean search(int searchMode)
     {
         boolean solutionFound = false;
+        GameBoard.setShowMove(false);
 
         Node.solution.clear();
 
         switch(searchMode)
         {
-            case 0:
-                solutionFound = root.depthSearch();
+            case 1:
+                solutionFound = this.breadCrumb();
                 break;
 
-            case 1:
-                solutionFound = this.widthSearch();
+            case 2:
+                solutionFound = root.depthSearch();
                 break;
 
             default:
@@ -34,7 +35,7 @@ public class Bot
 
         if(solutionFound)
         {
-            System.out.println("Solution found\n");
+            System.out.println("\nSolution found\n");
             root.printBoard();
             root.traceSolution();
         }
@@ -44,7 +45,7 @@ public class Bot
         return solutionFound;
     }
 
-    public boolean widthSearch()
+    public boolean breadCrumb()
     {
         ArrayList<Node> activeNodes = new ArrayList<Node>(), childrenNodes = new ArrayList<Node>();
         

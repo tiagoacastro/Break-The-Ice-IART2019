@@ -198,7 +198,6 @@ public class GameNode extends Node
                 continue;
             }
             
-
             op = move[0];
             direction = move[1];
             pieceCoords[0] = Integer.parseInt(move[2]);
