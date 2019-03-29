@@ -12,7 +12,7 @@ public class Bot
         this.root = root;
     }
 
-    public boolean search(int searchMode)
+    public boolean search(int searchMode, boolean test)
     {
         boolean solutionFound = false;
         GameBoard.setShowMove(false);
@@ -46,15 +46,18 @@ public class Bot
                 return false;
         }
 
-        if(solutionFound)
+        if(!test)
         {
-            System.out.println("\nSolution found\n");
-            root.printBoard();
-            root.traceSolution();
+            if(solutionFound)
+            {
+                System.out.println("\nSolution found\n");
+                root.printBoard();
+                root.traceSolution();
+            }
+            else
+                System.out.println("No solution was found");
         }
-        else
-            System.out.println("No solution was found");
-
+        
         return solutionFound;
     }
 

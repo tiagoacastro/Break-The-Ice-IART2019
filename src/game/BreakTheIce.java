@@ -85,10 +85,18 @@ public class BreakTheIce
 
         option = getOption(5);
 
+        levelSelected = getLevelSelected(option);
+
+        bot = new Bot(new GameNode(null, 0, 0, "root", 0, new GameBoard(levelSelected, 3)));
+        chooseMode();
+    }
+
+    public static char[][] getLevelSelected(int option)
+    {
         switch(option)
         {
             case 1:
-                levelSelected = new char[][] 
+                return new char[][] 
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -103,10 +111,9 @@ public class BreakTheIce
                     {'_', 'o', 'g', 'r', 'b', 'p', '_'},
                     {'o', 'g', 'o', 'b', 'r', 'b', 'b'}
                 };
-                break;
 
             case 2:
-                levelSelected = new char[][] 
+                return new char[][] 
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -121,10 +128,9 @@ public class BreakTheIce
                     {'_', '_', '_', 'g', 'p', '_', '_'},
                     {'_', '_', 'g', 'p', 'g', 'p', 'p'}
                 };
-                break;
 
             case 3:
-                levelSelected = new char[][]
+                return new char[][]
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -139,10 +145,9 @@ public class BreakTheIce
                     {'_', 'g', 'b', 'r', 'r', 'b', '_'},
                     {'y', 'b', 'r', 'b', 'r', 'b', 'b'}
                 };
-                break;
 
             case 4:
-                levelSelected = new char[][]
+                return new char[][]
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -157,10 +162,9 @@ public class BreakTheIce
                     {'_', '_', 'y', 'b', 'g', 'b', 'o'},
                     {'_', 'b', 'g', 'g', 'b', 'g', 'b'}
                 };
-                break;
 
             case 5:
-                levelSelected = new char[][]
+                return new char[][]
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -175,15 +179,11 @@ public class BreakTheIce
                     {'b', 'b', 'p', 'p', 'b', 'p', 'p'},
                     {'b', 'r', 'b', 'p', 'b', 'p', 'p'}
                 };
-                break;
 
             default:
                 System.out.println("Option not recognized in level selection");
-                return;
+                return null;
         }
-
-        bot = new Bot(new GameNode(null, 0, 0, "root", 0, new GameBoard(levelSelected, 3)));
-        chooseMode();
     }
 
     public static void chooseMode()
@@ -207,7 +207,7 @@ public class BreakTheIce
         System.out.println("+-------------------------+");
 
         option = getOption(6);
-        bot.search(option);
+        bot.search(option, false);
     }
 
     public static int getOption(int maxValue)
