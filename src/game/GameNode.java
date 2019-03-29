@@ -135,7 +135,6 @@ public class GameNode extends Node
     {
         if(this.depth == depth)
         {
-            System.out.println(this.depth);
             if(this.testGoal()) 
             {
                 Node.solution.add(this.operator);
