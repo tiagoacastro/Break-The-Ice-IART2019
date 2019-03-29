@@ -88,23 +88,32 @@ public class Bot
         //isto ainda esta copy pasta, tenho de mudar
 
         PriorityQueue<Node> activeNodes = new PriorityQueue<Node>();
-        ArrayList<Node> childrenNodes = new ArrayList<Node>();
+        PriorityQueue<Node> childrenNodes = new PriorityQueue<Node>();
+        ArrayList<Node> childrenNodesAR = new ArrayList<Node>();
         
         activeNodes.add(root);
 
-        while(activeNodes.size() != 0) {
+        for(int i = 0; i < root.getGameBoard().getMaxMoves(); i++)
+        {
 
-            if(activeNodes.peek().testGoal()) {
-                activeNodes.poll().traceSolutionUp();
-                return true;
+            childrenNodes.clear();
+            
+            while(activeNodes.size() != 0) {
+    
+                if(activeNodes.peek().testGoal()) {
+                    activeNodes.poll().traceSolutionUp();
+                    return true;
+                }
+    
+                childrenNodesAR.addAll(activeNodes.poll().expandNode());
             }
-
-            childrenNodes.addAll(activeNodes.poll().expandNode());
-            childrenNodes.forEach((o) ->  
+            
+            childrenNodesAR.forEach((o) ->  
                 activeNodes.add(o)
             );
 
         }
+
 
         return false;
     }
