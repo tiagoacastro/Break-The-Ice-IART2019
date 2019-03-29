@@ -91,14 +91,14 @@ public class GameNode extends Node
         {
             if(this.moves > board.getMaxMoves())
                 return false;
-
+            
             ArrayList<Node> children = this.expandNode();
 
             for(int i = 0; i < children.size(); i++)
             {
-                if(children.get(i).depthSearch())
+                if(children.get(i) != null && children.get(i).depthSearch())
                 {
-                    Node.solution.add(this.operator);
+                    Node.solution.add(0, this.operator);
                     return true;
                 }
                     
@@ -113,46 +113,51 @@ public class GameNode extends Node
         }
     }
 
-    public boolean iterativeDepthSearch() {
-        //maximum limit -> max number of moves ?
-
+    public boolean iterativeDepthSearch() 
+    {
         int maxDepth = board.getMaxMoves();
         int depth = 0;
 
-        for (int i = 0; i < maxDepth; i++) {
-            if (depthLimitedSearch(depth)) {
+        for (int i = 0; i <= maxDepth; i++) 
+        {
+            if(depthLimitedSearch(depth)) 
+            {
                 return true;
             } 
+
             depth++;
         }
 
         return false;
     } 
 
-    public boolean depthLimitedSearch(int depth) {
-
-        if(this.testGoal()) {
-            Node.solution.add(this.operator);
-            return true;
-        }
-
-        if(depth == 0) {
-            return false;
-        }
-
-        ArrayList<Node> children = this.expandNode();
-
-        for(int i = 0; i < children.size(); i++)
+    public boolean depthLimitedSearch(int depth) 
+    {
+        if(this.depth == depth)
         {
-            if(children.get(i).depthLimitedSearch(depth-1))
+            System.out.println(this.depth);
+            if(this.testGoal()) 
             {
                 Node.solution.add(this.operator);
                 return true;
             }
         }
+        else
+            if(this.depth < depth)
+            {
+                ArrayList<Node> children = this.expandNode();
 
+                for(int i = 0; i < children.size(); i++)
+                {
+                    if(children.get(i).depthLimitedSearch(depth))
+                    {
+                        Node.solution.add(0, this.operator);
+                        return true;
+                    }
+                }
+            }
+        
         return false;
-
     }
 
     public boolean greedySearch() {

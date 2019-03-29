@@ -9,26 +9,6 @@ public class BreakTheIce
     public static void main(String[] args) throws Exception 
     {
         menu();
-
-
-
-        /*
-        GameNode root = new GameNode(null, 0, 0, "root", 0, new GameBoard(board, 3));
-        int[] coords = {10, 3};
-
-        Bot bot = new Bot(root);
-        bot.search(0);
-
-        
-        GameNode node = root.switchBlock("down", coords);
-
-        node.printBoard();
-        
-        if(newBoard.getBoard() != null)
-            newBoard.printBoard();
-        else
-            System.out.println("Null pointer"); */
-        
     }
 
     public static void menu()
@@ -193,7 +173,7 @@ public class BreakTheIce
         System.out.println("+-------------------------+");
         System.out.println("|   Algorithm Selection   |");
         System.out.println("+-------------------------+");
-        System.out.println("|      1 - Breadcrumb     |");
+        System.out.println("|      1 - Breadth First  |");
         System.out.println("+-------------------------+");
         System.out.println("|     2 - Depth First     |");
         System.out.println("+-------------------------+");

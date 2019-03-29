@@ -12,10 +12,11 @@ public class GameBoard
         this.maxMoves = maxMoves;
     }
 
+    /*
     public GameBoard(char[][] board)
     {
         this.board = board;
-    }
+    } */
 
     public GameBoard movePieceRight(int[] pieceCoords)
     {
@@ -74,7 +75,7 @@ public class GameBoard
                 
         }
 
-        return new GameBoard(newBoard);
+        return new GameBoard(newBoard, this.maxMoves);
     }
 
     public GameBoard movePieceLeft(int[] pieceCoords)
@@ -135,7 +136,7 @@ public class GameBoard
             
         }
 
-        return new GameBoard(newBoard);
+        return new GameBoard(newBoard, this.maxMoves);
     }
 
     public GameBoard switchPieceLeft(int[] pieceCoords)
@@ -150,7 +151,7 @@ public class GameBoard
         else
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0]][pieceCoords[1] - 1])
-                return new GameBoard(newBoard);
+                return new GameBoard(newBoard, this.maxMoves);
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] - 1]; 
             newBoard[pieceCoords[0]][pieceCoords[1] - 1] = board[pieceCoords[0]][pieceCoords[1]];
@@ -165,7 +166,7 @@ public class GameBoard
         if(showMove)
             printBoard(newBoard);
 
-        return new GameBoard(newBoard);
+        return new GameBoard(newBoard, this.maxMoves);
     }
 
     public GameBoard switchPieceRight(int[] pieceCoords)
@@ -180,7 +181,7 @@ public class GameBoard
         else
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0]][pieceCoords[1] + 1])
-                return new GameBoard(newBoard);
+                return new GameBoard(newBoard, this.maxMoves);
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] + 1];
             newBoard[pieceCoords[0]][pieceCoords[1] + 1] = board[pieceCoords[0]][pieceCoords[1]];
@@ -195,7 +196,7 @@ public class GameBoard
         if(showMove)
             printBoard(newBoard);
 
-        return new GameBoard(newBoard);
+        return new GameBoard(newBoard, this.maxMoves);
     }
 
     public GameBoard switchPieceUp(int[] pieceCoords)
@@ -210,7 +211,7 @@ public class GameBoard
         else
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0] - 1][pieceCoords[1]])
-                return new GameBoard(newBoard);
+                return new GameBoard(newBoard, this.maxMoves);
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] - 1][pieceCoords[1]];
             newBoard[pieceCoords[0] - 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]];
@@ -225,7 +226,7 @@ public class GameBoard
         if(showMove)
             printBoard(newBoard);
 
-        return new GameBoard(newBoard);
+        return new GameBoard(newBoard, this.maxMoves);
     }
 
     public GameBoard switchPieceDown(int[] pieceCoords)
@@ -240,7 +241,7 @@ public class GameBoard
         else
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0] + 1][pieceCoords[1]])
-                return new GameBoard(newBoard);
+                return new GameBoard(newBoard, this.maxMoves);
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] + 1][pieceCoords[1]];
             newBoard[pieceCoords[0] + 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]];
@@ -255,7 +256,7 @@ public class GameBoard
         if(showMove)
             printBoard(newBoard);
 
-        return new GameBoard(newBoard);
+        return new GameBoard(newBoard, this.maxMoves);
     }
 
     public char[][] dropPiece(char[][] board, int[] pieceCoords)

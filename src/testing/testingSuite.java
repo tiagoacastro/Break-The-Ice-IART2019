@@ -9,7 +9,21 @@ public class testingSuite
 {
     public static void main(String args[])
     {
-        testLevels();
+        //testLevels();
+        randomTest();
+    }
+
+    public static void randomTest()
+    {
+        char[][] board = BreakTheIce.getLevelSelected(2);
+        GameNode root = new GameNode(null, 0, 0, "root", 0, new GameBoard(board, 3));
+        int[] coords = {11, 3};
+
+        Bot bot = new Bot(root);
+        GameNode node = root.switchBlock("up", coords);
+        node.printBoard();
+        
+        System.out.println(node.testGoal());
     }
 
     public static void testLevels()
