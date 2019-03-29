@@ -1,11 +1,12 @@
 package game;
 import java.util.ArrayList;
 
-public abstract class Node
+public abstract class Node implements Comparable<Node>
 {
     protected Node parentNode;
     protected int depth;
-    protected int pathCost;
+    protected int pathCost; //blocks left
+    protected int priority;
     protected String operator;
     protected static ArrayList<String> solution = new ArrayList<String>(); //Prolly vai-se mudar isto
 
@@ -51,6 +52,14 @@ public abstract class Node
     public String getOperator()
     {
         return operator;
+    }
+
+    public void setPathCost(int pathCost) {
+        this.pathCost = pathCost;
+    }
+
+    public int compareTo(Node o) {
+        return o.pathCost - this.pathCost;
     }
 
     public static ArrayList<String> getSolution()

@@ -3,7 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class GameNode extends Node implements Comparable<GameNode>
+public class GameNode extends Node 
 {
     private GameBoard board;
     private int moves;
@@ -157,23 +157,33 @@ public class GameNode extends Node implements Comparable<GameNode>
 
     public boolean greedySearch() {
 
-
+        PriorityQueue<GameNode> childrenNodes = new PriorityQueue<GameNode>();
+        ArrayList<Node> childrenNodesAR = new ArrayList<Node>();
 
         if(!this.testGoal())
         {
             if(this.moves > board.getMaxMoves())
                 return false;
 
-            ArrayList<Node> children = this.expandNode();
+            childrenNodesAR = this.expandNode();
 
-            for(int i = 0; i < children.size(); i++)
-            {
-                if(children.get(i).depthSearch())
+            childrenNodesAR.forEach((o) ->  
+                o.setPathCost(5)
+            );
+
+            /*
+            childrenNodesAR.forEach((o) ->  
+                childrenNodes.add(o)
+            );
+            */
+
+            while(childrenNodes.size() != 0) {
+
+                if(childrenNodes.poll().depthSearch())
                 {
                     Node.solution.add(this.operator);
                     return true;
                 }
-                    
             }
 
             return false;
