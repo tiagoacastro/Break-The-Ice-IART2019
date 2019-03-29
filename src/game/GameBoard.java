@@ -628,4 +628,21 @@ public class GameBoard
         return !(pieceCoords[0] >= this.board.length || pieceCoords[1] >= this.board[0].length 
         || pieceCoords[0] < 0 || pieceCoords[1] < 0 || this.board[pieceCoords[0]][pieceCoords[1]] == '_');
     }
+
+    public int getBlocksLeft() {
+        int count = 0;
+
+        for(int i = 0; i < board.length; i++)
+        {
+            for(int j = 0; j < board[i].length; j++)
+            {
+                if(board[i][j] != '_') {
+                    count++;
+                }
+            } 
+        }
+
+        return count;
+
+    }
 }

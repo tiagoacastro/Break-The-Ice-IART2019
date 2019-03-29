@@ -1,12 +1,15 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class GameNode extends Node implements Comparable<GameNode>
 {
     private GameBoard board;
     private int moves;
+    private int searchOption;
     private int priority;
+    private int blocksLeft;
 
     public GameNode(Node parentNode, int depth, int pathCost, String operator, int moves, GameBoard board)
     {
@@ -15,6 +18,7 @@ public class GameNode extends Node implements Comparable<GameNode>
         this.board = board;
         this.moves = moves;
         this.priority = 1;
+        this.blocksLeft = this.board.getBlocksLeft();
     }
 
     public GameNode(Node parentNode, String operator, int moves, GameBoard board)
@@ -24,10 +28,18 @@ public class GameNode extends Node implements Comparable<GameNode>
         this.board = board;
         this.moves = moves;
         this.priority = 1;
+        this.blocksLeft = this.board.getBlocksLeft();
     }
 
     public int compareTo(GameNode o) {
-        return this.priority-o.priority;
+        switch(this.searchOption) {
+            case 4: //uniform cost
+                return this.priority-o.priority;
+            case 5: //greedy
+                return o.blocksLeft-this.blocksLeft;
+            default:
+                return 0;
+        }
     }
 
     public ArrayList<Node> expandNode()
@@ -140,6 +152,37 @@ public class GameNode extends Node implements Comparable<GameNode>
         }
 
         return false;
+
+    }
+
+    public boolean greedySearch() {
+
+
+
+        if(!this.testGoal())
+        {
+            if(this.moves > board.getMaxMoves())
+                return false;
+
+            ArrayList<Node> children = this.expandNode();
+
+            for(int i = 0; i < children.size(); i++)
+            {
+                if(children.get(i).depthSearch())
+                {
+                    Node.solution.add(this.operator);
+                    return true;
+                }
+                    
+            }
+
+            return false;
+        }
+        else
+        {
+            Node.solution.add(this.operator);
+            return true;
+        }
 
     }
 
@@ -288,5 +331,9 @@ public class GameNode extends Node implements Comparable<GameNode>
     public void setGameBoard(GameBoard board)
     {
         this.board = board;
+    }
+
+    public void setSearchOption(int searchOption) {
+        this.searchOption = searchOption;
     }
 }

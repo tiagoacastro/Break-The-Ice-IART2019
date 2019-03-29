@@ -34,6 +34,12 @@ public class Bot
             case 4:
                 solutionFound = this.uniformCostSearch();
                 break;
+            case 5:
+                solutionFound = root.greedySearch();
+                break;
+            case 6:
+                solutionFound = this.AStarSearch();
+                break;
 
             default:
                 System.out.println("Invalid search option: " + searchMode);
@@ -114,7 +120,10 @@ public class Bot
 
         }
 
-
         return false;
+    }
+
+    public boolean AStarSearch() {
+        return true;
     }
 }
