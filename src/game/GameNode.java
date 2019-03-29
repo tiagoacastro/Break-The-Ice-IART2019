@@ -2,10 +2,11 @@ package game;
 
 import java.util.ArrayList;
 
-public class GameNode extends Node
+public class GameNode extends Node implements Comparable<GameNode>
 {
     private GameBoard board;
     private int moves;
+    private int priority;
 
     public GameNode(Node parentNode, int depth, int pathCost, String operator, int moves, GameBoard board)
     {
@@ -13,6 +14,7 @@ public class GameNode extends Node
 
         this.board = board;
         this.moves = moves;
+        this.priority = 1;
     }
 
     public GameNode(Node parentNode, String operator, int moves, GameBoard board)
@@ -21,6 +23,11 @@ public class GameNode extends Node
 
         this.board = board;
         this.moves = moves;
+        this.priority = 1;
+    }
+
+    public int compareTo(GameNode o) {
+        return this.priority-o.priority;
     }
 
     public ArrayList<Node> expandNode()
@@ -98,11 +105,13 @@ public class GameNode extends Node
         //maximum limit -> max number of moves ?
 
         int maxDepth = board.getMaxMoves();
+        int depth = 0;
 
         for (int i = 0; i < maxDepth; i++) {
             if (depthLimitedSearch(depth)) {
                 return true;
             } 
+            depth++;
         }
 
         return false;

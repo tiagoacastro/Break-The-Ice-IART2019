@@ -1,7 +1,7 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.PriorityQueue<E>;
+import java.util.PriorityQueue;
 
 public class Bot
 {
@@ -32,7 +32,7 @@ public class Bot
                 solutionFound = root.iterativeDepthSearch();
                 break;
             case 4:
-                solutionFound = root.uniformCostSearch();
+                solutionFound = this.uniformCostSearch();
                 break;
 
             default:
@@ -87,34 +87,25 @@ public class Bot
         //basicamente o mesmo que bfs só que com uma priority queue
         //isto ainda esta copy pasta, tenho de mudar
 
-        ArrayList<Node> activeNodes = new ArrayList<Node>(), childrenNodes = new ArrayList<Node>();
+        PriorityQueue<Node> activeNodes = new PriorityQueue<Node>();
+        ArrayList<Node> childrenNodes = new ArrayList<Node>();
         
         activeNodes.add(root);
 
-        for(int i = 0; i < root.getGameBoard().getMaxMoves(); i++)
-        {
-            childrenNodes.clear();
-            childrenNodes.trimToSize();
+        while(activeNodes.size() != 0) {
 
-            for(int j = 0; j < activeNodes.size(); j++)
-            {
-                if(activeNodes.get(j).testGoal())
-                {
-                    activeNodes.get(j).traceSolutionUp();
-                    return true;
-                }
-
-                childrenNodes.addAll(activeNodes.get(j).expandNode());
+            if(activeNodes.peek().testGoal()) {
+                activeNodes.poll().traceSolutionUp();
+                return true;
             }
 
-            activeNodes.clear();
-            activeNodes.trimToSize();
-            activeNodes.addAll(childrenNodes);
+            childrenNodes.addAll(activeNodes.poll().expandNode());
+            childrenNodes.forEach((o) ->  
+                activeNodes.add(o)
+            );
+
         }
 
         return false;
-
-
-        return true;
     }
 }
