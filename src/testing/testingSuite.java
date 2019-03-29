@@ -24,7 +24,7 @@ public class testingSuite
         levelList.add(BreakTheIce.getLevelSelected(1));
         levelList.add(BreakTheIce.getLevelSelected(2));
 
-        algTable.put(1, "Breadcrumbs");
+        algTable.put(1, "Breadth First");
         algTable.put(2, "Depth First");
         algTable.put(3, "Iterative Deepening");
         algTable.put(4, "Uniform Cost");
@@ -35,8 +35,8 @@ public class testingSuite
         {
             bot = new Bot(new GameNode(null, 0, 0, "root", 0, new GameBoard(levelList.get(i), 3)));
 
-            System.out.println("-----Testing with " + (i + 1) + " move(s) solution, " 
-                + GameBoard.getBlocksLeft(levelList.get(i)) + " blocks-----\n");
+            System.out.println("----- Testing with " + (i + 1) + " move(s) solution, " 
+                + GameBoard.getBlocksLeft(levelList.get(i)) + " blocks -----\n");
 
             for(int j = 1; j <= 6; j++)
             {

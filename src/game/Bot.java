@@ -22,7 +22,7 @@ public class Bot
         switch(searchMode)
         {
             case 1:
-                solutionFound = this.breadCrumb();
+                solutionFound = this.breadth();
                 break;
 
             case 2:
@@ -61,7 +61,7 @@ public class Bot
         return solutionFound;
     }
 
-    public boolean breadCrumb()
+    public boolean breadth()
     {
         ArrayList<Node> activeNodes = new ArrayList<Node>(), childrenNodes = new ArrayList<Node>();
         
