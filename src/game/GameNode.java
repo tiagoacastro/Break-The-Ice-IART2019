@@ -255,9 +255,9 @@ public class GameNode extends Node implements Comparable<GameNode>
             System.out.println("\n" + op + " " + direction + "(" + move[2] + "," + move[3] + ")\n");
 
             if(op.equals("move"))
-                this.move(direction, pieceCoords);
+                this.board = this.move(direction, pieceCoords).getGameBoard();
             else
-                this.switchBlock(direction, pieceCoords);
+                this.board = this.switchBlock(direction, pieceCoords).getGameBoard();
         }
     }
 
