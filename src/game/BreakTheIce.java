@@ -231,13 +231,13 @@ public class BreakTheIce
     public static void chooseHeuristic() {
         int option;
 
-        System.out.println("+----------------------------+");
-        System.out.println("|      Heuristic Selection   |");
-        System.out.println("+----------------------------+");
-        System.out.println("|    1 - Number of blocks    |");
-        System.out.println("+----------------------------+");
-        System.out.println("|     2 - Under 3 blocks     |");
-        System.out.println("+----------------------------+");
+        System.out.println("+----------------------------------+");
+        System.out.println("|        Heuristic Selection       |");
+        System.out.println("+----------------------------------+");
+        System.out.println("|       1 - Number of blocks       |");
+        System.out.println("+----------------------------------+");
+        System.out.println("|  2 - Number of blocks & colours  |");
+        System.out.println("+----------------------------------+");
 
         option = getOption(2);
         Heuristic.currentHeuristic = option;
