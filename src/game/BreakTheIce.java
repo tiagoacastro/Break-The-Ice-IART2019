@@ -47,7 +47,6 @@ public class BreakTheIce
     public static void chooseLevel()
     {
         int option;
-        char[][] levelSelected = new char[12][7]; //7 width, 12 height
 
         System.out.println("+-----------------+");
         System.out.println("| Level Selection |");
@@ -65,18 +64,20 @@ public class BreakTheIce
 
         option = getOption(5);
 
-        levelSelected = getLevelSelected(option);
-
-        bot = new Bot(new GameNode(null, 0, 0, "root", 0, new GameBoard(levelSelected, 1)));
+        bot = new Bot(new GameNode(null, 0, 0, "root", 0, getLevelSelected(option)));
         chooseMode();
     }
 
-    public static char[][] getLevelSelected(int option)
+    public static GameBoard getLevelSelected(int option)
     {
+        int maxPlays;
+        char[][] board;
+
         switch(option)
         {
             case 1:
-                return new char[][]
+                maxPlays = 1;
+                board = new char[][]
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -91,9 +92,11 @@ public class BreakTheIce
                     {'_', 'g', 'b', 'r', 'r', 'b', '_'},
                     {'y', 'b', 'r', 'b', 'r', 'b', 'b'}
                 };
+                break;
 
             case 2:
-                return new char[][]
+                maxPlays = 1;
+                board = new char[][]
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -108,9 +111,11 @@ public class BreakTheIce
                     {'_', '_', 'y', 'b', 'g', 'b', 'o'},
                     {'_', 'b', 'g', 'g', 'b', 'g', 'b'}
                 };
+                break;
 
             case 3:
-                return new char[][]
+                maxPlays = 1;
+                board = new char[][]
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -125,9 +130,11 @@ public class BreakTheIce
                     {'b', 'b', 'p', 'p', 'b', 'p', 'p'},
                     {'b', 'r', 'b', 'p', 'b', 'p', 'p'}
                 };
+                break;
 
             case 4:
-                return new char[][] 
+                maxPlays = 2;
+                board = new char[][] 
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -142,9 +149,11 @@ public class BreakTheIce
                     {'_', 'o', 'g', 'r', 'b', 'p', '_'},
                     {'o', 'g', 'o', 'b', 'r', 'b', 'b'}
                 };
+                break;
 
             case 5:
-                return new char[][] 
+                maxPlays = 3;
+                board = new char[][] 
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -159,11 +168,14 @@ public class BreakTheIce
                     {'_', '_', '_', 'g', 'p', '_', '_'},
                     {'_', '_', 'g', 'p', 'g', 'p', 'p'}
                 };
+                break;
 
             default:
                 System.out.println("Option not recognized in level selection");
                 return null;
         }
+
+        return new GameBoard(board, maxPlays);
     }
 
     public static void chooseMode()
