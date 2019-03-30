@@ -12,15 +12,10 @@ public class GameBoard
         this.maxMoves = maxMoves;
     }
 
-    /*
-    public GameBoard(char[][] board)
-    {
-        this.board = board;
-    } */
-
     public GameBoard movePieceRight(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board);
+        char[][] testBoard = null;
 
         if (pieceCoords[1] == board[0].length - 1 || this.board[pieceCoords[0]][pieceCoords[1] + 1] != '_') 
         {
@@ -59,7 +54,18 @@ public class GameBoard
                 if(showMove)
                     printBoard(newBoard);
             } 
-                
+              
+            testBoard = explodeAll(newBoard);
+
+            if(testBoard != null)
+            {
+                newBoard = testBoard;
+
+                if(showMove)
+                    printBoard(newBoard);
+            }
+
+            /*
             newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
 
             if(showMove)
@@ -71,16 +77,21 @@ public class GameBoard
 
                 if(showMove)
                     printBoard(newBoard);
-            }
+            } */
                 
         }
 
         return new GameBoard(newBoard, this.maxMoves);
     }
 
+    public boolean validateMoveRight(int[] pieceCoords)
+    {
+        return pieceCoords[1] != board[0].length - 1 && this.board[pieceCoords[0]][pieceCoords[1] + 1] == '_';
+    }
+
     public GameBoard movePieceLeft(int[] pieceCoords)
     {
-        char[][] newBoard = copyBoard(this.board);
+        char[][] newBoard = copyBoard(this.board), testBoard = null;
 
         if(pieceCoords[1] == 0 || this.board[pieceCoords[0]][pieceCoords[1] - 1] != '_')
         {
@@ -119,7 +130,18 @@ public class GameBoard
                 if(showMove)
                     printBoard(newBoard);
             }    
-                
+
+            testBoard = explodeAll(newBoard);
+
+            if(testBoard != null)
+            {
+                newBoard = testBoard;
+
+                if(showMove)
+                    printBoard(newBoard);
+            } 
+            
+                /*
             newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
 
             if(showMove)
@@ -130,8 +152,8 @@ public class GameBoard
                 newBoard = explodeAround(droppedPieceCoords[0], droppedPieceCoords[1], newBoard);
 
                 if(showMove)
-                    printBoard(newBoard);
-            } 
+                    printBoard(newBoard); 
+            }  */
                 
             
         }
@@ -141,7 +163,7 @@ public class GameBoard
 
     public GameBoard switchPieceLeft(int[] pieceCoords)
     {
-        char[][] newBoard = copyBoard(this.board);
+        char[][] newBoard = copyBoard(this.board), testBoard = null;
 
         if(pieceCoords[1] == 0 || this.board[pieceCoords[0]][pieceCoords[1] - 1] == '_')
         {
@@ -160,18 +182,29 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
+        testBoard = explodeAll(newBoard);
+
+        if(testBoard != null) 
+        {
+            newBoard = testBoard;
+
+            if (showMove)
+                printBoard(newBoard);
+        }
+
+        /*
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1] - 1, newBoard);
 
         if(showMove)
-            printBoard(newBoard);
+            printBoard(newBoard); */
 
-        return new GameBoard(newBoard, this.maxMoves);
+        return new GameBoard(newBoard, this.maxMoves); 
     }
 
     public GameBoard switchPieceRight(int[] pieceCoords)
     {
-        char[][] newBoard = copyBoard(this.board);
+        char[][] newBoard = copyBoard(this.board), testBoard = null;
 
         if(pieceCoords[1] == board[0].length - 1 || this.board[pieceCoords[0]][pieceCoords[1] + 1] == '_')
         {
@@ -190,18 +223,29 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
+        testBoard = explodeAll(newBoard);
+
+        if(testBoard != null) 
+        {
+            newBoard = testBoard;
+
+            if (showMove)
+                printBoard(newBoard);
+        }
+
+        /*
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1] + 1, newBoard);
 
         if(showMove)
-            printBoard(newBoard);
+            printBoard(newBoard); */
 
         return new GameBoard(newBoard, this.maxMoves);
     }
 
     public GameBoard switchPieceUp(int[] pieceCoords)
     {
-        char[][] newBoard = copyBoard(this.board);
+        char[][] newBoard = copyBoard(this.board), testBoard = null;
 
         if(pieceCoords[0] == 0 || this.board[pieceCoords[0] - 1][pieceCoords[1]] == '_')
         {
@@ -220,18 +264,29 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
+        testBoard = explodeAll(newBoard);
+        
+        if (testBoard != null) 
+        {
+            newBoard = testBoard;
+
+            if (showMove)
+                printBoard(newBoard);
+        }
+
+        /*
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
         newBoard = explodeAround(pieceCoords[0] - 1, pieceCoords[1], newBoard);
 
         if(showMove)
-            printBoard(newBoard);
+            printBoard(newBoard); */
 
         return new GameBoard(newBoard, this.maxMoves);
     }
 
     public GameBoard switchPieceDown(int[] pieceCoords)
     {
-        char[][] newBoard = copyBoard(this.board);
+        char[][] newBoard = copyBoard(this.board), testBoard = null;
 
         if(pieceCoords[0] == board.length - 1|| this.board[pieceCoords[0] + 1][pieceCoords[1]] == '_')
         {
@@ -250,11 +305,22 @@ public class GameBoard
                 printBoard(newBoard); 
         }
 
+        testBoard = explodeAll(newBoard);
+
+        if(testBoard != null) 
+        {
+            newBoard = testBoard;
+
+            if (showMove)
+                printBoard(newBoard);
+        }
+
+        /*
         newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
         newBoard = explodeAround(pieceCoords[0] + 1, pieceCoords[1], newBoard);
 
         if(showMove)
-            printBoard(newBoard);
+            printBoard(newBoard); */
 
         return new GameBoard(newBoard, this.maxMoves);
     }
@@ -330,6 +396,7 @@ public class GameBoard
     {
         char[][] newBoard = copyBoard(board), testBoard;
         boolean recalculate = false;
+        boolean differentBoard = false;
         
         for(int i = 0; i < board.length; i++)
         {
@@ -339,6 +406,7 @@ public class GameBoard
             {
                 newBoard = copyBoard(testBoard);
                 recalculate = true;
+                differentBoard = true;
 
                 if(showMove)
                     printBoard(newBoard);
@@ -363,41 +431,13 @@ public class GameBoard
                 recalculate = false;
                 i = 0;
                 continue;
-            }
-
-
-            /*
-            if(testBoard != null)
-            {
-                newBoard = copyBoard(testBoard);
-                
-                if(showMove)
-                    printBoard(newBoard);
-
-                i = 0;
-                continue;
-            }
-            else
-            {
-                if(i < newBoard[i].length)
-                {
-                    testBoard = explodeColumn(i, newBoard);
-
-                    if(testBoard != null)
-                    {
-                        newBoard = copyBoard(testBoard);
-                        
-                        if(showMove)
-                            printBoard(newBoard);
-
-                        i = 0;
-                        continue;
-                    }
-                }
-            } */       
+            }  
         }
 
-        return newBoard;
+        if(differentBoard)
+            return newBoard;
+        else
+            return null;
     }
 
     public char[][] explodeAround(int line, int column, char[][] board)

@@ -37,6 +37,33 @@ public class GameNode extends Node
         }
     }
 
+    public int closeChainsHeuristic()
+    {
+        char[][] board = getBoard();
+        int result = 0;
+
+        for(int i = 0; i < board.length; i++)
+            for(int j = 0; j < board[i].length; j++)
+                if(board[i][j] != '_')
+                {
+
+                }
+        
+        return result;
+    }
+
+    public boolean testMoveLeftChain(int[] pieceCoords)
+    {
+        /*
+        if(pieceCoords[1] == 0 || board[pieceCoords[0]][pieceCoords[1] - 1] != '_')
+        {
+            System.out.println("Can't move left: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
+            return null;
+        } */
+
+        return true;
+    }
+
     public ArrayList<Node> expandNode()
     {
         ArrayList<Node> nodeList = new ArrayList<Node>();
@@ -84,7 +111,7 @@ public class GameNode extends Node
     {
         if(!this.testGoal())
         {
-            if(this.moves > board.getMaxMoves())
+            if(this.moves >= board.getMaxMoves())
                 return false;
             
             ArrayList<Node> children = this.expandNode();
