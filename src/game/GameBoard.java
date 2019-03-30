@@ -17,15 +17,14 @@ public class GameBoard
         char[][] newBoard = copyBoard(this.board);
         char[][] testBoard = null;
 
-        if (pieceCoords[1] == board[0].length - 1 || this.board[pieceCoords[0]][pieceCoords[1] + 1] != '_') 
+        if (!validateMoveRight(pieceCoords)) 
         {
             System.out.println("Can't move right: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
         } 
         else 
         {
-            int[] newPieceCoords = pieceCoords.clone(), droppedPieceCoords = new int[2];
-            boolean searchDrop = false;
+            int[] newPieceCoords = pieceCoords.clone();
 
             newPieceCoords[1] += 1;
 
@@ -39,9 +38,7 @@ public class GameBoard
             if (newPieceCoords[0] < this.board.length - 1 && this.board[newPieceCoords[0] + 1][newPieceCoords[1]] == '_')
             {
                 newBoard = dropPiece(newBoard, newPieceCoords);
-                droppedPieceCoords = getDroppedPieceCoords(newPieceCoords[1], newBoard);
-                searchDrop = true;
-
+                
                 if(showMove)
                     printBoard(newBoard);
             }
@@ -63,22 +60,7 @@ public class GameBoard
 
                 if(showMove)
                     printBoard(newBoard);
-            }
-
-            /*
-            newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
-
-            if(showMove)
-                printBoard(newBoard); 
-
-            if(searchDrop)
-            {
-                newBoard = explodeAround(droppedPieceCoords[0], droppedPieceCoords[1], newBoard);
-
-                if(showMove)
-                    printBoard(newBoard);
-            } */
-                
+            }                
         }
 
         return new GameBoard(newBoard, this.maxMoves);
@@ -93,16 +75,14 @@ public class GameBoard
     {
         char[][] newBoard = copyBoard(this.board), testBoard = null;
 
-        if(pieceCoords[1] == 0 || this.board[pieceCoords[0]][pieceCoords[1] - 1] != '_')
+        if(!validateMoveLeft(pieceCoords))
         {
             System.out.println("Can't move left: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
         }
         else
         {
-            int[] newPieceCoords = pieceCoords.clone(), droppedPieceCoords = new int[2];
-            boolean searchDrop = false;
-
+            int[] newPieceCoords = pieceCoords.clone();
             newPieceCoords[1] -= 1;
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = '_'; //Old position
@@ -115,9 +95,7 @@ public class GameBoard
             if(newPieceCoords[0] < this.board.length - 1 && this.board[newPieceCoords[0] + 1][newPieceCoords[1]] == '_')
             {
                 newBoard = dropPiece(newBoard, newPieceCoords);
-                droppedPieceCoords = getDroppedPieceCoords(newPieceCoords[1], newBoard);
-                searchDrop = true;
-
+                
                 if(showMove)
                     printBoard(newBoard);
             }
@@ -140,32 +118,22 @@ public class GameBoard
                 if(showMove)
                     printBoard(newBoard);
             } 
-            
-                /*
-            newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
-
-            if(showMove)
-                printBoard(newBoard);
-
-            if(searchDrop)
-            {
-                newBoard = explodeAround(droppedPieceCoords[0], droppedPieceCoords[1], newBoard);
-
-                if(showMove)
-                    printBoard(newBoard); 
-            }  */
-                
-            
+               
         }
 
         return new GameBoard(newBoard, this.maxMoves);
+    }
+
+    public boolean validateMoveLeft(int[] pieceCoords)
+    {
+        return pieceCoords[1] != 0 && this.board[pieceCoords[0]][pieceCoords[1] - 1] == '_';
     }
 
     public GameBoard switchPieceLeft(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board), testBoard = null;
 
-        if(pieceCoords[1] == 0 || this.board[pieceCoords[0]][pieceCoords[1] - 1] == '_')
+        if(!validateSwitchLeft(pieceCoords))
         {
             System.out.println("Can't switch left: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
@@ -192,21 +160,19 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        /*
-        newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
-        newBoard = explodeAround(pieceCoords[0], pieceCoords[1] - 1, newBoard);
-
-        if(showMove)
-            printBoard(newBoard); */
-
         return new GameBoard(newBoard, this.maxMoves); 
+    }
+
+    public boolean validateSwitchLeft(int[] pieceCoords)
+    {
+        return pieceCoords[1] != 0 && this.board[pieceCoords[0]][pieceCoords[1] - 1] != '_';
     }
 
     public GameBoard switchPieceRight(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board), testBoard = null;
 
-        if(pieceCoords[1] == board[0].length - 1 || this.board[pieceCoords[0]][pieceCoords[1] + 1] == '_')
+        if(!validateSwitchRight(pieceCoords))
         {
             System.out.println("Can't switch right: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
@@ -233,21 +199,19 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        /*
-        newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
-        newBoard = explodeAround(pieceCoords[0], pieceCoords[1] + 1, newBoard);
-
-        if(showMove)
-            printBoard(newBoard); */
-
         return new GameBoard(newBoard, this.maxMoves);
+    }
+
+    public boolean validateSwitchRight(int[] pieceCoords)
+    {
+        return pieceCoords[1] != board[0].length - 1 && this.board[pieceCoords[0]][pieceCoords[1] + 1] != '_';
     }
 
     public GameBoard switchPieceUp(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board), testBoard = null;
 
-        if(pieceCoords[0] == 0 || this.board[pieceCoords[0] - 1][pieceCoords[1]] == '_')
+        if(!validateSwitchUp(pieceCoords))
         {
             System.out.println("Can't switch up: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
@@ -274,21 +238,19 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        /*
-        newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
-        newBoard = explodeAround(pieceCoords[0] - 1, pieceCoords[1], newBoard);
-
-        if(showMove)
-            printBoard(newBoard); */
-
         return new GameBoard(newBoard, this.maxMoves);
+    }
+
+    public boolean validateSwitchUp(int[] pieceCoords)
+    {
+        return pieceCoords[0] != 0 && this.board[pieceCoords[0] - 1][pieceCoords[1]] != '_';
     }
 
     public GameBoard switchPieceDown(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board), testBoard = null;
 
-        if(pieceCoords[0] == board.length - 1|| this.board[pieceCoords[0] + 1][pieceCoords[1]] == '_')
+        if(!validateSwitchDown(pieceCoords))
         {
             System.out.println("Can't switch down: (" + pieceCoords[0] + "," + pieceCoords[1] + ")");
             return null;
@@ -315,14 +277,12 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        /*
-        newBoard = explodeAround(pieceCoords[0], pieceCoords[1], newBoard);
-        newBoard = explodeAround(pieceCoords[0] + 1, pieceCoords[1], newBoard);
-
-        if(showMove)
-            printBoard(newBoard); */
-
         return new GameBoard(newBoard, this.maxMoves);
+    }
+
+    public boolean validateSwitchDown(int[] pieceCoords)
+    {
+        return pieceCoords[0] != board.length - 1 && this.board[pieceCoords[0] + 1][pieceCoords[1]] != '_';
     }
 
     public char[][] dropPiece(char[][] board, int[] pieceCoords)
