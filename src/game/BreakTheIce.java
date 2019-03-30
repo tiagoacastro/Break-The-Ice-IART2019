@@ -152,7 +152,7 @@ public class BreakTheIce
                 break;
 
             case 5:
-                maxPlays = 3;
+                maxPlays = 5;
                 board = new char[][] 
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},

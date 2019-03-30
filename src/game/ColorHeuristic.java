@@ -5,7 +5,7 @@ public class ColorHeuristic extends Heuristic {
         return this.value - h.value;
     }
 
-  public void update(GameBoard board) {
+  public void calculate(GameBoard board) {
       char[][] boardChar = board.getBoard();
 
     auxiliar(boardChar);

@@ -584,7 +584,12 @@ public class GameBoard
 
     public char[][] getBoard()
     {
-        return board;
+        return copyBoard(board);
+    }
+
+    public void setBoard(char[][] board)
+    {
+        this.board = board;
     }
 
     public int getMaxMoves()

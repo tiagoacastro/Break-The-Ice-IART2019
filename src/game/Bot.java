@@ -76,8 +76,6 @@ public class Bot
 
             for(int j = 0; j < activeNodes.size(); j++)
             {
-                GameNode.analyzedNodes++;
-
                 if(activeNodes.get(j).testGoal())
                 {
                     activeNodes.get(j).traceSolutionUp();
@@ -109,7 +107,6 @@ public class Bot
             childrenNodes.clear();
             
             while(activeNodes.size() != 0) {
-                GameNode.analyzedNodes++;
     
                 if(activeNodes.peek().testGoal()) {
                     activeNodes.poll().traceSolutionUp();

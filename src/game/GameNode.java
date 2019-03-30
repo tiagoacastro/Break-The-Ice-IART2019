@@ -15,7 +15,7 @@ public class GameNode extends Node
 
         this.board = board;
         this.moves = moves;
-        this.heuristic.update(board);
+        this.heuristic.calculate(board);
     }
 
     public GameNode(Node parentNode, String operator, int moves, GameBoard board)
@@ -24,7 +24,7 @@ public class GameNode extends Node
 
         this.board = board;
         this.moves = moves;
-        this.heuristic.update(board);
+        this.heuristic.calculate(board);
     }
 
     public ArrayList<Node> expandNode()
@@ -72,8 +72,6 @@ public class GameNode extends Node
 
     public boolean depthSearch()
     {
-        analyzedNodes++;
-
         if(!this.testGoal())
         {
             if(this.moves >= board.getMaxMoves())
@@ -120,8 +118,6 @@ public class GameNode extends Node
 
     public boolean depthLimitedSearch(int depth) 
     {
-        analyzedNodes++;
-
         if(this.depth == depth)
         {
             if(this.testGoal()) 
@@ -151,8 +147,6 @@ public class GameNode extends Node
     public boolean greedySearch() {
 
         PriorityQueue<Node> children = new PriorityQueue<Node>();
-
-        analyzedNodes++;
 
         if(this.testGoal()) {
 
@@ -186,8 +180,6 @@ public class GameNode extends Node
     public boolean AStarSearch() {
         PriorityQueue<Node> children = new PriorityQueue<Node>();
 
-        analyzedNodes++;
-
         if(this.testGoal()) {
 
             Node.solution.add(this.operator);
@@ -219,6 +211,8 @@ public class GameNode extends Node
     public boolean testGoal()
     {
         char[][] board = getBoard();
+
+        analyzedNodes++;
 
         for(int i = 0; i < board.length; i++)
             for(int j = 0; j < board[i].length; j++)

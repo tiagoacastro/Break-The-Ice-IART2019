@@ -3,7 +3,7 @@ package game;
 public class BlockNumHeuristic extends Heuristic {
     private int purple=0, orange=0, red=0, blue=0, green=0, yellow=0;
 
-  public void update(GameBoard board) {
+  public void calculate(GameBoard board) {
     char[][] boardChar = board.getBoard();
 
     auxiliar(boardChar);

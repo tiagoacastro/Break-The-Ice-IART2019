@@ -2,7 +2,7 @@ package game;
 
 public class CloseChainHeuristic extends Heuristic
 {
-    public void update(GameBoard gameBoard)
+    public void calculate(GameBoard gameBoard)
     {
         char[][] board = gameBoard.getBoard();
         int[] pieceCoords = new int[2];
@@ -31,8 +31,12 @@ public class CloseChainHeuristic extends Heuristic
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[movedPieceCoords[0]][movedPieceCoords[1]])
                 return false;
+
+            board[pieceCoords[0]][pieceCoords[1]] = board[movedPieceCoords[0]][movedPieceCoords[1]];
+            board[movedPieceCoords[0]][movedPieceCoords[1]] = color;
             
-            return testCloseChain(board, movedPieceCoords, color);
+            return findPatternInColumn(board, pieceCoords[1]) || findPatternInLine(board, pieceCoords[0]) 
+                || findPatternInLine(board, movedPieceCoords[0]);
         } 
 
         return false;
@@ -48,8 +52,12 @@ public class CloseChainHeuristic extends Heuristic
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[movedPieceCoords[0]][movedPieceCoords[1]])
                 return false;
+
+            board[pieceCoords[0]][pieceCoords[1]] = board[movedPieceCoords[0]][movedPieceCoords[1]];
+            board[movedPieceCoords[0]][movedPieceCoords[1]] = color;
             
-            return testCloseChain(board, movedPieceCoords, color);
+            return findPatternInColumn(board, pieceCoords[1]) || findPatternInLine(board, pieceCoords[0]) 
+                || findPatternInLine(board, movedPieceCoords[0]);
         } 
 
         return false;
@@ -65,8 +73,12 @@ public class CloseChainHeuristic extends Heuristic
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[movedPieceCoords[0]][movedPieceCoords[1]])
                 return false;
+
+            board[pieceCoords[0]][pieceCoords[1]] = board[movedPieceCoords[0]][movedPieceCoords[1]];
+            board[movedPieceCoords[0]][movedPieceCoords[1]] = color;
             
-            return testCloseChain(board, movedPieceCoords, color);
+            return findPatternInLine(board, pieceCoords[0]) || findPatternInColumn(board, pieceCoords[1]) 
+            || findPatternInColumn(board, movedPieceCoords[1]);
         } 
 
         return false;
@@ -82,8 +94,12 @@ public class CloseChainHeuristic extends Heuristic
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[movedPieceCoords[0]][movedPieceCoords[1]])
                 return false;
+
+            board[pieceCoords[0]][pieceCoords[1]] = board[movedPieceCoords[0]][movedPieceCoords[1]];
+            board[movedPieceCoords[0]][movedPieceCoords[1]] = color;
             
-            return testCloseChain(board, movedPieceCoords, color);
+            return findPatternInLine(board, pieceCoords[0]) || findPatternInColumn(board, pieceCoords[1]) 
+                || findPatternInColumn(board, movedPieceCoords[1]);
         } 
 
         return false;
@@ -139,7 +155,9 @@ public class CloseChainHeuristic extends Heuristic
             {
                 board = gameBoard.dropColumn(board, pieceCoords[1]);
 
-                if(findPatternAround(board, new int[] {pieceCoords[0], pieceCoords[1]}))
+                
+
+                if(findPatternAround(board, pieceCoords))
                     return true;
             }
 

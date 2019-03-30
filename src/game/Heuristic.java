@@ -27,7 +27,7 @@ public abstract class Heuristic {
 		currentHeuristic = h;
 	}
 	
-	public abstract void update(GameBoard board);
+	public abstract void calculate(GameBoard board);
 	public abstract int compareTo(Heuristic h); //for priority queues
 
 	protected void auxiliar(char[][] boardChar) {
