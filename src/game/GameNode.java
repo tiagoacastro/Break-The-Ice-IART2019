@@ -7,9 +7,6 @@ public class GameNode extends Node
 {
     private GameBoard board;
     private int moves;
-    private int searchOption;
-    private int priority;
-    private int blocksLeft;
 
     public GameNode(Node parentNode, int depth, int pathCost, String operator, int moves, GameBoard board)
     {
@@ -17,8 +14,7 @@ public class GameNode extends Node
 
         this.board = board;
         this.moves = moves;
-        this.priority = 1;
-        this.blocksLeft = this.board.getBlocksLeft();
+        updateHeuristic();
     }
 
     public GameNode(Node parentNode, String operator, int moves, GameBoard board)
@@ -27,18 +23,17 @@ public class GameNode extends Node
 
         this.board = board;
         this.moves = moves;
-        this.priority = 1;
-        this.blocksLeft = this.board.getBlocksLeft();
+        updateHeuristic();
     }
 
-    public int compareTo(GameNode o) {
-        switch(this.searchOption) {
-            case 4: //uniform cost
-                return this.priority-o.priority;
-            case 5: //greedy
-                return o.blocksLeft-this.blocksLeft;
-            default:
-                return 0;
+    public void updateHeuristic() {
+        char[][] board = getBoard();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if(board[i][j] != '_') {
+                    this.heuristic++;
+                } 
+            }
         }
     }
 
@@ -161,43 +156,35 @@ public class GameNode extends Node
 
     public boolean greedySearch() {
 
-        PriorityQueue<GameNode> childrenNodes = new PriorityQueue<GameNode>();
-        ArrayList<Node> childrenNodesAR = new ArrayList<Node>();
+        PriorityQueue<Node> children = new PriorityQueue<Node>();
 
-        if(!this.testGoal())
-        {
+        if(this.testGoal()) {
+
+            Node.solution.add(this.operator);
+            return true;
+
+        } else {
+
             if(this.moves > board.getMaxMoves())
                 return false;
 
-            childrenNodesAR = this.expandNode();
+            ArrayList<Node> childrenAR = this.expandNode();
+            for(Node child: childrenAR) {
+                child.setSearchOption(5);
+                children.add(child);
+            }
 
-            childrenNodesAR.forEach((o) ->  
-                o.setPathCost(5)
-            );
-
-            /*
-            childrenNodesAR.forEach((o) ->  
-                childrenNodes.add(o)
-            );
-            */
-
-            while(childrenNodes.size() != 0) {
-
-                if(childrenNodes.poll().depthSearch())
-                {
-                    Node.solution.add(this.operator);
+            while (!children.isEmpty()) {
+                if (children.poll().greedySearch()) {
+                    Node.solution.add(0, this.operator);
                     return true;
                 }
             }
 
             return false;
-        }
-        else
-        {
-            Node.solution.add(this.operator);
-            return true;
-        }
 
+        }
+        
     }
 
     public boolean testGoal()
@@ -347,7 +334,4 @@ public class GameNode extends Node
         this.board = board;
     }
 
-    public void setSearchOption(int searchOption) {
-        this.searchOption = searchOption;
-    }
 }

@@ -93,9 +93,6 @@ public class Bot
 
     public boolean uniformCostSearch() {
 
-        //basicamente o mesmo que bfs só que com uma priority queue
-        //isto ainda esta copy pasta, tenho de mudar
-
         PriorityQueue<Node> activeNodes = new PriorityQueue<Node>();
         PriorityQueue<Node> childrenNodes = new PriorityQueue<Node>();
         ArrayList<Node> childrenNodesAR = new ArrayList<Node>();
@@ -117,9 +114,10 @@ public class Bot
                 childrenNodesAR.addAll(activeNodes.poll().expandNode());
             }
             
-            childrenNodesAR.forEach((o) ->  
-                activeNodes.add(o)
-            );
+            for(Node child: childrenNodesAR) {
+                child.setSearchOption(4);
+                childrenNodes.add(child);
+            }
 
         }
 
