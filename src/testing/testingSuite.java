@@ -34,9 +34,9 @@ public class testingSuite
         long startTime, endTime;
         Bot bot;
 
+        levelList.add(BreakTheIce.getLevelSelected(3));
+        levelList.add(BreakTheIce.getLevelSelected(4));
         levelList.add(BreakTheIce.getLevelSelected(5));
-        levelList.add(BreakTheIce.getLevelSelected(1));
-        levelList.add(BreakTheIce.getLevelSelected(2));
 
         algTable.put(1, "Breadth First");
         algTable.put(2, "Depth First");
