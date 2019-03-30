@@ -99,7 +99,7 @@ public class Bot
         
         activeNodes.add(root);
 
-        for(int i = 0; i < root.getGameBoard().getMaxMoves(); i++)
+        for(int i = 0; i <= root.getGameBoard().getMaxMoves(); i++)
         {
 
             childrenNodes.clear();
