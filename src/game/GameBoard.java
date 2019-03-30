@@ -670,7 +670,7 @@ public class GameBoard
         || pieceCoords[0] < 0 || pieceCoords[1] < 0 || this.board[pieceCoords[0]][pieceCoords[1]] == '_');
     }
 
-    public int getBlocksLeft() 
+    public int getBlocksLeft()
     {
         return getBlocksLeft(board);
     }

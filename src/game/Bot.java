@@ -38,7 +38,7 @@ public class Bot
                 solutionFound = root.greedySearch();
                 break;
             case 6:
-                solutionFound = this.AStarSearch();
+                solutionFound = root.AStarSearch();
                 break;
 
             default:
@@ -122,9 +122,5 @@ public class Bot
         }
 
         return false;
-    }
-
-    public boolean AStarSearch() {
-        return true;
     }
 }

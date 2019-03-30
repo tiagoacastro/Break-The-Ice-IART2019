@@ -28,8 +28,8 @@ public class testingSuite
 
     public static void testLevels()
     {
-        ArrayList<char[][]> levelList = new ArrayList<char[][]>();
-        HashMap<Integer, String> algTable = new HashMap<Integer, String>();
+        ArrayList<char[][]> levelList = new ArrayList<>();
+        HashMap<Integer, String> algTable = new HashMap<>();
         long[] times = new long[10];
         long startTime, endTime;
         Bot bot;
