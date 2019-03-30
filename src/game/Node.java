@@ -6,7 +6,7 @@ public abstract class Node implements Comparable<Node>
     protected Node parentNode;
     protected int depth;
     protected int pathCost; //priority (always 1 since from one depth level to the other all possible plays exhaust 1 move)
-    protected BlockNumHeuristic heuristic; //number of blocks left
+    protected Heuristic heuristic; //number of blocks left
     protected int searchOption;
     protected String operator;
     protected static ArrayList<String> solution = new ArrayList<String>(); //Prolly vai-se mudar isto
@@ -19,6 +19,17 @@ public abstract class Node implements Comparable<Node>
         this.heuristic = new BlockNumHeuristic();
         this.searchOption = 0;
         this.operator = operator;
+
+        switch(Heuristic.currentHeuristic) {
+            case 1:
+                this.heuristic = new BlockNumHeuristic();
+                break;
+            case 2:
+                this.heuristic = new ColorHeuristic();
+                break;
+            default:
+                this.heuristic = new BlockNumHeuristic();
+        }
     }
 
     public Node(Node parentNode, String operator)
@@ -73,6 +84,19 @@ public abstract class Node implements Comparable<Node>
 
         return o.pathCost - this.pathCost;
     }
+
+    public void updateHeuristic() {
+        switch(Heuristic.currentHeuristic) {
+            case 1:
+                this.heuristic = new BlockNumHeuristic();
+                break;
+            case 2:
+                this.heuristic = new ColorHeuristic();
+                break;
+            default:
+                this.heuristic = new BlockNumHeuristic();
+        }
+    } 
 
     public static ArrayList<String> getSolution()
     {

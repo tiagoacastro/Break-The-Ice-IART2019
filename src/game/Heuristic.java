@@ -3,6 +3,7 @@ package game;
 public abstract class Heuristic {
 
 	protected int value;
+	public static int currentHeuristic = 0;
 	
 	public Heuristic() { 
 		this.value = 0; 
