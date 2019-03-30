@@ -306,7 +306,7 @@ public class GameBoard
 
     public int[] getDroppedPieceCoords(int column, char[][] board)
     {
-        int[] droppedPieceCoords = new int[2];
+        int[] droppedPieceCoords = new int[] {board.length - 1, column};
 
         for(int i = 0; i < board.length; i++)
             if(board[i][column] != '_')
@@ -317,10 +317,7 @@ public class GameBoard
                 return droppedPieceCoords;
             }
 
-        System.out.println("Couldn't find dropped piece at column " + column);
-
-        droppedPieceCoords[0] = -1;
-        droppedPieceCoords[1] = -1;
+        //System.out.println("Couldn't find dropped piece at column " + column);
 
         return droppedPieceCoords;
     }
