@@ -15,8 +15,8 @@ public class testingSuite
 
     public static void randomTest()
     {
-        char[][] board = BreakTheIce.getLevelSelected(2);
-        GameNode root = new GameNode(null, 0, 0, "root", 0, new GameBoard(board, 3)); //review this
+        GameBoard board = BreakTheIce.getLevelSelected(2);
+        GameNode root = new GameNode(null, 0, 0, "root", 0, board); //review this
         int[] coords = {11, 3};
 
         Bot bot = new Bot(root);
@@ -28,7 +28,7 @@ public class testingSuite
 
     public static void testLevels()
     {
-        ArrayList<char[][]> levelList = new ArrayList<>();
+        ArrayList<GameBoard> levelList = new ArrayList<GameBoard>();
         HashMap<Integer, String> algTable = new HashMap<>();
         long[] times = new long[10];
         long startTime, endTime;
@@ -47,10 +47,10 @@ public class testingSuite
 
         for(int i = 0; i < levelList.size(); i++)
         {
-            bot = new Bot(new GameNode(null, 0, 0, "root", 0, new GameBoard(levelList.get(i), 3))); //review this
+            bot = new Bot(new GameNode(null, 0, 0, "root", 0, levelList.get(i))); //review this
 
             System.out.println("----- Testing with " + (i + 1) + " move(s) solution, " 
-                + GameBoard.getBlocksLeft(levelList.get(i)) + " blocks -----\n");
+                + GameBoard.getBlocksLeft(levelList.get(i).getBoard()) + " blocks -----\n");
 
             for(int j = 1; j <= 6; j++)
             {
