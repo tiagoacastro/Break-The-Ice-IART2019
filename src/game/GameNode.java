@@ -7,6 +7,7 @@ public class GameNode extends Node
 {
     private GameBoard board;
     private int moves;
+    public static int analyzedNodes = 0;
 
     public GameNode(Node parentNode, int depth, int pathCost, String operator, int moves, GameBoard board)
     {
@@ -71,6 +72,8 @@ public class GameNode extends Node
 
     public boolean depthSearch()
     {
+        analyzedNodes++;
+
         if(!this.testGoal())
         {
             if(this.moves >= board.getMaxMoves())
@@ -117,6 +120,8 @@ public class GameNode extends Node
 
     public boolean depthLimitedSearch(int depth) 
     {
+        analyzedNodes++;
+
         if(this.depth == depth)
         {
             if(this.testGoal()) 
@@ -146,6 +151,8 @@ public class GameNode extends Node
     public boolean greedySearch() {
 
         PriorityQueue<Node> children = new PriorityQueue<Node>();
+
+        analyzedNodes++;
 
         if(this.testGoal()) {
 
@@ -178,6 +185,8 @@ public class GameNode extends Node
 
     public boolean AStarSearch() {
         PriorityQueue<Node> children = new PriorityQueue<Node>();
+
+        analyzedNodes++;
 
         if(this.testGoal()) {
 
