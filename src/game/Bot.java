@@ -116,7 +116,7 @@ public class Bot
             
             for(Node child: childrenNodesAR) {
                 child.setSearchOption(4);
-                childrenNodes.add(child);
+                activeNodes.add(child);
             }
 
         }
