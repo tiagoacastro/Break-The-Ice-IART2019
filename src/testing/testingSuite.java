@@ -62,7 +62,7 @@ public class testingSuite
                     times[k] = endTime - startTime;
                 }
 
-                System.out.println(algTable.get(j) + " average(ms): " + calculateAverage(times) + "\n");
+                System.out.println(algTable.get(j) + " average(ms): " + calculateAverage(times) + "\n" + GameNode.analyzedNodes + " nodes visited\n");
             }
         }
 

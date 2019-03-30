@@ -15,8 +15,8 @@
       <file leaf-file-name="Bot.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/Bot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="37" column="51" lean-forward="false" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
+            <state relative-caret-position="278">
+              <caret line="21" column="35" lean-forward="true" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -25,20 +25,20 @@
       <file leaf-file-name="GameNode.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/GameNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3987">
-              <caret line="227" column="32" lean-forward="false" selection-start-line="227" selection-start-column="32" selection-end-line="227" selection-end-column="32" />
+            <state relative-caret-position="168">
+              <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="37" />
               <folding>
-                <element signature="e#1411#1417#0" expanded="true" />
-                <element signature="e#4616#4622#0" expanded="true" />
-                <element signature="e#5380#5386#0" expanded="true" />
-                <element signature="e#9830#9831#0" expanded="true" />
-                <element signature="e#9864#9865#0" expanded="true" />
-                <element signature="e#9907#9908#0" expanded="true" />
-                <element signature="e#9940#9941#0" expanded="true" />
-                <element signature="e#9978#9979#0" expanded="true" />
-                <element signature="e#10017#10018#0" expanded="true" />
-                <element signature="e#10070#10071#0" expanded="true" />
-                <element signature="e#10104#10105#0" expanded="true" />
+                <element signature="e#1452#1458#0" expanded="true" />
+                <element signature="e#4709#4715#0" expanded="true" />
+                <element signature="e#5499#5505#0" expanded="true" />
+                <element signature="e#9975#9976#0" expanded="true" />
+                <element signature="e#10009#10010#0" expanded="true" />
+                <element signature="e#10052#10053#0" expanded="true" />
+                <element signature="e#10085#10086#0" expanded="true" />
+                <element signature="e#10123#10124#0" expanded="true" />
+                <element signature="e#10162#10163#0" expanded="true" />
+                <element signature="e#10215#10216#0" expanded="true" />
+                <element signature="e#10249#10250#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -47,8 +47,8 @@
       <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/Node.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state relative-caret-position="-147">
+              <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -67,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Heuristic.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Heuristic.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/Heuristic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+            <state relative-caret-position="0">
+              <caret line="0" column="12" lean-forward="true" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -80,8 +80,8 @@
       <file leaf-file-name="BreakTheIce.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/BreakTheIce.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="237" column="63" lean-forward="true" selection-start-line="237" selection-start-column="63" selection-end-line="237" selection-end-column="63" />
+            <state relative-caret-position="4276">
+              <caret line="249" column="63" lean-forward="true" selection-start-line="249" selection-start-column="63" selection-end-line="249" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -100,12 +100,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testingSuite.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="testingSuite.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/testing/testingSuite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-84">
-              <caret line="41" column="39" lean-forward="true" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
-              <folding />
+            <state relative-caret-position="364">
+              <caret line="64" column="101" lean-forward="false" selection-start-line="64" selection-start-column="101" selection-end-line="64" selection-end-column="101" />
+              <folding>
+                <element signature="e#708#719#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,6 +124,11 @@
       <find>expan</find>
       <find>switchblo</find>
       <find>greed</find>
+      <find>breadth</find>
+      <find>uniform</find>
+      <find>setsearch</find>
+      <find>searchop</find>
+      <find>analyzednodes =</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -135,13 +142,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/game/Bot.java" />
-        <option value="$PROJECT_DIR$/src/game/GameNode.java" />
         <option value="$PROJECT_DIR$/src/game/Node.java" />
         <option value="$PROJECT_DIR$/src/game/GameBoard.java" />
-        <option value="$PROJECT_DIR$/src/testing/testingSuite.java" />
         <option value="$PROJECT_DIR$/src/game/BreakTheIce.java" />
         <option value="$PROJECT_DIR$/src/game/BlockNumHeuristic.java" />
+        <option value="$PROJECT_DIR$/src/game/GameNode.java" />
+        <option value="$PROJECT_DIR$/src/game/Bot.java" />
+        <option value="$PROJECT_DIR$/src/testing/testingSuite.java" />
       </list>
     </option>
   </component>
@@ -225,7 +232,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.BreakTheIce">
+  <component name="RunManager" selected="Application.testingSuite">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -351,8 +358,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.BreakTheIce" />
-        <item index="1" class="java.lang.String" itemvalue="Application.testingSuite" />
+        <item index="0" class="java.lang.String" itemvalue="Application.testingSuite" />
+        <item index="1" class="java.lang.String" itemvalue="Application.BreakTheIce" />
       </list>
     </recent_temporary>
   </component>
@@ -370,12 +377,12 @@
       <option name="presentableId" value="Default" />
       <updated>1553893905888</updated>
       <workItem from="1553893917339" duration="831000" />
-      <workItem from="1553957450673" duration="5511000" />
+      <workItem from="1553957450673" duration="7112000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6342000" />
+    <option name="totallyTimeSpent" value="7943000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -390,7 +397,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3296582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3296582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -463,62 +470,18 @@
         <state relative-caret-position="105">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding>
-            <element signature="e#1411#1417#0" expanded="true" />
-            <element signature="e#4616#4622#0" expanded="true" />
-            <element signature="e#5380#5386#0" expanded="true" />
-            <element signature="e#9830#9831#0" expanded="true" />
-            <element signature="e#9864#9865#0" expanded="true" />
-            <element signature="e#9907#9908#0" expanded="true" />
-            <element signature="e#9940#9941#0" expanded="true" />
-            <element signature="e#9978#9979#0" expanded="true" />
-            <element signature="e#10017#10018#0" expanded="true" />
-            <element signature="e#10070#10071#0" expanded="true" />
-            <element signature="e#10104#10105#0" expanded="true" />
+            <element signature="e#1452#1458#0" expanded="true" />
+            <element signature="e#4709#4715#0" expanded="true" />
+            <element signature="e#5499#5505#0" expanded="true" />
+            <element signature="e#9975#9976#0" expanded="true" />
+            <element signature="e#10009#10010#0" expanded="true" />
+            <element signature="e#10052#10053#0" expanded="true" />
+            <element signature="e#10085#10086#0" expanded="true" />
+            <element signature="e#10123#10124#0" expanded="true" />
+            <element signature="e#10162#10163#0" expanded="true" />
+            <element signature="e#10215#10216#0" expanded="true" />
+            <element signature="e#10249#10250#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/GameNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3987">
-          <caret line="227" column="32" lean-forward="false" selection-start-line="227" selection-start-column="32" selection-end-line="227" selection-end-column="32" />
-          <folding>
-            <element signature="e#1411#1417#0" expanded="true" />
-            <element signature="e#4616#4622#0" expanded="true" />
-            <element signature="e#5380#5386#0" expanded="true" />
-            <element signature="e#9830#9831#0" expanded="true" />
-            <element signature="e#9864#9865#0" expanded="true" />
-            <element signature="e#9907#9908#0" expanded="true" />
-            <element signature="e#9940#9941#0" expanded="true" />
-            <element signature="e#9978#9979#0" expanded="true" />
-            <element signature="e#10017#10018#0" expanded="true" />
-            <element signature="e#10070#10071#0" expanded="true" />
-            <element signature="e#10104#10105#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/testing/testingSuite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-84">
-          <caret line="41" column="39" lean-forward="true" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/Bot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="37" column="51" lean-forward="false" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -530,6 +493,42 @@
             <element signature="e#1951#1952#0" expanded="true" />
             <element signature="e#1988#1989#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/Heuristic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="12" lean-forward="true" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/GameNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="37" />
+          <folding>
+            <element signature="e#1452#1458#0" expanded="true" />
+            <element signature="e#4709#4715#0" expanded="true" />
+            <element signature="e#5499#5505#0" expanded="true" />
+            <element signature="e#9975#9976#0" expanded="true" />
+            <element signature="e#10009#10010#0" expanded="true" />
+            <element signature="e#10052#10053#0" expanded="true" />
+            <element signature="e#10085#10086#0" expanded="true" />
+            <element signature="e#10123#10124#0" expanded="true" />
+            <element signature="e#10162#10163#0" expanded="true" />
+            <element signature="e#10215#10216#0" expanded="true" />
+            <element signature="e#10249#10250#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-147">
+          <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -546,17 +545,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game/BreakTheIce.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="237" column="63" lean-forward="true" selection-start-line="237" selection-start-column="63" selection-end-line="237" selection-end-column="63" />
+        <state relative-caret-position="4276">
+          <caret line="249" column="63" lean-forward="true" selection-start-line="249" selection-start-column="63" selection-end-line="249" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/Heuristic.java">
+    <entry file="file://$PROJECT_DIR$/src/game/Bot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+        <state relative-caret-position="278">
+          <caret line="21" column="35" lean-forward="true" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testing/testingSuite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="64" column="101" lean-forward="false" selection-start-line="64" selection-start-column="101" selection-end-line="64" selection-end-column="101" />
+          <folding>
+            <element signature="e#708#719#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
