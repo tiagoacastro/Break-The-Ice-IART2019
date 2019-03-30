@@ -21,7 +21,7 @@ public abstract class Heuristic {
 		return value; 
 	}
 
-	public void setCurrentHeuristic(int h)
+	public static void setCurrentHeuristic(int h)
 	{
 		currentHeuristic = h;
 	}

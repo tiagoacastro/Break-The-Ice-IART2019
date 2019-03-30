@@ -16,10 +16,9 @@ public class testingSuite
     public static void randomTest()
     {
         GameBoard board = BreakTheIce.getLevelSelected(5);
-        GameNode root = new GameNode(null, 0, 0, "root", 0, board); //review this
+        Heuristic.setCurrentHeuristic(3);
         
-        root.getHeuristic().setCurrentHeuristic(3);
-        root.updateHeuristic();
+        GameNode root = new GameNode(null, 0, 0, "root", 0, board); 
         root.getHeuristic().update(board);
         
         System.out.println(root.getHeuristic().getValue());
