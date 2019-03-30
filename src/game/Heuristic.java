@@ -3,7 +3,7 @@ package game;
 public abstract class Heuristic {
 
 	protected int value;
-	public static int currentHeuristic = 0;
+	protected static int currentHeuristic = 0;
 	
 	public Heuristic() { 
 		this.value = 0; 
@@ -19,6 +19,11 @@ public abstract class Heuristic {
 	
 	public double getValue() { 
 		return value; 
+	}
+
+	public void setCurrentHeuristic(int h)
+	{
+		currentHeuristic = h;
 	}
 	
 	public abstract void update(GameBoard board);

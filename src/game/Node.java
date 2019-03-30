@@ -96,6 +96,10 @@ public abstract class Node implements Comparable<Node>
             case 2:
                 this.heuristic = new ColorHeuristic();
                 break;
+
+            case 3:
+                this.heuristic = new CloseChainHeuristic();
+                
             default:
                 this.heuristic = new BlockNumHeuristic();
         }
@@ -108,6 +112,11 @@ public abstract class Node implements Comparable<Node>
 
     public void setSearchOption(int searchOption) {
         this.searchOption = searchOption;
+    }
+
+    public Heuristic getHeuristic()
+    {
+        return heuristic;
     }
 
 }

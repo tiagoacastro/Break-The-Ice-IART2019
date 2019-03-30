@@ -9,21 +9,20 @@ public class testingSuite
 {
     public static void main(String args[])
     {
-        testLevels();
-        //randomTest();
+        //testLevels();
+        randomTest();
     }
 
     public static void randomTest()
     {
-        GameBoard board = BreakTheIce.getLevelSelected(2);
+        GameBoard board = BreakTheIce.getLevelSelected(5);
         GameNode root = new GameNode(null, 0, 0, "root", 0, board); //review this
-        int[] coords = {11, 3};
-
-        Bot bot = new Bot(root);
-        GameNode node = root.switchBlock("up", coords);
-        node.printBoard();
         
-        System.out.println(node.testGoal());
+        root.getHeuristic().setCurrentHeuristic(3);
+        root.updateHeuristic();
+        root.getHeuristic().update(board);
+        
+        System.out.println(root.getHeuristic().getValue());
     }
 
     public static void testLevels()

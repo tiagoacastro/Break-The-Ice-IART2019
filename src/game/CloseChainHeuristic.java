@@ -7,6 +7,8 @@ public class CloseChainHeuristic extends Heuristic
         char[][] board = gameBoard.getBoard();
         int[] pieceCoords = new int[2];
 
+        System.out.println("smt");
+
         for(int i = 0; i < board.length; i++)
             for(int j = 0; j < board[i].length; j++)
             {
@@ -18,6 +20,8 @@ public class CloseChainHeuristic extends Heuristic
                         || testSwitchLeftChain(gameBoard, pieceCoords) || testSwitchRightChain(gameBoard, pieceCoords)
                         || testSwitchUpChain(gameBoard, pieceCoords) || testSwitchDownChain(gameBoard, pieceCoords))
                         value++;
+
+                System.out.println("smt2");
             }    
     }
 

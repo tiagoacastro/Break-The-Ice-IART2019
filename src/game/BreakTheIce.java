@@ -199,10 +199,11 @@ public class BreakTheIce
         System.out.println("+-------------------------+");
 
         option = getOption(6);
+
         if(option == 5 || option == 6) {
             chooseHeuristic();
         }
-        bot.root.updateHeuristic();
+        bot.getRoot().updateHeuristic();
         bot.search(option, false);
     }
 
@@ -250,8 +251,10 @@ public class BreakTheIce
         System.out.println("+----------------------------------+");
         System.out.println("|  2 - Number of blocks & colours  |");
         System.out.println("+----------------------------------+");
+        System.out.println("|  3 - Chains one move away        |");
+        System.out.println("+----------------------------------+");
 
-        option = getOption(2);
+        option = getOption(3);
         Heuristic.currentHeuristic = option;
     }
 }
