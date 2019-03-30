@@ -9,8 +9,8 @@ public class testingSuite
 {
     public static void main(String args[])
     {
-        //testLevels();
-        randomTest();
+        testLevels();
+        //randomTest();
     }
 
     public static void randomTest()
