@@ -249,7 +249,7 @@ public class BreakTheIce
         System.out.println("+----------------------------------+");
         System.out.println("|       1 - Number of blocks       |");
         System.out.println("+----------------------------------+");
-        System.out.println("|  2 - Number of blocks & colours  |");
+        System.out.println("|       2 - Number of colors       |");
         System.out.println("+----------------------------------+");
         System.out.println("|  3 - Chains one move away        |");
         System.out.println("+----------------------------------+");
