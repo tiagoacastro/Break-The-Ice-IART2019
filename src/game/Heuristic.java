@@ -21,6 +21,11 @@ public abstract class Heuristic {
 	public double getValue() { 
 		return value; 
 	}
+
+	public static void setCurrentHeuristic(int h)
+	{
+		currentHeuristic = h;
+	}
 	
 	public abstract void update(GameBoard board);
 	public abstract int compareTo(Heuristic h); //for priority queues

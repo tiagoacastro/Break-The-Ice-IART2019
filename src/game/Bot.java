@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 
 public class Bot
 {
-    GameNode root;
+    private GameNode root;
 
     public Bot(GameNode root)
     {
@@ -127,5 +127,10 @@ public class Bot
         }
 
         return false;
+    }
+
+    public GameNode getRoot()
+    {
+        return root;
     }
 }
