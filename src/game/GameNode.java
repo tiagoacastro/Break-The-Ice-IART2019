@@ -14,7 +14,7 @@ public class GameNode extends Node
 
         this.board = board;
         this.moves = moves;
-        updateHeuristic();
+        this.heuristic.update(board);
     }
 
     public GameNode(Node parentNode, String operator, int moves, GameBoard board)
@@ -23,18 +23,7 @@ public class GameNode extends Node
 
         this.board = board;
         this.moves = moves;
-        updateHeuristic();
-    }
-
-    public void updateHeuristic() {
-        char[][] board = getBoard();
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if(board[i][j] != '_') {
-                    this.heuristic++;
-                } 
-            }
-        }
+        this.heuristic.update(board);
     }
 
     public ArrayList<Node> expandNode()
@@ -84,7 +73,7 @@ public class GameNode extends Node
     {
         if(!this.testGoal())
         {
-            if(this.moves > board.getMaxMoves())
+            if(this.moves >= board.getMaxMoves())
                 return false;
             
             ArrayList<Node> children = this.expandNode();
@@ -165,7 +154,7 @@ public class GameNode extends Node
 
         } else {
 
-            if(this.moves > board.getMaxMoves())
+            if(this.moves >= board.getMaxMoves())
                 return false;
 
             ArrayList<Node> childrenAR = this.expandNode();
