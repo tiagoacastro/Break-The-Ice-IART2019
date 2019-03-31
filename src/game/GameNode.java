@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+import heuristic.*;
 
 public class GameNode extends Node 
 {
@@ -147,6 +148,8 @@ public class GameNode extends Node
     public boolean greedySearch() {
 
         PriorityQueue<Node> children = new PriorityQueue<Node>();
+
+        
 
         if(this.testGoal()) {
 
@@ -356,5 +359,26 @@ public class GameNode extends Node
     {
         this.board = board;
     }
+
+    public void setHeuristic() 
+    {
+        switch(Heuristic.getCurrentHeuristic()) {
+            case 1:
+                this.heuristic = new BlockNumHeuristic();
+                break;
+            case 2:
+                this.heuristic = new ColorHeuristic();
+                break;
+
+            case 3:
+                this.heuristic = new CloseChainHeuristic();
+                break;
+                
+            default:
+                this.heuristic = new BlockNumHeuristic();
+        }
+
+        this.heuristic.calculate(board);
+    } 
 
 }

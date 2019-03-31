@@ -141,7 +141,13 @@ public class GameBoard
         else
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0]][pieceCoords[1] - 1])
+            {
+                if(showMove)
+                    printBoard(newBoard);
+
                 return new GameBoard(newBoard, this.maxMoves);
+            }
+                
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] - 1]; 
             newBoard[pieceCoords[0]][pieceCoords[1] - 1] = board[pieceCoords[0]][pieceCoords[1]];
@@ -180,7 +186,12 @@ public class GameBoard
         else
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0]][pieceCoords[1] + 1])
+            {
+                if(showMove)
+                    printBoard(newBoard);
+
                 return new GameBoard(newBoard, this.maxMoves);
+            }
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] + 1];
             newBoard[pieceCoords[0]][pieceCoords[1] + 1] = board[pieceCoords[0]][pieceCoords[1]];
@@ -219,7 +230,12 @@ public class GameBoard
         else
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0] - 1][pieceCoords[1]])
+            {
+                if(showMove)
+                    printBoard(newBoard);
+
                 return new GameBoard(newBoard, this.maxMoves);
+            }
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] - 1][pieceCoords[1]];
             newBoard[pieceCoords[0] - 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]];
@@ -258,7 +274,12 @@ public class GameBoard
         else
         {
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0] + 1][pieceCoords[1]])
+            {
+                if(showMove)
+                    printBoard(newBoard);
+
                 return new GameBoard(newBoard, this.maxMoves);
+            }
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] + 1][pieceCoords[1]];
             newBoard[pieceCoords[0] + 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]];

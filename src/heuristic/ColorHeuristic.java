@@ -1,4 +1,6 @@
-package game;
+package heuristic;
+
+import game.GameBoard;
 
 public class ColorHeuristic extends Heuristic {
     public int compareTo(Heuristic h) {

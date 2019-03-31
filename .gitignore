@@ -2,6 +2,7 @@ src/game/*.class
 src/testing/*.class
 bin/game/*.class
 bin/testing/*.class
+bin/heuristic/*.class
 .idea/*
 Break-The-Ice.iml
 

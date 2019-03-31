@@ -1,5 +1,6 @@
 package game;
 import java.util.ArrayList;
+import heuristic.*;
 
 public abstract class Node implements Comparable<Node>
 {
@@ -18,20 +19,7 @@ public abstract class Node implements Comparable<Node>
         this.pathCost = pathCost;
         this.searchOption = 0;
         this.operator = operator;
-
-        switch(Heuristic.currentHeuristic) {
-            case 1:
-                this.heuristic = new BlockNumHeuristic();
-                break;
-            case 2:
-                this.heuristic = new ColorHeuristic();
-                break;
-            case 3:
-                this.heuristic = new CloseChainHeuristic();
-                break;
-            default:
-                this.heuristic = new BlockNumHeuristic();
-        }
+        this.heuristic = Heuristic.createCurrentHeuristic();
     }
 
     public Node(Node parentNode, String operator)
@@ -40,20 +28,11 @@ public abstract class Node implements Comparable<Node>
         this.pathCost = 1;
         this.parentNode = parentNode;
         this.operator = operator;
-
-        switch(Heuristic.currentHeuristic) {
-            case 1:
-                this.heuristic = new BlockNumHeuristic();
-                break;
-            case 2:
-                this.heuristic = new ColorHeuristic();
-                break;
-            case 3:
-                this.heuristic = new CloseChainHeuristic();
-                break;
-            default:
-                this.heuristic = new BlockNumHeuristic();
-        }
+        
+        if(parentNode != null)
+            this.heuristic = parentNode.getHeuristic();
+        else
+            this.heuristic = Heuristic.createCurrentHeuristic();
     }
 
     public abstract ArrayList<Node> expandNode();
@@ -102,23 +81,6 @@ public abstract class Node implements Comparable<Node>
                 return 0;
         }
     }
-
-    public void updateHeuristic() {
-        switch(Heuristic.currentHeuristic) {
-            case 1:
-                this.heuristic = new BlockNumHeuristic();
-                break;
-            case 2:
-                this.heuristic = new ColorHeuristic();
-                break;
-
-            case 3:
-                this.heuristic = new CloseChainHeuristic();
-                
-            default:
-                this.heuristic = new BlockNumHeuristic();
-        }
-    } 
 
     public static ArrayList<String> getSolution()
     {

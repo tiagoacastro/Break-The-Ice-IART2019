@@ -1,9 +1,9 @@
 package testing;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import game.*;
+import heuristic.*;
 
 public class testingSuite
 {

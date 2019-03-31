@@ -2,6 +2,7 @@ package game;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import heuristic.Heuristic;
 
 public class BreakTheIce 
 {
@@ -203,7 +204,7 @@ public class BreakTheIce
         if(option == 5 || option == 6) {
             chooseHeuristic();
         }
-        bot.getRoot().updateHeuristic();
+        bot.getRoot().setHeuristic();
         bot.search(option, false);
     }
 
@@ -255,6 +256,6 @@ public class BreakTheIce
         System.out.println("+----------------------------------+");
 
         option = getOption(3);
-        Heuristic.currentHeuristic = option;
+        Heuristic.setCurrentHeuristic(option);
     }
 }

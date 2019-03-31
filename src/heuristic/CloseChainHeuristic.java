@@ -1,4 +1,6 @@
-package game;
+package heuristic;
+
+import game.GameBoard;
 
 public class CloseChainHeuristic extends Heuristic
 {
@@ -6,6 +8,7 @@ public class CloseChainHeuristic extends Heuristic
     {
         char[][] board = gameBoard.getBoard();
         int[] pieceCoords = new int[2];
+        int nChains = 0, blocksLeft = GameBoard.getBlocksLeft(board);
 
         for(int i = 0; i < board.length; i++)
             for(int j = 0; j < board[i].length; j++)
@@ -17,8 +20,16 @@ public class CloseChainHeuristic extends Heuristic
                     if(testMoveLeftChain(gameBoard, pieceCoords) || testMoveRightChain(gameBoard, pieceCoords)
                         || testSwitchLeftChain(gameBoard, pieceCoords) || testSwitchRightChain(gameBoard, pieceCoords)
                         || testSwitchUpChain(gameBoard, pieceCoords) || testSwitchDownChain(gameBoard, pieceCoords))
-                        value++;
-            }    
+                        nChains++;
+            }
+            
+        if(nChains == 0)
+            value = 2;
+        else
+            value = blocksLeft / (nChains);
+
+        if(value > 3)
+            value = 3;
     }
 
     public boolean testSwitchDownChain(GameBoard gameBoard, int[] pieceCoords)

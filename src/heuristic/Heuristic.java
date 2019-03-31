@@ -1,9 +1,11 @@
-package game;
+package heuristic;
+
+import game.GameBoard;
 
 public abstract class Heuristic {
 
 	protected int value;
-	public static int currentHeuristic = 0;
+	protected static int currentHeuristic = 0;
 	protected int purple=0, orange=0, red=0, blue=0, green=0, yellow=0;
 	
 	public Heuristic() { 
@@ -22,6 +24,11 @@ public abstract class Heuristic {
 		return value; 
 	}
 
+	public static int getCurrentHeuristic()
+	{
+		return currentHeuristic;
+	}
+
 	public static void setCurrentHeuristic(int h)
 	{
 		currentHeuristic = h;
@@ -30,12 +37,17 @@ public abstract class Heuristic {
 	public abstract void calculate(GameBoard board);
 	public abstract int compareTo(Heuristic h); //for priority queues
 
-	protected void auxiliar(char[][] boardChar) {
-		for (int i = 0; i < boardChar.length; i++) {
-			for (int j = 0; j < boardChar[i].length; j++) {
-				if(boardChar[i][j] != '_') {
+	public void auxiliar(char[][] boardChar) 
+	{
+		for (int i = 0; i < boardChar.length; i++) 
+		{
+			for (int j = 0; j < boardChar[i].length; j++) 
+			{
+				if(boardChar[i][j] != '_') 
+				{
 					this.value++;
-					switch(boardChar[i][j]){
+					switch(boardChar[i][j])
+					{
 						case 'p':
 							purple++;
 							break;
@@ -58,5 +70,19 @@ public abstract class Heuristic {
 				}
 			}
 		}
+	}
+
+	public static Heuristic createCurrentHeuristic()
+	{
+		switch(Heuristic.currentHeuristic) {
+            case 1:
+                return new BlockNumHeuristic();
+            case 2:
+                return new ColorHeuristic();
+            case 3:
+                return new CloseChainHeuristic();
+            default:
+                return new BlockNumHeuristic();
+        }
 	}
 }
