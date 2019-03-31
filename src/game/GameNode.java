@@ -180,37 +180,6 @@ public class GameNode extends Node
 
     }
 
-    public boolean AStarSearch() {
-        PriorityQueue<Node> children = new PriorityQueue<Node>();
-
-        if(this.testGoal()) {
-
-            Node.solution.add(this.operator);
-            return true;
-
-        } else {
-
-            if(this.moves >= board.getMaxMoves())
-                return false;
-
-            ArrayList<Node> childrenAR = this.expandNode();
-            for(Node child: childrenAR) {
-                child.setSearchOption(6);
-                children.add(child);
-            }
-
-            while (!children.isEmpty()) {
-                if (children.poll().AStarSearch()) {
-                    Node.solution.add(0, this.operator);
-                    return true;
-                }
-            }
-
-            return false;
-
-        }
-    }
-
     public boolean testGoal()
     {
         char[][] board = getBoard();
