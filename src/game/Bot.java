@@ -58,7 +58,7 @@ public class Bot
                 solutionFound = root.greedySearch();
                 break;
             case 6:
-                solutionFound = root.AStarSearch();
+                solutionFound = this.AStarSearch();
                 break;
 
             default:
@@ -128,7 +128,6 @@ public class Bot
      * @return Flag indicating if the search was successfull or not.
      */
     public boolean uniformCostSearch() {
-
         PriorityQueue<Node> activeNodes = new PriorityQueue<Node>();
         PriorityQueue<Node> childrenNodes = new PriorityQueue<Node>();
         ArrayList<Node> childrenNodesAR = new ArrayList<Node>();
@@ -139,17 +138,9 @@ public class Bot
         {
 
             childrenNodes.clear();
-            
-            while(activeNodes.size() != 0) {
-    
-                if(activeNodes.peek().testGoal()) {
-                    activeNodes.poll().traceSolutionUp();
-                    return true;
-                }
-    
-                childrenNodesAR.addAll(activeNodes.poll().expandNode());
-            }
-            
+
+            if (aux(activeNodes, childrenNodesAR)) return true;
+
             for(Node child: childrenNodesAR) {
                 child.setSearchOption(4);
                 activeNodes.add(child);
@@ -157,6 +148,43 @@ public class Bot
 
         }
 
+        return false;
+    }
+
+    public boolean AStarSearch() {
+        PriorityQueue<Node> activeNodes = new PriorityQueue<Node>();
+        PriorityQueue<Node> childrenNodes = new PriorityQueue<Node>();
+        ArrayList<Node> childrenNodesAR = new ArrayList<Node>();
+
+        activeNodes.add(root);
+
+        for(int i = 0; i <= root.getGameBoard().getMaxMoves(); i++)
+        {
+
+            childrenNodes.clear();
+
+            if (aux(activeNodes, childrenNodesAR)) return true;
+
+            for(Node child: childrenNodesAR) {
+                child.setSearchOption(6);
+                activeNodes.add(child);
+            }
+
+        }
+
+        return false;
+    }
+
+    private boolean aux(PriorityQueue<Node> activeNodes, ArrayList<Node> childrenNodesAR) {
+        while(activeNodes.size() != 0) {
+
+            if(activeNodes.peek().testGoal()) {
+                activeNodes.poll().traceSolutionUp();
+                return true;
+            }
+
+            childrenNodesAR.addAll(activeNodes.poll().expandNode());
+        }
         return false;
     }
 

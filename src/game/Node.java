@@ -40,7 +40,6 @@ public abstract class Node implements Comparable<Node>
     public abstract boolean iterativeDepthSearch();
     public abstract boolean depthLimitedSearch(int depth);
     public abstract boolean greedySearch();
-    public abstract boolean AStarSearch();
     public abstract boolean testGoal();
     public abstract void traceSolution();
     public abstract void traceSolutionUp();
@@ -72,11 +71,11 @@ public abstract class Node implements Comparable<Node>
     public int compareTo(Node o) {
         switch(this.searchOption) {
             case 4:
-                return o.pathCost - this.pathCost;
+                return o.depth - this.depth;
             case 5:
                 return this.heuristic.compareTo(o.heuristic);
             case 6:
-                return this.heuristic.compareTo(o.heuristic) + o.pathCost - this.pathCost;
+                return this.heuristic.compareTo(o.heuristic) + o.depth - this.depth;
             default:
                 return 0;
         }
