@@ -2,8 +2,16 @@ package heuristic;
 
 import game.GameBoard;
 
+/**
+ * Heuristic based on the number of chains that are one move away from forming and the number of blocks remaining.
+ */
 public class CloseChainHeuristic extends Heuristic
 {
+    /**
+     * Calculates the heuristic's value based on the number of chains that are able to be formed with just one move
+     * and the number of blocks remaining.
+     * @param gameBoard The gameBoard to which apply the heuristic.
+     */
     public void calculate(GameBoard gameBoard)
     {
         char[][] board = gameBoard.getBoard();
@@ -40,6 +48,12 @@ public class CloseChainHeuristic extends Heuristic
         }
     }
 
+    /**
+     * Checks if there are any chains formed by a switch down of a piece.
+     * @param gameBoard The board to analyse.
+     * @param pieceCoords The piece's coordinates.
+     * @return True if there were chains formed and false otherwise.
+     */
     public boolean testSwitchDownChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
@@ -61,6 +75,12 @@ public class CloseChainHeuristic extends Heuristic
         return false;
     }
 
+        /**
+     * Checks if there are any chains formed by a switch up of a piece.
+     * @param gameBoard The board to analyse.
+     * @param pieceCoords The piece's coordinates.
+     * @return True if there were chains formed and false otherwise.
+     */
     public boolean testSwitchUpChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
@@ -82,6 +102,12 @@ public class CloseChainHeuristic extends Heuristic
         return false;
     }
 
+    /**
+     * Checks if there are any chains formed by a switch left of a piece.
+     * @param gameBoard The board to analyse.
+     * @param pieceCoords The piece's coordinates.
+     * @return True if there were chains formed and false otherwise.
+     */
     public boolean testSwitchLeftChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
@@ -103,6 +129,12 @@ public class CloseChainHeuristic extends Heuristic
         return false;
     }
 
+    /**
+     * Checks if there are any chains formed by a switch right of a piece.
+     * @param gameBoard The board to analyse.
+     * @param pieceCoords The piece's coordinates.
+     * @return True if there were chains formed and false otherwise.
+     */
     public boolean testSwitchRightChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
@@ -124,6 +156,12 @@ public class CloseChainHeuristic extends Heuristic
         return false;
     }
 
+    /**
+     * Checks if there are any chains formed by a move right of a piece.
+     * @param gameBoard The board to analyse.
+     * @param pieceCoords The piece's coordinates.
+     * @return True if there were chains formed and false otherwise.
+     */
     public boolean testMoveRightChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
@@ -159,6 +197,12 @@ public class CloseChainHeuristic extends Heuristic
         return false;
     }
 
+    /**
+     * Checks if there are any chains formed by a move left of a piece.
+     * @param gameBoard The board to analyse.
+     * @param pieceCoords The piece's coordinates.
+     * @return True if there were chains formed and false otherwise.
+     */
     public boolean testMoveLeftChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
@@ -197,32 +241,23 @@ public class CloseChainHeuristic extends Heuristic
         return false;
     }
 
-    public boolean testCloseChain(char[][] board, int[] position, char color)
-    {
-        if(position[0] + 2 <= board.length - 1)
-            if(board[position[0] + 1][position[1]] == color && board[position[0] + 2][position[1]] == color)
-                return true;
-        
-        if(position[0] - 2 >= 0)
-            if(board[position[0] - 1][position[1]] == color && board[position[0] - 2][position[1]] == color)
-                return true;
-
-        if(position[1] - 2 >= 0)
-            if(board[position[0]][position[1] - 1] == color && board[position[0]][position[1] - 2] == color)
-                return true;
-
-        if(position[1] + 2 <= board[0].length - 1)
-            if(board[position[0]][position[1] + 1] == color && board[position[0]][position[1] + 2] == color)
-                    return true;
-    
-        return false;
-    }
-
+    /**
+     * Checks if there is a chain around a particular piece.
+     * @param board The board to analyse.
+     * @param coords The piece's coordinates.
+     * @return True if there were chains formed and false otherwise.
+     */
     public boolean findPatternAround(char[][] board, int[] coords)
     {
         return findPatternInLine(board, coords[0]) || findPatternInColumn(board, coords[1]);
     }
 
+    /**
+     * Checks if there is a chain in a line.
+     * @param board The board which contains the line.
+     * @param line The line to analyse.
+     * @return True if there were chains formed and false otherwise.
+     */
     public boolean findPatternInLine(char[][] board, int line)
     {
         char currentColor = '_';
@@ -247,6 +282,12 @@ public class CloseChainHeuristic extends Heuristic
         return false;
     }
 
+    /**
+     * Checks if there is a chain in a column.
+     * @param board The board which contains the column.
+     * @param column The column to analyse.
+     * @return True if there were chains formed and false otherwise.
+     */
     public boolean findPatternInColumn(char[][] board, int column)
     {
         char currentColor = '_';
