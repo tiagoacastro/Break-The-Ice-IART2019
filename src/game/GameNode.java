@@ -73,11 +73,11 @@ public class GameNode extends Node
 
     public boolean depthSearch()
     {
+        if(this.moves >= board.getMaxMoves())
+            return false;
+
         if(!this.testGoal())
         {
-            if(this.moves >= board.getMaxMoves())
-                return false;
-            
             ArrayList<Node> children = this.expandNode();
 
             for(int i = 0; i < children.size(); i++)

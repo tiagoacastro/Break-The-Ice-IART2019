@@ -74,6 +74,9 @@ public class Bot
 
                 movesDiff = GameNode.getSolution().size() - root.getGameBoard().getOptimalMoves();
 
+                if(GameNode.getSolution().get(0).equals("root"))
+                    movesDiff -= 1;
+
                 if(movesDiff > 3)
                     movesDiff = 3;
 
@@ -151,7 +154,12 @@ public class Bot
         return false;
     }
 
-    public boolean AStarSearch() {
+    /**
+     * A* search.
+     * @return Flag indicating if the search was successfull or not.
+     */
+    public boolean AStarSearch() 
+    {
         PriorityQueue<Node> activeNodes = new PriorityQueue<Node>();
         PriorityQueue<Node> childrenNodes = new PriorityQueue<Node>();
         ArrayList<Node> childrenNodesAR = new ArrayList<Node>();
@@ -175,6 +183,10 @@ public class Bot
         return false;
     }
 
+    /**
+     * Auxiliary function to searches using priority queues.
+     * @return Flag indicating if the search was successfull or not.
+     */
     private boolean aux(PriorityQueue<Node> activeNodes, ArrayList<Node> childrenNodesAR) {
         while(activeNodes.size() != 0) {
 

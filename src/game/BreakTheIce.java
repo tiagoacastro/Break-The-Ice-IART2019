@@ -69,6 +69,11 @@ public class BreakTheIce
         chooseMode();
     }
 
+    /**
+     * 
+     * @param option
+     * @return
+     */
     public static GameBoard getLevelSelected(int option)
     {
         int maxPlays, optimalMoves;
