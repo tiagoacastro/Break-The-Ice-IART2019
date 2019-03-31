@@ -4,14 +4,29 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 import heuristic.Heuristic;
 
+/**
+ * Main instance of the game, serves as UI and starting point.
+ */
 public class BreakTheIce 
 {
+    /**
+     * The bot which is to realize the search.
+     */
     private static Bot bot;
+    
+    /**
+     * Launching point of the application.
+     * @param args Arguments of the main function, none expected.
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception 
     {
         menu();
     }
 
+    /**
+     * Main menu interface.
+     */
     public static void menu()
     {
         int option = 0;
@@ -45,6 +60,9 @@ public class BreakTheIce
         while(option != 2);
     }
 
+    /**
+     * Level selection interface.
+     */
     public static void chooseLevel()
     {
         int option;
@@ -70,9 +88,9 @@ public class BreakTheIce
     }
 
     /**
-     * 
-     * @param option
-     * @return
+     * Returns a new GameBoard instance based on the level chosen previously.
+     * @param option The option chosen.
+     * @return The new GameBoard.
      */
     public static GameBoard getLevelSelected(int option)
     {
@@ -186,6 +204,9 @@ public class BreakTheIce
         return new GameBoard(board, maxPlays, optimalMoves);
     }
 
+    /**
+     * Mode selection menu.
+     */
     public static void chooseMode()
     {
         int option;
@@ -215,6 +236,32 @@ public class BreakTheIce
         bot.search(option, false);
     }
 
+    /**
+     * Heuristic selection menu.
+     */
+    public static void chooseHeuristic() 
+    {
+        int option;
+
+        System.out.println("+----------------------------------+");
+        System.out.println("|        Heuristic Selection       |");
+        System.out.println("+----------------------------------+");
+        System.out.println("|       1 - Number of blocks       |");
+        System.out.println("+----------------------------------+");
+        System.out.println("|       2 - Number of colors       |");
+        System.out.println("+----------------------------------+");
+        System.out.println("|  3 - Chains one move away        |");
+        System.out.println("+----------------------------------+");
+
+        option = getOption(3);
+        Heuristic.setCurrentHeuristic(option);
+    }
+
+    /**
+     * Gets an option from the user and tests its validity.
+     * @param maxValue The maximum number of options allowed in this instance.
+     * @return The option chosen.
+     */
     public static int getOption(int maxValue)
     {
         Scanner scanner = new Scanner(System.in);
@@ -247,22 +294,5 @@ public class BreakTheIce
         }
 
         return option;
-    }
-
-    public static void chooseHeuristic() {
-        int option;
-
-        System.out.println("+----------------------------------+");
-        System.out.println("|        Heuristic Selection       |");
-        System.out.println("+----------------------------------+");
-        System.out.println("|       1 - Number of blocks       |");
-        System.out.println("+----------------------------------+");
-        System.out.println("|       2 - Number of colors       |");
-        System.out.println("+----------------------------------+");
-        System.out.println("|  3 - Chains one move away        |");
-        System.out.println("+----------------------------------+");
-
-        option = getOption(3);
-        Heuristic.setCurrentHeuristic(option);
     }
 }
