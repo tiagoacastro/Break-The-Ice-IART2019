@@ -30,8 +30,6 @@ public class CloseChainHeuristic extends Heuristic
 
         if(value > 3)
             value = 3;
-
-        System.out.println(value);
     }
 
     public boolean testSwitchDownChain(GameBoard gameBoard, int[] pieceCoords)
