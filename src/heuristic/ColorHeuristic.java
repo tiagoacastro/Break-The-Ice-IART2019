@@ -25,7 +25,7 @@ public class ColorHeuristic extends Heuristic
       if (yellow > 0)
         i++;
 
-      this.value *= i / 6;
+      this.value = (this.value * board.getColors()) / board.getBlocks();
       if (value > board.getMaxMoves())
         value = board.getMaxMoves();
     
