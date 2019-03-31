@@ -20,20 +20,7 @@ public abstract class Node implements Comparable<Node>
         this.heuristic = new BlockNumHeuristic();
         this.searchOption = 0;
         this.operator = operator;
-
-        switch(Heuristic.currentHeuristic) {
-            case 1:
-                this.heuristic = new BlockNumHeuristic();
-                break;
-            case 2:
-                this.heuristic = new ColorHeuristic();
-                break;
-            case 3:
-                this.heuristic = new CloseChainHeuristic();
-                break;
-            default:
-                this.heuristic = new BlockNumHeuristic();
-        }
+        this.heuristic = Heuristic.createCurrentHeuristic();
     }
 
     public Node(Node parentNode, String operator)
@@ -41,8 +28,12 @@ public abstract class Node implements Comparable<Node>
         this.depth = parentNode.depth + 1;
         this.pathCost = 1;
         this.parentNode = parentNode;
-        this.heuristic = new BlockNumHeuristic();
         this.operator = operator;
+        
+        if(parentNode != null)
+            this.heuristic = parentNode.getHeuristic();
+        else
+            this.heuristic = Heuristic.createCurrentHeuristic();
     }
 
     public abstract ArrayList<Node> expandNode();
@@ -91,23 +82,6 @@ public abstract class Node implements Comparable<Node>
 
         return o.pathCost - this.pathCost;
     }
-
-    public void updateHeuristic() {
-        switch(Heuristic.currentHeuristic) {
-            case 1:
-                this.heuristic = new BlockNumHeuristic();
-                break;
-            case 2:
-                this.heuristic = new ColorHeuristic();
-                break;
-
-            case 3:
-                this.heuristic = new CloseChainHeuristic();
-                
-            default:
-                this.heuristic = new BlockNumHeuristic();
-        }
-    } 
 
     public static ArrayList<String> getSolution()
     {

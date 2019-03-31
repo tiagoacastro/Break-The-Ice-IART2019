@@ -149,6 +149,8 @@ public class GameNode extends Node
 
         PriorityQueue<Node> children = new PriorityQueue<Node>();
 
+        
+
         if(this.testGoal()) {
 
             Node.solution.add(this.operator);
@@ -357,5 +359,26 @@ public class GameNode extends Node
     {
         this.board = board;
     }
+
+    public void setHeuristic() 
+    {
+        switch(Heuristic.getCurrentHeuristic()) {
+            case 1:
+                this.heuristic = new BlockNumHeuristic();
+                break;
+            case 2:
+                this.heuristic = new ColorHeuristic();
+                break;
+
+            case 3:
+                this.heuristic = new CloseChainHeuristic();
+                break;
+                
+            default:
+                this.heuristic = new BlockNumHeuristic();
+        }
+
+        this.heuristic.calculate(board);
+    } 
 
 }
