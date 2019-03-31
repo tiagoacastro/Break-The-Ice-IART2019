@@ -23,20 +23,15 @@ public class CloseChainHeuristic extends Heuristic
                         nChains++;
             }
             
-        
-
-        if(blocksLeft == 0)
-            value = 0;
+        if(nChains == 0)
+            value = 2;
         else
-        {
-            value = (nChains / 2) / blocksLeft;
+            value = blocksLeft / (nChains);
 
-            if(value == 0)
-                value = 1;
-        }
-            
+        if(value > 3)
+            value = 3;
 
-        
+        System.out.println(value);
     }
 
     public boolean testSwitchDownChain(GameBoard gameBoard, int[] pieceCoords)
