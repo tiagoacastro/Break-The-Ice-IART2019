@@ -153,6 +153,8 @@ public class Bot
                     child.setSearchOption(4);
                     activeNodes.add(child);
                 }
+                activeNodesAR.clear();
+                activeNodesAR.trimToSize();
             } else {
                 return false;
             }
