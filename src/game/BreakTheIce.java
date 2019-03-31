@@ -76,7 +76,7 @@ public class BreakTheIce
         switch(option)
         {
             case 1:
-                maxPlays = 1;
+                maxPlays = 3;
                 board = new char[][]
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -95,7 +95,7 @@ public class BreakTheIce
                 break;
 
             case 2:
-                maxPlays = 1;
+                maxPlays = 3;
                 board = new char[][]
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -114,7 +114,7 @@ public class BreakTheIce
                 break;
 
             case 3:
-                maxPlays = 1;
+                maxPlays = 3;
                 board = new char[][]
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -133,7 +133,7 @@ public class BreakTheIce
                 break;
 
             case 4:
-                maxPlays = 2;
+                maxPlays = 4;
                 board = new char[][] 
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
