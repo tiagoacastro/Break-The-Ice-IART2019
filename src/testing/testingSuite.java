@@ -5,14 +5,24 @@ import java.util.HashMap;
 import game.*;
 import heuristic.*;
 
+/**
+ * Suite designed to run statistical analysis tests or just plain, random ones.
+ */
 public class testingSuite
 {
+    /**
+     * Point of entry for the tests.
+     * @param args Command line arguments, none expected.
+     */
     public static void main(String args[])
     {
         testLevels();
         //randomTest();
     }
 
+    /**
+     * Runs random tests for debug purposes.
+     */
     public static void randomTest()
     {
         GameBoard board = new GameBoard(new char[][]
@@ -39,6 +49,9 @@ public class testingSuite
         System.out.println(res);
     }
 
+    /**
+     * Used to get statistical data regarding the different algorythms.
+     */
     public static void testLevels()
     {
         HashMap<Integer, String> algTable = new HashMap<>();
@@ -77,6 +90,11 @@ public class testingSuite
 
     }
 
+    /**
+     * Calculates the average of a set of values.
+     * @param values The set of values.
+     * @return The average of the values.
+     */
     public static long calculateAverage(long[] values)
     {
         long sum = 0;
