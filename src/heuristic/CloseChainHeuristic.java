@@ -1,4 +1,6 @@
-package game;
+package heuristic;
+
+import game.GameBoard;
 
 public class CloseChainHeuristic extends Heuristic
 {

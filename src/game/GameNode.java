@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+import heuristic.*;
 
 public class GameNode extends Node 
 {

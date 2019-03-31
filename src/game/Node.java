@@ -1,5 +1,6 @@
 package game;
 import java.util.ArrayList;
+import heuristic.*;
 
 public abstract class Node implements Comparable<Node>
 {

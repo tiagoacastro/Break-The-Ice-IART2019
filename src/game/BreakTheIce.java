@@ -2,6 +2,7 @@ package game;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import heuristic.Heuristic;
 
 public class BreakTheIce 
 {

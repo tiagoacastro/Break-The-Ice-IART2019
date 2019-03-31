@@ -1,4 +1,6 @@
-package game;
+package heuristic;
+
+import game.GameBoard;
 
 public abstract class Heuristic {
 
