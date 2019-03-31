@@ -9,8 +9,8 @@ public class testingSuite
 {
     public static void main(String args[])
     {
-        //testLevels();
-        randomTest();
+        testLevels();
+        //randomTest();
     }
 
     public static void randomTest()
@@ -36,7 +36,6 @@ public class testingSuite
         
         GameNode root = new GameNode(null, 0, 0, "root", 0, board); 
     
-        res = ((PairsHeuristic) root.getHeuristic()).getPairs(board.getBoard());
         System.out.println(res);
     }
 

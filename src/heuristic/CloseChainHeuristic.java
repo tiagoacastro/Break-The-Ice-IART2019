@@ -10,6 +10,9 @@ public class CloseChainHeuristic extends Heuristic
         int[] pieceCoords = new int[2];
         int nChains = 0, blocksLeft = GameBoard.getBlocksLeft(board);
 
+        if(!possibleBoard(board))
+            return;
+
         for(int i = 0; i < board.length; i++)
             for(int j = 0; j < board[i].length; j++)
             {
@@ -27,9 +30,10 @@ public class CloseChainHeuristic extends Heuristic
             value = 0;
         else{
             if(nChains == 0)
-                value = gameBoard.getMaxMoves();
+                value = 2;
             else {
                 value = blocksLeft / (nChains);
+
                 if (value > gameBoard.getMaxMoves())
                     value = gameBoard.getMaxMoves();
             }

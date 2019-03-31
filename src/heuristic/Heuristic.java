@@ -4,9 +4,9 @@ import game.GameBoard;
 
 public abstract class Heuristic {
 
-	int value;
+	protected int value;
 	private static int currentHeuristic = 0;
-	int purple=0, orange=0, red=0, blue=0, green=0, yellow=0;
+	protected int purple=0, orange=0, red=0, blue=0, green=0, yellow=0;
 	
 	public Heuristic() { 
 		this.value = 0; 
@@ -39,7 +39,7 @@ public abstract class Heuristic {
 		return this.value - h.value;
 	}
 
-	public void auxiliar(char[][] boardChar) 
+	public boolean possibleBoard(char[][] boardChar) 
 	{
 		for (int i = 0; i < boardChar.length; i++) 
 		{
@@ -72,6 +72,14 @@ public abstract class Heuristic {
 				}
 			}
 		}
+
+		if((purple | orange | red | blue | green | yellow) < 3 && (purple | orange | red | blue | green | yellow) > 0)
+		{
+			this.value = Integer.MAX_VALUE;
+			return false;
+		}
+		else
+			return true;
 	}
 
 	public static Heuristic createCurrentHeuristic()
@@ -83,8 +91,6 @@ public abstract class Heuristic {
                 return new ColorHeuristic();
             case 3:
 				return new CloseChainHeuristic();
-			case 4:
-				return new PairsHeuristic();
             default:
                 return new BlockNumHeuristic();
         }
