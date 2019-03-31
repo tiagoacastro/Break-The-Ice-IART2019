@@ -1,12 +1,36 @@
 package game;
 
+/**
+ * Contains the actual playing board (matrix) and performs the moves and tests on it.
+ */
 public class GameBoard
 {
+    /**
+     * The actual board.
+     */
     private char[][] board;
+
+    /**
+     * The maximum number of moves allowed for this board.
+     */
     private int maxMoves;
+
+    /**
+     * The optimal number of moves for this board.
+     */
     private int optimalMoves;
+
+    /**
+     * Flag indicating if the moves performed are to be displayed.
+     */
     private static boolean showMove = false;
     
+    /**
+     * Constructor of the class.
+     * @param board The board matrix.
+     * @param maxMoves The maximum number of moves allowed.
+     * @param optimalMoves The optimal number of moves.
+     */
     public GameBoard(char[][] board, int maxMoves, int optimalMoves)
     {
         this.board = board;
@@ -14,6 +38,11 @@ public class GameBoard
         this.optimalMoves = optimalMoves;
     }
 
+    /**
+     * Moves a piece to the right if possible.
+     * @param pieceCoords The coordinates of the piece to be moved.
+     * @return A new GameBoard with the move performed or null if it was invalid.
+     */
     public GameBoard movePieceRight(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board);
@@ -68,11 +97,21 @@ public class GameBoard
         return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
     }
 
+    /**
+     * Tests if a piece can be moved to the right.
+     * @param pieceCoords The piece coordinates.
+     * @return True if the move is valid or false otherwise.
+     */
     public boolean validateMoveRight(int[] pieceCoords)
     {
         return pieceCoords[1] != board[0].length - 1 && this.board[pieceCoords[0]][pieceCoords[1] + 1] == '_';
     }
 
+    /**
+     * Moves a piece to the left if possible.
+     * @param pieceCoords The coordinates of the piece to be moved.
+     * @return A new GameBoard with the move performed or null if it was invalid.
+     */
     public GameBoard movePieceLeft(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board), testBoard = null;
@@ -126,11 +165,21 @@ public class GameBoard
         return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
     }
 
+    /**
+     * Tests if a piece can be moved to the left.
+     * @param pieceCoords The piece coordinates.
+     * @return True if the move is valid or false otherwise.
+     */
     public boolean validateMoveLeft(int[] pieceCoords)
     {
         return pieceCoords[1] != 0 && this.board[pieceCoords[0]][pieceCoords[1] - 1] == '_';
     }
 
+    /**
+     * Switches a piece with the one to it's left.
+     * @param pieceCoords The coordinates of the piece to be switched.
+     * @return A new GameBoard with the move performed or null if it was invalid.
+     */
     public GameBoard switchPieceLeft(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board), testBoard = null;
@@ -171,11 +220,21 @@ public class GameBoard
         return new GameBoard(newBoard, this.maxMoves, this.optimalMoves); 
     }
 
+    /**
+     * Tests if a piece can be switched to the left.
+     * @param pieceCoords The piece coordinates.
+     * @return True if the move is valid or false otherwise.
+     */
     public boolean validateSwitchLeft(int[] pieceCoords)
     {
         return pieceCoords[1] != 0 && this.board[pieceCoords[0]][pieceCoords[1] - 1] != '_';
     }
 
+    /**
+     * Switches a piece with the one to it's right.
+     * @param pieceCoords The coordinates of the piece to be switched.
+     * @return A new GameBoard with the move performed or null if it was invalid.
+     */
     public GameBoard switchPieceRight(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board), testBoard = null;
@@ -215,11 +274,21 @@ public class GameBoard
         return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
     }
 
+    /**
+     * Tests if a piece can be switched to the right.
+     * @param pieceCoords The piece coordinates.
+     * @return True if the move is valid or false otherwise.
+     */
     public boolean validateSwitchRight(int[] pieceCoords)
     {
         return pieceCoords[1] != board[0].length - 1 && this.board[pieceCoords[0]][pieceCoords[1] + 1] != '_';
     }
 
+    /**
+     * Switches a piece with the one above it.
+     * @param pieceCoords The coordinates of the piece to be switched.
+     * @return A new GameBoard with the move performed or null if it was invalid.
+     */
     public GameBoard switchPieceUp(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board), testBoard = null;
@@ -259,11 +328,21 @@ public class GameBoard
         return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
     }
 
+    /**
+     * Tests if a piece can be switched upwards.
+     * @param pieceCoords The piece coordinates.
+     * @return True if the move is valid or false otherwise.
+     */
     public boolean validateSwitchUp(int[] pieceCoords)
     {
         return pieceCoords[0] != 0 && this.board[pieceCoords[0] - 1][pieceCoords[1]] != '_';
     }
 
+    /**
+     * Switches a piece with the one below it.
+     * @param pieceCoords The coordinates of the piece to be switched.
+     * @return A new GameBoard with the move performed or null if it was invalid.
+     */
     public GameBoard switchPieceDown(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board), testBoard = null;
@@ -303,11 +382,22 @@ public class GameBoard
         return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
     }
 
+    /**
+     * Tests if a piece can be switched downwards.
+     * @param pieceCoords The piece coordinates.
+     * @return True if the move is valid or false otherwise.
+     */
     public boolean validateSwitchDown(int[] pieceCoords)
     {
         return pieceCoords[0] != board.length - 1 && this.board[pieceCoords[0] + 1][pieceCoords[1]] != '_';
     }
 
+    /**
+     * "Drops" a piece until it hits another piece of the floor.
+     * @param board The board in which to drop the piece.
+     * @param pieceCoords The piece's coordinates.
+     * @return A new board with the piece dropped.
+     */
     public char[][] dropPiece(char[][] board, int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(board);
@@ -327,6 +417,12 @@ public class GameBoard
         return newBoard;
     }
 
+    /**
+     * Gets the coordinates of the last dropped piece in a column.
+     * @param column The column in which to search.
+     * @param board The board containing the column.
+     * @return The piece's coordinates if it finds one or the coordinates of the floor at that column.
+     */
     public int[] getDroppedPieceCoords(int column, char[][] board)
     {
         int[] droppedPieceCoords = new int[] {board.length - 1, column};
@@ -340,11 +436,15 @@ public class GameBoard
                 return droppedPieceCoords;
             }
 
-        //System.out.println("Couldn't find dropped piece at column " + column);
-
         return droppedPieceCoords;
     }
 
+    /**
+     * Makes a column act in accordance to gravity, i.e, eliminates any "holes" in it.
+     * @param board The board in wich to drop the column.
+     * @param column The column to drop.
+     * @return A new board with the column dropped.
+     */
     public char[][] dropColumn(char[][] board, int column)
     {
         int i;
@@ -372,6 +472,12 @@ public class GameBoard
         return newBoard;
     }
 
+    /**
+     * Analyzes the board for chains of 3 or more cubes and eliminates the blocks in these until there are no 
+     * more active chains.
+     * @param board The board to analyse.
+     * @return The new board free of chains.
+     */
     public char[][] explodeAll(char[][] board)
     {
         char[][] newBoard = copyBoard(board), testBoard;
@@ -420,26 +526,12 @@ public class GameBoard
             return null;
     }
 
-    public char[][] explodeAround(int line, int column, char[][] board)
-    {
-        char[][] newBoard = copyBoard(board), testBoard;
-
-        testBoard = explodeLine(line, newBoard);
-        
-        if(testBoard != null)
-            return explodeAll(testBoard);
-        else
-        {
-            testBoard = explodeColumn(column, newBoard);
-
-            if(testBoard != null)
-                return explodeAll(testBoard);
-            else
-                return board;
-        }
-        
-    }
-
+    /**
+     * Eliminates any chain of 3 or more cubes in a line.
+     * @param line The line to analyse.
+     * @param board The board containing the line.
+     * @return The new board after the line was cleared of chains.
+     */
     public char[][] explodeLine(int line, char[][] board)
     {
         char[][] newBoard = copyBoard(board);
@@ -528,6 +620,12 @@ public class GameBoard
             return null;
     }
 
+    /**
+     * Eliminates any chain of 3 or more cubes in a column.
+     * @param column The column to analyse.
+     * @param board The board containing the column.
+     * @return The new board after the column was cleared of chains.
+     */
     public char[][] explodeColumn(int column, char[][] board)
     {
         char[][] newBoard = copyBoard(board);
@@ -595,6 +693,11 @@ public class GameBoard
 
     }
 
+    /**
+     * Copies and returns a board (2D matrix of chars).
+     * @param board The board to be copied.
+     * @return The cloned board.
+     */
     public char[][] copyBoard(char[][] board)
     {
         char newBoard[][] = new char[board.length][board[0].length];
@@ -605,31 +708,63 @@ public class GameBoard
         return newBoard;
     }
 
+    /**
+     * Retrieves a copy of the current board.
+     * @return A copy of the current board.
+     */
     public char[][] getBoard()
     {
         return copyBoard(board);
     }
 
+    /**
+     * Sets the current board to a new one.
+     * @param board The new board to replace the current one.
+     */
     public void setBoard(char[][] board)
     {
         this.board = board;
     }
 
+    /**
+     * Retrieves the maximum amount of moves of this board.
+     * @return The maximum amount of moves.
+     */
     public int getMaxMoves()
     {
         return maxMoves;
     }
 
+    /**
+     * Retrieves the optimal number of moves of this board.
+     * @return The optimal number of moves.
+     */
+    public int getOptimalMoves()
+    {
+        return optimalMoves;
+    }
+
+    /**
+     * Sets the show move flag.
+     * @param showMove The new value of the show move flag.
+     */
     public static void setShowMove(boolean showMove)
     {
         GameBoard.showMove = showMove;
     }
 
+    /**
+     * Prints the current board.
+     */
     public void printBoard()
     {
         printBoard(board);
     }
 
+    /**
+     * Prints a board.
+     * @param board The board to be printed.
+     */
     public void printBoard(char[][] board)
     {
         for(int i = 0; i < board.length; i++)
@@ -649,22 +784,31 @@ public class GameBoard
         System.out.println("---------------");
     }
 
+    /**
+     * Tests if a set of coordinates evaluates to an actual piece.
+     * @param pieceCoords The piece's coordinates.
+     * @return True if the coordinates correspond to a piece and false otherwise.
+     */
     public boolean testPieceCoords(int[] pieceCoords)
     {
         return !(pieceCoords[0] >= this.board.length || pieceCoords[1] >= this.board[0].length 
         || pieceCoords[0] < 0 || pieceCoords[1] < 0 || this.board[pieceCoords[0]][pieceCoords[1]] == '_');
     }
 
-    public int getOptimalMoves()
-    {
-        return optimalMoves;
-    }
-
+    /**
+     * Returns the number of blocks left in the current board.
+     * @return The number of blocks left.
+     */
     public int getBlocksLeft()
     {
         return getBlocksLeft(board);
     }
     
+    /**
+     * Returns the number of blocks in a board.
+     * @param board The board in question.
+     * @return The number of blocks left in the board.
+     */
     public static int getBlocksLeft(char[][] board)
     {
         int count = 0;
