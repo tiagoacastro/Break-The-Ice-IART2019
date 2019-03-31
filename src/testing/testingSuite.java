@@ -44,7 +44,7 @@ public class testingSuite
 
         Heuristic.setCurrentHeuristic(4);
         
-        GameNode root = new GameNode(null, 0, 0, "root", 0, board); 
+        new GameNode(null, 0, 0, "root", 0, board);
     
         System.out.println(res);
     }
@@ -52,7 +52,7 @@ public class testingSuite
     /**
      * Used to get statistical data regarding the different algorythms.
      */
-    public static void testLevels()
+    private static void testLevels()
     {
         HashMap<Integer, String> algTable = new HashMap<>();
         long[] times = new long[10];
@@ -70,9 +70,14 @@ public class testingSuite
         {
             bot = new Bot(new GameNode(null, 0, 0, "root", 0, BreakTheIce.getLevelSelected(i + 1))); //review this
 
-            System.out.println("----- Testing with " + BreakTheIce.getLevelSelected(i + 1).getMaxMoves() 
-                + " move(s) solution, " + GameBoard.getBlocksLeft(BreakTheIce.getLevelSelected(i + 1).getBoard()) 
-                + " blocks -----\n");
+            try {
+                System.out.println("----- Testing with " + BreakTheIce.getLevelSelected(i + 1).getMaxMoves()
+                        + " move(s) solution, " + GameBoard.getBlocksLeft(BreakTheIce.getLevelSelected(i + 1).getBoard())
+                        + " blocks -----\n");
+            } catch(NullPointerException e){
+                System.out.println("Null pointer exception\n");
+                return;
+            }
 
             for(int j = 1; j <= 6; j++)
             {
@@ -95,12 +100,12 @@ public class testingSuite
      * @param values The set of values.
      * @return The average of the values.
      */
-    public static long calculateAverage(long[] values)
+    private static long calculateAverage(long[] values)
     {
         long sum = 0;
 
-        for(int i = 0; i < values.length; i++)
-            sum += values[i];
+        for(long value : values)
+            sum += value;
 
         return sum / values.length;
     }

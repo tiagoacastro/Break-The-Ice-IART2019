@@ -18,7 +18,7 @@ public abstract class Node implements Comparable<Node>
     int depth;
 
     /**
-     * The path cost to reach this node (always 1 since from one depth level to the other all possible plays 
+     * The path cost to reach this node (always 1 since from one depth level to the other all possible plays
      * exhaust 1 move)
      */
     private int pathCost;
@@ -41,7 +41,7 @@ public abstract class Node implements Comparable<Node>
     /**
      * List containing the solution to a level in order.
      */
-    protected static ArrayList<String> solution = new ArrayList<String>();
+    protected static ArrayList<String> solution = new ArrayList<>();
 
     /**
      * Constructor of the class with most members.
@@ -72,11 +72,8 @@ public abstract class Node implements Comparable<Node>
         this.pathCost = 1;
         this.parentNode = parentNode;
         this.operator = operator;
-        
-        if(parentNode != null)
-            this.heuristic = parentNode.getHeuristic();
-        else
-            this.heuristic = Heuristic.createCurrentHeuristic();
+
+        this.heuristic = parentNode.getHeuristic();
     }
 
     /**
@@ -126,48 +123,12 @@ public abstract class Node implements Comparable<Node>
     public abstract void traceSolutionUp();
 
     /**
-     * Retrieves the parent node.
-     * @return The parent node.
-     */
-    public Node getParentNode()
-    {
-        return parentNode;
-    }
-
-    /**
      * Retrieves the depth.
      * @return The depth this node's at.
      */
     public int getDepth()
     {
         return depth;
-    }
-
-    /**
-     * Retrieves the path cost.
-     * @return The path cost to get to this node.
-     */
-    public int getPathCost()
-    {
-        return pathCost;
-    }
-
-    /**
-     * Retrieves the operator.
-     * @return The node's operator.
-     */
-    public String getOperator()
-    {
-        return operator;
-    }
-
-    /**
-     * Sets the path cost of this node.
-     * @param pathCost The new path cost of this node.
-     */
-    public void setPathCost(int pathCost) 
-    {
-        this.pathCost = pathCost;
     }
 
     /**

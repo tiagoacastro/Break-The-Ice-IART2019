@@ -17,9 +17,8 @@ public class BreakTheIce
     /**
      * Launching point of the application.
      * @param args Arguments of the main function, none expected.
-     * @throws Exception
      */
-    public static void main(String[] args) throws Exception 
+    public static void main(String[] args)
     {
         menu();
     }
@@ -27,9 +26,9 @@ public class BreakTheIce
     /**
      * Main menu interface.
      */
-    public static void menu()
+    private static void menu()
     {
-        int option = 0;
+        int option;
 
         do
         {
@@ -54,16 +53,15 @@ public class BreakTheIce
 
                 default:
                     System.out.println("Option not recognized in main menu");
-                    continue;
             }
         }
-        while(option != 2);
+        while(true);
     }
 
     /**
      * Level selection interface.
      */
-    public static void chooseLevel()
+    private static void chooseLevel()
     {
         int option;
 
@@ -218,7 +216,7 @@ public class BreakTheIce
     /**
      * Mode selection menu.
      */
-    public static void chooseMode()
+    private static void chooseMode()
     {
         int option;
 
@@ -250,7 +248,7 @@ public class BreakTheIce
     /**
      * Heuristic selection menu.
      */
-    public static void chooseHeuristic() 
+    private static void chooseHeuristic()
     {
         int option;
 
@@ -261,7 +259,7 @@ public class BreakTheIce
         System.out.println("+----------------------------------+");
         System.out.println("|       2 - Number of colors       |");
         System.out.println("+----------------------------------+");
-        System.out.println("|  3 - Chains one move away        |");
+        System.out.println("|     3 - Chains one move away     |");
         System.out.println("+----------------------------------+");
 
         option = getOption(3);
@@ -273,7 +271,7 @@ public class BreakTheIce
      * @param maxValue The maximum number of options allowed in this instance.
      * @return The option chosen.
      */
-    public static int getOption(int maxValue)
+    private static int getOption(int maxValue)
     {
         Scanner scanner = new Scanner(System.in);
         int option;

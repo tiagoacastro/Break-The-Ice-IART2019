@@ -18,7 +18,7 @@ public class CloseChainHeuristic extends Heuristic
         int[] pieceCoords = new int[2];
         int nChains = 0, blocksLeft = GameBoard.getBlocksLeft(board);
 
-        if(!possibleBoard(board))
+        if(notPossibleBoard(board))
             return;
 
         for(int i = 0; i < board.length; i++)
@@ -54,7 +54,7 @@ public class CloseChainHeuristic extends Heuristic
      * @param pieceCoords The piece's coordinates.
      * @return True if there were chains formed and false otherwise.
      */
-    public boolean testSwitchDownChain(GameBoard gameBoard, int[] pieceCoords)
+    private boolean testSwitchDownChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
         char color = board[pieceCoords[0]][pieceCoords[1]];
@@ -81,7 +81,7 @@ public class CloseChainHeuristic extends Heuristic
      * @param pieceCoords The piece's coordinates.
      * @return True if there were chains formed and false otherwise.
      */
-    public boolean testSwitchUpChain(GameBoard gameBoard, int[] pieceCoords)
+    private boolean testSwitchUpChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
         char color = board[pieceCoords[0]][pieceCoords[1]];
@@ -108,7 +108,7 @@ public class CloseChainHeuristic extends Heuristic
      * @param pieceCoords The piece's coordinates.
      * @return True if there were chains formed and false otherwise.
      */
-    public boolean testSwitchLeftChain(GameBoard gameBoard, int[] pieceCoords)
+    private boolean testSwitchLeftChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
         char color = board[pieceCoords[0]][pieceCoords[1]];
@@ -135,7 +135,7 @@ public class CloseChainHeuristic extends Heuristic
      * @param pieceCoords The piece's coordinates.
      * @return True if there were chains formed and false otherwise.
      */
-    public boolean testSwitchRightChain(GameBoard gameBoard, int[] pieceCoords)
+    private boolean testSwitchRightChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
         char color = board[pieceCoords[0]][pieceCoords[1]];
@@ -162,7 +162,7 @@ public class CloseChainHeuristic extends Heuristic
      * @param pieceCoords The piece's coordinates.
      * @return True if there were chains formed and false otherwise.
      */
-    public boolean testMoveRightChain(GameBoard gameBoard, int[] pieceCoords)
+    private boolean testMoveRightChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
         char color = board[pieceCoords[0]][pieceCoords[1]];
@@ -203,7 +203,7 @@ public class CloseChainHeuristic extends Heuristic
      * @param pieceCoords The piece's coordinates.
      * @return True if there were chains formed and false otherwise.
      */
-    public boolean testMoveLeftChain(GameBoard gameBoard, int[] pieceCoords)
+    private boolean testMoveLeftChain(GameBoard gameBoard, int[] pieceCoords)
     {
         char[][] board = gameBoard.getBoard();
         char color = board[pieceCoords[0]][pieceCoords[1]];
@@ -224,21 +224,35 @@ public class CloseChainHeuristic extends Heuristic
                     return true;
             }
 
-            if(pieceCoords[0] < board.length - 1 && board[movedPieceCoords[0] + 1][movedPieceCoords[1]] == '_')
-            {
-                board = gameBoard.dropPiece(board, movedPieceCoords);
-
-                int[] droppedPieceCoords = gameBoard.getDroppedPieceCoords(movedPieceCoords[1], board);
-
-                if(findPatternAround(board, droppedPieceCoords))
-                    return true;
-            }
-            else
-                return findPatternInColumn(board, movedPieceCoords[1]);
+            Boolean b = aux(gameBoard, pieceCoords[0] < board.length - 1 && board[movedPieceCoords[0] + 1][movedPieceCoords[1]] == '_', board, movedPieceCoords);
+            if (b != null) return b;
 
         } 
 
         return false;
+    }
+
+    /**
+     * auxiliar function
+     * @param gameBoard board
+     * @param b boolean
+     * @param board actual board
+     * @param movedPieceCoords moved piece coordenates
+     * @return boolean
+     */
+    private Boolean aux(GameBoard gameBoard, boolean b, char[][] board, int[] movedPieceCoords) {
+        if(b)
+        {
+            board = gameBoard.dropPiece(board, movedPieceCoords);
+
+            int[] droppedPieceCoords = gameBoard.getDroppedPieceCoords(movedPieceCoords[1], board);
+
+            if(findPatternAround(board, droppedPieceCoords))
+                return true;
+        }
+        else
+            return findPatternInColumn(board, movedPieceCoords[1]);
+        return null;
     }
 
     /**
@@ -247,7 +261,7 @@ public class CloseChainHeuristic extends Heuristic
      * @param coords The piece's coordinates.
      * @return True if there were chains formed and false otherwise.
      */
-    public boolean findPatternAround(char[][] board, int[] coords)
+    private boolean findPatternAround(char[][] board, int[] coords)
     {
         return findPatternInLine(board, coords[0]) || findPatternInColumn(board, coords[1]);
     }
@@ -258,7 +272,7 @@ public class CloseChainHeuristic extends Heuristic
      * @param line The line to analyse.
      * @return True if there were chains formed and false otherwise.
      */
-    public boolean findPatternInLine(char[][] board, int line)
+    private boolean findPatternInLine(char[][] board, int line)
     {
         char currentColor = '_';
         int counter = 1;
@@ -288,7 +302,7 @@ public class CloseChainHeuristic extends Heuristic
      * @param column The column to analyse.
      * @return True if there were chains formed and false otherwise.
      */
-    public boolean findPatternInColumn(char[][] board, int column)
+    private boolean findPatternInColumn(char[][] board, int column)
     {
         char currentColor = '_';
         int counter = 1;

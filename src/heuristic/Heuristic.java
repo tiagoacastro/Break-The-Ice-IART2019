@@ -5,12 +5,11 @@ import game.GameBoard;
 /**
  * General heuristic class, serves as basis for more complex heuristics associated with a node.
  */
-public abstract class Heuristic 
-{
+public abstract class Heuristic {
 	/**
 	 * The current value of the heuristic.
 	 */
-	protected int value;
+	int value;
 
 	/**
 	 *	Indicator of the current sub-heuristic being used.
@@ -20,39 +19,14 @@ public abstract class Heuristic
 	/**
 	 * The possible colors in a board.
 	 */
-	protected int purple=0, orange=0, red=0, blue=0, green=0, yellow=0;
+	int purple=0, orange=0, red=0, blue=0, green=0, yellow=0;
 	
 	/**
 	 * Constructor of the class, initiates it's value to 0.
 	 */
-	public Heuristic() 
+	Heuristic()
 	{ 
 		this.value = 0; 
-	}
-
-	/**
-	 * Constructor of the class, initiates it's value with the argument passed.
-	 * @param value The initial value of the heuristic.
-	 */
-	public Heuristic(int value) 
-	{
-		this.value = value; 
-	}
-
-	/**
-	 * Sets the heuristic's value.
-	 * @param value The new value.
-	 */
-	public void setValue(int value) { 
-		this.value = value; 
-	}
-	
-	/**
-	 * Retrieves the heuristic's value.
-	 * @return The current value.
-	 */
-	public double getValue() { 
-		return value; 
 	}
 
 	/**
@@ -78,6 +52,12 @@ public abstract class Heuristic
 	 * @param board The board to which the heuristic's value is calculated.
 	 */
 	public abstract void calculate(GameBoard board);
+
+	/**
+	 * CompareTo for comparation purposes
+	 * @param h heuristic to compare to
+	 * @return difference
+	 */
 	public int compareTo(Heuristic h) {
 		return this.value - h.value;
 	}
@@ -87,16 +67,16 @@ public abstract class Heuristic
 	 * @param boardChar The board in question.
 	 * @return True if the board has a solution and false otherwise.
 	 */
-	public boolean possibleBoard(char[][] boardChar) 
+	boolean notPossibleBoard(char[][] boardChar)
 	{
-		for (int i = 0; i < boardChar.length; i++) 
+		for (char[] line : boardChar)
 		{
-			for (int j = 0; j < boardChar[i].length; j++) 
+			for (char cell : line)
 			{
-				if(boardChar[i][j] != '_') 
+				if(cell != '_')
 				{
 					this.value++;
-					switch(boardChar[i][j])
+					switch(cell)
 					{
 						case 'p':
 							purple++;

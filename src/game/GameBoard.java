@@ -59,14 +59,6 @@ public class GameBoard
     }
 
     /**
-     * Getter for Colors
-     * @return  colors
-     */
-    public int getColors() {
-        return colors;
-    }
-
-    /**
      * Moves a piece to the right if possible.
      * @param pieceCoords The coordinates of the piece to be moved.
      * @return A new GameBoard with the move performed or null if it was invalid.
@@ -74,7 +66,7 @@ public class GameBoard
     public GameBoard movePieceRight(int[] pieceCoords)
     {
         char[][] newBoard = copyBoard(this.board);
-        char[][] testBoard = null;
+        char[][] testBoard;
 
         if (!validateMoveRight(pieceCoords)) 
         {
@@ -142,7 +134,7 @@ public class GameBoard
      */
     public GameBoard movePieceLeft(int[] pieceCoords)
     {
-        char[][] newBoard = copyBoard(this.board), testBoard = null;
+        char[][] newBoard = copyBoard(this.board), testBoard;
 
         if(!validateMoveLeft(pieceCoords))
         {
@@ -210,7 +202,7 @@ public class GameBoard
      */
     public GameBoard switchPieceLeft(int[] pieceCoords)
     {
-        char[][] newBoard = copyBoard(this.board), testBoard = null;
+        char[][] newBoard = copyBoard(this.board), testBoard;
 
         if(!validateSwitchLeft(pieceCoords))
         {
@@ -265,7 +257,7 @@ public class GameBoard
      */
     public GameBoard switchPieceRight(int[] pieceCoords)
     {
-        char[][] newBoard = copyBoard(this.board), testBoard = null;
+        char[][] newBoard = copyBoard(this.board), testBoard;
 
         if(!validateSwitchRight(pieceCoords))
         {
@@ -319,7 +311,7 @@ public class GameBoard
      */
     public GameBoard switchPieceUp(int[] pieceCoords)
     {
-        char[][] newBoard = copyBoard(this.board), testBoard = null;
+        char[][] newBoard = copyBoard(this.board), testBoard;
 
         if(!validateSwitchUp(pieceCoords))
         {
@@ -373,7 +365,7 @@ public class GameBoard
      */
     public GameBoard switchPieceDown(int[] pieceCoords)
     {
-        char[][] newBoard = copyBoard(this.board), testBoard = null;
+        char[][] newBoard = copyBoard(this.board), testBoard;
 
         if(!validateSwitchDown(pieceCoords))
         {
@@ -506,7 +498,7 @@ public class GameBoard
      * @param board The board to analyse.
      * @return The new board free of chains.
      */
-    public char[][] explodeAll(char[][] board)
+    private char[][] explodeAll(char[][] board)
     {
         char[][] newBoard = copyBoard(board), testBoard;
         boolean recalculate = false;
@@ -544,7 +536,6 @@ public class GameBoard
             {
                 recalculate = false;
                 i = 0;
-                continue;
             }  
         }
 
@@ -560,7 +551,7 @@ public class GameBoard
      * @param board The board containing the line.
      * @return The new board after the line was cleared of chains.
      */
-    public char[][] explodeLine(int line, char[][] board)
+    private char[][] explodeLine(int line, char[][] board)
     {
         char[][] newBoard = copyBoard(board);
         char currentColor = 'X';
@@ -654,7 +645,7 @@ public class GameBoard
      * @param board The board containing the column.
      * @return The new board after the column was cleared of chains.
      */
-    public char[][] explodeColumn(int column, char[][] board)
+    private char[][] explodeColumn(int column, char[][] board)
     {
         char[][] newBoard = copyBoard(board);
         char currentColor = 'X';
@@ -726,7 +717,7 @@ public class GameBoard
      * @param board The board to be copied.
      * @return The cloned board.
      */
-    public char[][] copyBoard(char[][] board)
+    private char[][] copyBoard(char[][] board)
     {
         char newBoard[][] = new char[board.length][board[0].length];
 
@@ -743,15 +734,6 @@ public class GameBoard
     public char[][] getBoard()
     {
         return copyBoard(board);
-    }
-
-    /**
-     * Sets the current board to a new one.
-     * @param board The new board to replace the current one.
-     */
-    public void setBoard(char[][] board)
-    {
-        this.board = board;
     }
 
     /**
@@ -793,18 +775,16 @@ public class GameBoard
      * Prints a board.
      * @param board The board to be printed.
      */
-    public void printBoard(char[][] board)
+    private void printBoard(char[][] board)
     {
-        for(int i = 0; i < board.length; i++)
+        for(char[] line : board)
         {
             System.out.print("|");
 
-            for(int j = 0; j < board[i].length; j++)
-            {
-                System.out.print(board[i][j]);
+            for(char cell : line) {
+                System.out.print(cell);
                 System.out.print('|');
             }
-                
 
             System.out.print("\n");
         }
@@ -815,21 +795,12 @@ public class GameBoard
     /**
      * Tests if a set of coordinates evaluates to an actual piece.
      * @param pieceCoords The piece's coordinates.
-     * @return True if the coordinates correspond to a piece and false otherwise.
+     * @return True if the coordinates don't correspond to a piece and false otherwise.
      */
     public boolean testPieceCoords(int[] pieceCoords)
     {
-        return !(pieceCoords[0] >= this.board.length || pieceCoords[1] >= this.board[0].length 
-        || pieceCoords[0] < 0 || pieceCoords[1] < 0 || this.board[pieceCoords[0]][pieceCoords[1]] == '_');
-    }
-
-    /**
-     * Returns the number of blocks left in the current board.
-     * @return The number of blocks left.
-     */
-    public int getBlocksLeft()
-    {
-        return getBlocksLeft(board);
+        return pieceCoords[0] >= this.board.length || pieceCoords[1] >= this.board[0].length
+        || pieceCoords[0] < 0 || pieceCoords[1] < 0 || this.board[pieceCoords[0]][pieceCoords[1]] == '_';
     }
     
     /**
@@ -841,11 +812,11 @@ public class GameBoard
     {
         int count = 0;
 
-        for(int i = 0; i < board.length; i++)
+        for(char[] line : board)
         {
-            for(int j = 0; j < board[i].length; j++)
+            for(char cell : line)
             {
-                if(board[i][j] != '_') 
+                if(cell != '_')
                     count++;
             } 
         }

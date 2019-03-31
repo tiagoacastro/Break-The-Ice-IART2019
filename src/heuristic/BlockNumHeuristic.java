@@ -3,14 +3,18 @@ package heuristic;
 import game.GameBoard;
 
 public class BlockNumHeuristic extends Heuristic {
-  public void calculate(GameBoard board) {
-    char[][] boardChar = board.getBoard();
+      /**
+       * Calculates the heuristic's value based on the blocks left on the board.
+       * @param board The board to which the heuristic's value is calculated.
+       */
+      public void calculate(GameBoard board) {
+            char[][] boardChar = board.getBoard();
 
-    if(!possibleBoard(boardChar))
-      return;
+            if(notPossibleBoard(boardChar))
+              return;
 
-    this.value = (this.value * board.getMaxMoves()) / board.getBlocks();
-    if (value > board.getMaxMoves())
-        value = board.getMaxMoves();
-  }
+            this.value = (this.value * board.getMaxMoves()) / board.getBlocks();
+            if (value > board.getMaxMoves())
+                value = board.getMaxMoves();
+      }
 }

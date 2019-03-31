@@ -50,7 +50,7 @@ public class GameNode extends Node
      * @param moves The number of mobes performed to get to this node.
      * @param board The state of the board in this node.
      */
-    public GameNode(Node parentNode, String operator, int moves, GameBoard board)
+    private GameNode(Node parentNode, String operator, int moves, GameBoard board)
     {
         super(parentNode, operator);
 
@@ -65,7 +65,7 @@ public class GameNode extends Node
      */
     public ArrayList<Node> expandNode()
     {
-        ArrayList<Node> nodeList = new ArrayList<Node>();
+        ArrayList<Node> nodeList = new ArrayList<>();
         char[][] board = getBoard();
         char piece;
         int[] pieceCoords = new int[2];
@@ -119,9 +119,9 @@ public class GameNode extends Node
         {
             ArrayList<Node> children = this.expandNode();
 
-            for(int i = 0; i < children.size(); i++)
+            for(Node n : children)
             {
-                if(children.get(i) != null && children.get(i).depthSearch())
+                if(n != null && n.depthSearch())
                 {
                     Node.solution.add(0, this.operator);
                     return true;
@@ -179,9 +179,9 @@ public class GameNode extends Node
             {
                 ArrayList<Node> children = this.expandNode();
 
-                for(int i = 0; i < children.size(); i++)
+                for(Node n : children)
                 {
-                    if(children.get(i).depthLimitedSearch(depth))
+                    if(n.depthLimitedSearch(depth))
                     {
                         Node.solution.add(0, this.operator);
                         return true;
@@ -198,7 +198,7 @@ public class GameNode extends Node
      */
     public boolean greedySearch() 
     {
-        PriorityQueue<Node> children = new PriorityQueue<Node>();
+        PriorityQueue<Node> children = new PriorityQueue<>();
 
         if(this.testGoal()) {
 
@@ -239,9 +239,9 @@ public class GameNode extends Node
 
         analyzedNodes++;
 
-        for(int i = 0; i < board.length; i++)
-            for(int j = 0; j < board[i].length; j++)
-                if(board[i][j] != '_')
+        for(char[] line : board)
+            for(char cell : line)
+                if(cell != '_')
                     return false;
 
         return true;
@@ -253,12 +253,12 @@ public class GameNode extends Node
      * @param pieceCoords The coordinates of the piece.
      * @return A new node representing the board if the move was succesfull or null if not. 
      */
-    public GameNode move(String direction, int[] pieceCoords)
+    private GameNode move(String direction, int[] pieceCoords)
     {
-        GameBoard newBoard = null;
-        String op = "null";
+        GameBoard newBoard ;
+        String op;
         
-        if(!board.testPieceCoords(pieceCoords))
+        if(board.testPieceCoords(pieceCoords))
         {
             System.out.println("Invalid piece in move " + direction);
             return null;
@@ -290,12 +290,12 @@ public class GameNode extends Node
      * @param pieceCoords The piece's coordinates.
      * @return A new node representing the board if the move was succesfull or null if not.
      */
-    public GameNode switchBlock(String direction, int[] pieceCoords)
+    private GameNode switchBlock(String direction, int[] pieceCoords)
     {
-        GameBoard newBoard = null;
-        String op = "null";
+        GameBoard newBoard;
+        String op;
 
-        if(!board.testPieceCoords(pieceCoords))
+        if(board.testPieceCoords(pieceCoords))
         {
             System.out.println("Invalid piece in move " + direction);
             return null;
@@ -361,10 +361,15 @@ public class GameNode extends Node
 
             System.out.println("\n" + op + " " + direction + "(" + move[2] + "," + move[3] + ")\n");
 
-            if(op.equals("move"))
-                this.board = this.move(direction, pieceCoords).getGameBoard();
-            else
-                this.board = this.switchBlock(direction, pieceCoords).getGameBoard();
+            try {
+                if (op.equals("move"))
+                    this.board = this.move(direction, pieceCoords).getGameBoard();
+                else
+                    this.board = this.switchBlock(direction, pieceCoords).getGameBoard();
+            } catch(NullPointerException e){
+                System.out.println("Null pointer exception\n");
+                return;
+            }
         }
     }
 
@@ -376,7 +381,7 @@ public class GameNode extends Node
         if(!operator.equals("root"))
         {
             solution.add(0, operator);
-            ((GameNode) parentNode).traceSolutionUp();
+            parentNode.traceSolutionUp();
         }
     }
 
@@ -401,18 +406,9 @@ public class GameNode extends Node
      * Retrieves the matrix instance of the board.
      * @return The matrix representing the actual board.
      */
-    public char[][] getBoard()
+    private char[][] getBoard()
     {
         return board.getBoard();
-    }
-
-    /**
-     * Sets the current board.
-     * @param board The new board.
-     */
-    public void setGameBoard(GameBoard board)
-    {
-        this.board = board;
     }
 
     /**

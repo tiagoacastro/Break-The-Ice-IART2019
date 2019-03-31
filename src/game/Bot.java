@@ -15,7 +15,7 @@ public class Bot
 
     /**
      * Constructor of the class.
-     * @param root
+     * @param root  root node
      */
     public Bot(GameNode root)
     {
@@ -26,9 +26,8 @@ public class Bot
      * Initiates a type of search.
      * @param searchMode Identifier for the type of search to conduct.
      * @param test Flag indicating if the search being conducted is for statistical purposes (test) only.
-     * @return
      */
-    public boolean search(int searchMode, boolean test)
+    public void search(int searchMode, boolean test)
     {
         boolean solutionFound = false;
         int movesDiff;
@@ -63,7 +62,6 @@ public class Bot
 
             default:
                 System.out.println("Invalid search option: " + searchMode);
-                return false;
         }
 
         if(!test)
@@ -88,17 +86,15 @@ public class Bot
             else
                 System.out.println("No solution was found");
         }
-        
-        return solutionFound;
     }
 
     /**
      * Breadth search.
      * @return Flag indicating if the search was successfull or not.
      */
-    public boolean breadth()
+    private boolean breadth()
     {
-        ArrayList<Node> activeNodes = new ArrayList<Node>(), childrenNodes = new ArrayList<Node>();
+        ArrayList<Node> activeNodes = new ArrayList<>(), childrenNodes = new ArrayList<>();
         
         activeNodes.add(root);
 
@@ -107,15 +103,15 @@ public class Bot
             childrenNodes.clear();
             childrenNodes.trimToSize();
 
-            for(int j = 0; j < activeNodes.size(); j++)
+            for(Node n : activeNodes)
             {
-                if(activeNodes.get(j).testGoal())
+                if(n.testGoal())
                 {
-                    activeNodes.get(j).traceSolutionUp();
+                    n.traceSolutionUp();
                     return true;
                 }
 
-                childrenNodes.addAll(activeNodes.get(j).expandNode());
+                childrenNodes.addAll(n.expandNode());
             }
 
             activeNodes.clear();
@@ -148,8 +144,8 @@ public class Bot
      * @return Flag indicating if the search was successfull or not.
      */
     private boolean aux(int i) {
-        PriorityQueue<Node> activeNodes = new PriorityQueue<Node>();
-        ArrayList<Node> activeNodesAR = new ArrayList<Node>();
+        PriorityQueue<Node> activeNodes = new PriorityQueue<>();
+        ArrayList<Node> activeNodesAR = new ArrayList<>();
         Node currentNode;
 
         activeNodes.add(root);
