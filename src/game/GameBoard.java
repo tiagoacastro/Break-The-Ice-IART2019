@@ -24,18 +24,46 @@ public class GameBoard
      * Flag indicating if the moves performed are to be displayed.
      */
     private static boolean showMove = false;
-    
+
+    /**
+     * Original number of blocks on the board.
+     */
+    private int blocks;
+
+    /**
+     * Original number of colors on the board.
+     */
+    private int colors;
+
     /**
      * Constructor of the class.
      * @param board The board matrix.
      * @param maxMoves The maximum number of moves allowed.
      * @param optimalMoves The optimal number of moves.
      */
-    public GameBoard(char[][] board, int maxMoves, int optimalMoves)
+    public GameBoard(char[][] board, int maxMoves, int optimalMoves, int blocks, int colors)
     {
         this.board = board;
         this.maxMoves = maxMoves;
         this.optimalMoves = optimalMoves;
+        this.blocks = blocks;
+        this.colors = colors;
+    }
+
+    /**
+     * Getter for blocks
+     * @return  blocks
+     */
+    public int getBlocks() {
+        return blocks;
+    }
+
+    /**
+     * Getter for Colors
+     * @return  colors
+     */
+    public int getColors() {
+        return colors;
     }
 
     /**
@@ -94,7 +122,7 @@ public class GameBoard
             }                
         }
 
-        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
     }
 
     /**
@@ -162,7 +190,7 @@ public class GameBoard
                
         }
 
-        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
     }
 
     /**
@@ -196,7 +224,7 @@ public class GameBoard
                 if(showMove)
                     printBoard(newBoard);
 
-                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
+                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
             }
                 
 
@@ -217,7 +245,7 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves); 
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
     }
 
     /**
@@ -251,7 +279,7 @@ public class GameBoard
                 if(showMove)
                     printBoard(newBoard);
 
-                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
+                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
             }
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] + 1];
@@ -271,7 +299,7 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
     }
 
     /**
@@ -305,7 +333,7 @@ public class GameBoard
                 if(showMove)
                     printBoard(newBoard);
 
-                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
+                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
             }
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] - 1][pieceCoords[1]];
@@ -325,7 +353,7 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
     }
 
     /**
@@ -359,7 +387,7 @@ public class GameBoard
                 if(showMove)
                     printBoard(newBoard);
 
-                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
+                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
             }
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] + 1][pieceCoords[1]];
@@ -379,7 +407,7 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
     }
 
     /**
