@@ -16,7 +16,6 @@ public abstract class Node implements Comparable<Node>
         this.parentNode = parentNode;
         this.depth = depth;
         this.pathCost = pathCost;
-        this.heuristic = new BlockNumHeuristic();
         this.searchOption = 0;
         this.operator = operator;
 
@@ -40,8 +39,21 @@ public abstract class Node implements Comparable<Node>
         this.depth = parentNode.depth + 1;
         this.pathCost = 1;
         this.parentNode = parentNode;
-        this.heuristic = new BlockNumHeuristic();
         this.operator = operator;
+
+        switch(Heuristic.currentHeuristic) {
+            case 1:
+                this.heuristic = new BlockNumHeuristic();
+                break;
+            case 2:
+                this.heuristic = new ColorHeuristic();
+                break;
+            case 3:
+                this.heuristic = new CloseChainHeuristic();
+                break;
+            default:
+                this.heuristic = new BlockNumHeuristic();
+        }
     }
 
     public abstract ArrayList<Node> expandNode();
@@ -86,9 +98,9 @@ public abstract class Node implements Comparable<Node>
                 return this.heuristic.compareTo(o.heuristic);
             case 6:
                 return this.heuristic.compareTo(o.heuristic) + o.pathCost - this.pathCost;
+            default:
+                return 0;
         }
-
-        return o.pathCost - this.pathCost;
     }
 
     public void updateHeuristic() {
