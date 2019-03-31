@@ -130,16 +130,31 @@ public class Bot
      * Uniform cost search.
      * @return Flag indicating if the search was successfull or not.
      */
-    public boolean uniformCostSearch() {
+    private boolean uniformCostSearch() {
+        return aux(4);
+    }
 
+    /**
+     * A* search.
+     * @return Flag indicating if the search was successfull or not.
+     */
+    private boolean AStarSearch()
+    {
+        return aux(6);
+    }
+
+    /**
+     * Auxiliary function to searches using priority queues.
+     * @return Flag indicating if the search was successfull or not.
+     */
+    private boolean aux(int i) {
         PriorityQueue<Node> activeNodes = new PriorityQueue<Node>();
         ArrayList<Node> activeNodesAR = new ArrayList<Node>();
         Node currentNode;
-        
+
         activeNodes.add(root);
 
         while (!activeNodes.isEmpty()) {
-
             currentNode = activeNodes.peek();
 
             if (currentNode.testGoal()) {
@@ -149,8 +164,8 @@ public class Bot
 
             if (currentNode.getDepth() < root.getGameBoard().getMaxMoves()) {
                 activeNodesAR.addAll(currentNode.expandNode());
-                for(Node child: activeNodesAR) {
-                    child.setSearchOption(4);
+                for (Node child : activeNodesAR) {
+                    child.setSearchOption(i);
                     activeNodes.add(child);
                 }
                 activeNodesAR.clear();
@@ -160,58 +175,11 @@ public class Bot
             }
 
             activeNodes.poll();
-
-        }
-
-        return false;
-
-    }
-
-    /**
-     * A* search.
-     * @return Flag indicating if the search was successfull or not.
-     */
-    public boolean AStarSearch() 
-    {
-        PriorityQueue<Node> activeNodes = new PriorityQueue<Node>();
-        PriorityQueue<Node> childrenNodes = new PriorityQueue<Node>();
-        ArrayList<Node> childrenNodesAR = new ArrayList<Node>();
-
-        activeNodes.add(root);
-
-        for(int i = 0; i <= root.getGameBoard().getMaxMoves(); i++)
-        {
-
-            childrenNodes.clear();
-
-            if (aux(activeNodes, childrenNodesAR)) return true;
-
-            for(Node child: childrenNodesAR) {
-                child.setSearchOption(6);
-                activeNodes.add(child);
-            }
-
         }
 
         return false;
     }
 
-    /**
-     * Auxiliary function to searches using priority queues.
-     * @return Flag indicating if the search was successfull or not.
-     */
-    private boolean aux(PriorityQueue<Node> activeNodes, ArrayList<Node> childrenNodesAR) {
-        while(activeNodes.size() != 0) {
-
-            if(activeNodes.peek().testGoal()) {
-                activeNodes.poll().traceSolutionUp();
-                return true;
-            }
-
-            childrenNodesAR.addAll(activeNodes.poll().expandNode());
-        }
-        return false;
-    }
 
     /**
      * Returns the root node.

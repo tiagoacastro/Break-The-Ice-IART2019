@@ -10,18 +10,18 @@ public abstract class Node implements Comparable<Node>
     /**
      * The parent node of this node.
      */
-    protected Node parentNode;
+    Node parentNode;
 
     /**
      * The depth at which this node is at.
      */
-    protected int depth;
+    int depth;
 
     /**
      * The path cost to reach this node (always 1 since from one depth level to the other all possible plays 
      * exhaust 1 move)
      */
-    protected int pathCost; 
+    private int pathCost;
 
     /**
      * The heuristic used.
@@ -31,12 +31,12 @@ public abstract class Node implements Comparable<Node>
     /**
      * The type of search being performed.
      */
-    protected int searchOption;
+    private int searchOption;
 
     /**
      * This node's operator.
      */
-    protected String operator;
+    String operator;
 
     /**
      * List containing the solution to a level in order.
@@ -50,7 +50,7 @@ public abstract class Node implements Comparable<Node>
      * @param pathCost The path cost to reach this node.
      * @param operator This node's operator.
      */
-    public Node(Node parentNode, int depth, int pathCost, String operator)
+    Node(Node parentNode, int depth, int pathCost, String operator)
     {
         this.parentNode = parentNode;
         this.depth = depth;
@@ -66,7 +66,7 @@ public abstract class Node implements Comparable<Node>
      * @param parentNode The parent node of this node.
      * @param operator This node's operator.
      */
-    public Node(Node parentNode, String operator)
+    Node(Node parentNode, String operator)
     {
         this.depth = parentNode.depth + 1;
         this.pathCost = 1;
@@ -172,7 +172,7 @@ public abstract class Node implements Comparable<Node>
 
     /**
      * Used to compare this node to another depending on the current search function.
-     * @param Node The node to compare to.
+     * @param o The node to compare to.
      * @return The numerical difference between them.
      */
     public int compareTo(Node o) 
@@ -184,7 +184,7 @@ public abstract class Node implements Comparable<Node>
             case 5:
                 return this.heuristic.compareTo(o.heuristic);
             case 6:
-                return this.heuristic.compareTo(o.heuristic) + o.depth - this.depth;
+                return this.heuristic.compareTo(o.heuristic) + this.depth - o.depth;
             default:
                 return 0;
         }
