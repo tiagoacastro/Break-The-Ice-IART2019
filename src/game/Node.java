@@ -71,7 +71,7 @@ public abstract class Node implements Comparable<Node>
     public int compareTo(Node o) {
         switch(this.searchOption) {
             case 4:
-                return o.depth - this.depth;
+                return this.depth - o.depth;
             case 5:
                 return this.heuristic.compareTo(o.heuristic);
             case 6:

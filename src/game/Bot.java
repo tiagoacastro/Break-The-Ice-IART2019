@@ -131,27 +131,38 @@ public class Bot
      * @return Flag indicating if the search was successfull or not.
      */
     public boolean uniformCostSearch() {
+
         PriorityQueue<Node> activeNodes = new PriorityQueue<Node>();
-        PriorityQueue<Node> childrenNodes = new PriorityQueue<Node>();
-        ArrayList<Node> childrenNodesAR = new ArrayList<Node>();
+        ArrayList<Node> activeNodesAR = new ArrayList<Node>();
+        Node currentNode;
         
         activeNodes.add(root);
 
-        for(int i = 0; i <= root.getGameBoard().getMaxMoves(); i++)
-        {
+        while (!activeNodes.isEmpty()) {
 
-            childrenNodes.clear();
+            currentNode = activeNodes.peek();
 
-            if (aux(activeNodes, childrenNodesAR)) return true;
-
-            for(Node child: childrenNodesAR) {
-                child.setSearchOption(4);
-                activeNodes.add(child);
+            if (currentNode.testGoal()) {
+                activeNodes.poll().traceSolutionUp();
+                return true;
             }
+
+            if (currentNode.getDepth() < root.getGameBoard().getMaxMoves()) {
+                activeNodesAR.addAll(currentNode.expandNode());
+                for(Node child: activeNodesAR) {
+                    child.setSearchOption(4);
+                    activeNodes.add(child);
+                }
+            } else {
+                return false;
+            }
+
+            activeNodes.poll();
 
         }
 
         return false;
+
     }
 
     /**
