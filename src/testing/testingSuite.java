@@ -9,20 +9,35 @@ public class testingSuite
 {
     public static void main(String args[])
     {
-        testLevels();
-        //randomTest();
+        //testLevels();
+        randomTest();
     }
 
     public static void randomTest()
     {
-        GameBoard board = BreakTheIce.getLevelSelected(5);
+        GameBoard board = new GameBoard(new char[][]
+        {
+            {'_', '_', '_', '_', '_', '_', '_'},
+            {'_', '_', '_', '_', '_', '_', '_'},
+            {'_', '_', '_', '_', '_', '_', '_'},
+            {'_', '_', '_', '_', '_', '_', '_'},
+            {'_', '_', '_', '_', '_', '_', '_'},
+            {'_', '_', '_', '_', '_', '_', '_'},
+            {'_', '_', '_', '_', '_', '_', '_'},
+            {'_', '_', '_', '_', '_', '_', '_'},
+            {'_', '_', '_', 'p', '_', '_', '_'},
+            {'_', '_', 'p', 'p', '_', '_', '_'},
+            {'_', '_', '_', 'g', 'p', '_', 'p'},
+            {'_', '_', 'g', 'p', 'g', 'p', 'p'}
+        }, 5);
+        int res = 0;
 
-        Heuristic.setCurrentHeuristic(3);
+        Heuristic.setCurrentHeuristic(4);
         
         GameNode root = new GameNode(null, 0, 0, "root", 0, board); 
     
-        root.getHeuristic().calculate(board);
-        System.out.println(root.getHeuristic().getValue());
+        res = ((PairsHeuristic) root.getHeuristic()).getPairs(board.getBoard());
+        System.out.println(res);
     }
 
     public static void testLevels()

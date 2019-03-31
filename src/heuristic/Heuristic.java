@@ -80,7 +80,9 @@ public abstract class Heuristic {
             case 2:
                 return new ColorHeuristic();
             case 3:
-                return new CloseChainHeuristic();
+				return new CloseChainHeuristic();
+			case 4:
+				return new PairsHeuristic();
             default:
                 return new BlockNumHeuristic();
         }
