@@ -3,10 +3,6 @@ package heuristic;
 import game.GameBoard;
 
 public class ColorHeuristic extends Heuristic {
-    public int compareTo(Heuristic h) {
-        return this.value - h.value;
-    }
-
   public void calculate(GameBoard board) {
       char[][] boardChar = board.getBoard();
 
@@ -22,7 +18,9 @@ public class ColorHeuristic extends Heuristic {
       if(green > 0) i++;
       if(yellow > 0) i++;
 
-      this.value *= i;
+      this.value *= i/6;
+      if (value > board.getMaxMoves())
+          value = board.getMaxMoves();
     }
   }
 

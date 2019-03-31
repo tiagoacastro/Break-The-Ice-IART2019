@@ -4,9 +4,9 @@ import game.GameBoard;
 
 public abstract class Heuristic {
 
-	protected int value;
-	protected static int currentHeuristic = 0;
-	protected int purple=0, orange=0, red=0, blue=0, green=0, yellow=0;
+	int value;
+	private static int currentHeuristic = 0;
+	int purple=0, orange=0, red=0, blue=0, green=0, yellow=0;
 	
 	public Heuristic() { 
 		this.value = 0; 
@@ -35,7 +35,9 @@ public abstract class Heuristic {
 	}
 	
 	public abstract void calculate(GameBoard board);
-	public abstract int compareTo(Heuristic h); //for priority queues
+	public int compareTo(Heuristic h) {
+		return this.value - h.value;
+	}
 
 	public void auxiliar(char[][] boardChar) 
 	{
