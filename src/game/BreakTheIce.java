@@ -96,6 +96,7 @@ public class BreakTheIce
     {
         int maxPlays, optimalMoves;
         char[][] board;
+        int blocks, colors;
 
         switch(option)
         {
@@ -116,6 +117,8 @@ public class BreakTheIce
                     {'_', 'g', 'b', 'r', 'r', 'b', '_'},
                     {'y', 'b', 'r', 'b', 'r', 'b', 'b'}
                 };
+                blocks = 24;
+                colors = 4;
                 break;
 
             case 2:
@@ -135,6 +138,8 @@ public class BreakTheIce
                     {'_', '_', 'y', 'b', 'g', 'b', 'o'},
                     {'_', 'b', 'g', 'g', 'b', 'g', 'b'}
                 };
+                blocks = 24;
+                colors = 4;
                 break;
 
             case 3:
@@ -154,6 +159,8 @@ public class BreakTheIce
                     {'b', 'b', 'p', 'p', 'b', 'p', 'p'},
                     {'b', 'r', 'b', 'p', 'b', 'p', 'p'}
                 };
+                blocks = 24;
+                colors = 4;
                 break;
 
             case 4:
@@ -173,6 +180,8 @@ public class BreakTheIce
                     {'_', 'o', 'g', 'r', 'b', 'p', '_'},
                     {'o', 'g', 'o', 'b', 'r', 'b', 'b'}
                 };
+                blocks = 16;
+                colors = 5;
                 break;
 
             case 5:
@@ -192,6 +201,8 @@ public class BreakTheIce
                     {'_', '_', '_', 'g', 'p', '_', '_'},
                     {'_', '_', 'g', 'p', 'g', 'p', 'p'}
                 };
+                blocks = 8;
+                colors = 2;
                 break;
 
             default:
@@ -201,7 +212,7 @@ public class BreakTheIce
 
         optimalMoves = maxPlays - 2;
 
-        return new GameBoard(board, maxPlays, optimalMoves);
+        return new GameBoard(board, maxPlays, optimalMoves, blocks, colors);
     }
 
     /**
