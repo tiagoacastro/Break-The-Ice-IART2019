@@ -4,12 +4,14 @@ public class GameBoard
 {
     private char[][] board;
     private int maxMoves;
+    private int optimalMoves;
     private static boolean showMove = false;
-
-    public GameBoard(char[][] board, int maxMoves)
+    
+    public GameBoard(char[][] board, int maxMoves, int optimalMoves)
     {
         this.board = board;
         this.maxMoves = maxMoves;
+        this.optimalMoves = optimalMoves;
     }
 
     public GameBoard movePieceRight(int[] pieceCoords)
@@ -63,7 +65,7 @@ public class GameBoard
             }                
         }
 
-        return new GameBoard(newBoard, this.maxMoves);
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
     }
 
     public boolean validateMoveRight(int[] pieceCoords)
@@ -121,7 +123,7 @@ public class GameBoard
                
         }
 
-        return new GameBoard(newBoard, this.maxMoves);
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
     }
 
     public boolean validateMoveLeft(int[] pieceCoords)
@@ -145,7 +147,7 @@ public class GameBoard
                 if(showMove)
                     printBoard(newBoard);
 
-                return new GameBoard(newBoard, this.maxMoves);
+                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
             }
                 
 
@@ -166,7 +168,7 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        return new GameBoard(newBoard, this.maxMoves); 
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves); 
     }
 
     public boolean validateSwitchLeft(int[] pieceCoords)
@@ -190,7 +192,7 @@ public class GameBoard
                 if(showMove)
                     printBoard(newBoard);
 
-                return new GameBoard(newBoard, this.maxMoves);
+                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
             }
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1] + 1];
@@ -210,7 +212,7 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        return new GameBoard(newBoard, this.maxMoves);
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
     }
 
     public boolean validateSwitchRight(int[] pieceCoords)
@@ -234,7 +236,7 @@ public class GameBoard
                 if(showMove)
                     printBoard(newBoard);
 
-                return new GameBoard(newBoard, this.maxMoves);
+                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
             }
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] - 1][pieceCoords[1]];
@@ -254,7 +256,7 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        return new GameBoard(newBoard, this.maxMoves);
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
     }
 
     public boolean validateSwitchUp(int[] pieceCoords)
@@ -278,7 +280,7 @@ public class GameBoard
                 if(showMove)
                     printBoard(newBoard);
 
-                return new GameBoard(newBoard, this.maxMoves);
+                return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
             }
 
             newBoard[pieceCoords[0]][pieceCoords[1]] = board[pieceCoords[0] + 1][pieceCoords[1]];
@@ -298,7 +300,7 @@ public class GameBoard
                 printBoard(newBoard);
         }
 
-        return new GameBoard(newBoard, this.maxMoves);
+        return new GameBoard(newBoard, this.maxMoves, this.optimalMoves);
     }
 
     public boolean validateSwitchDown(int[] pieceCoords)
@@ -651,6 +653,11 @@ public class GameBoard
     {
         return !(pieceCoords[0] >= this.board.length || pieceCoords[1] >= this.board[0].length 
         || pieceCoords[0] < 0 || pieceCoords[1] < 0 || this.board[pieceCoords[0]][pieceCoords[1]] == '_');
+    }
+
+    public int getOptimalMoves()
+    {
+        return optimalMoves;
     }
 
     public int getBlocksLeft()

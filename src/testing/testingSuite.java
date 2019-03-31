@@ -29,7 +29,7 @@ public class testingSuite
             {'_', '_', 'p', 'p', '_', '_', '_'},
             {'_', '_', '_', 'g', 'p', '_', 'p'},
             {'_', '_', 'g', 'p', 'g', 'p', 'p'}
-        }, 5);
+        }, 5, 3);
         int res = 0;
 
         Heuristic.setCurrentHeuristic(4);

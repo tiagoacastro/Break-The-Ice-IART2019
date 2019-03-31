@@ -71,7 +71,7 @@ public class BreakTheIce
 
     public static GameBoard getLevelSelected(int option)
     {
-        int maxPlays;
+        int maxPlays, optimalMoves;
         char[][] board;
 
         switch(option)
@@ -176,7 +176,9 @@ public class BreakTheIce
                 return null;
         }
 
-        return new GameBoard(board, maxPlays);
+        optimalMoves = maxPlays - 2;
+
+        return new GameBoard(board, maxPlays, optimalMoves);
     }
 
     public static void chooseMode()
