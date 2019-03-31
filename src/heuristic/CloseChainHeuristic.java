@@ -22,14 +22,18 @@ public class CloseChainHeuristic extends Heuristic
                         || testSwitchUpChain(gameBoard, pieceCoords) || testSwitchDownChain(gameBoard, pieceCoords))
                         nChains++;
             }
-            
-        if(nChains == 0)
-            value = 2;
-        else
-            value = blocksLeft / (nChains);
 
-        if(value > 3)
-            value = 3;
+        if(blocksLeft == 0)
+            value = 0;
+        else{
+            if(nChains == 0)
+                value = gameBoard.getMaxMoves();
+            else {
+                value = blocksLeft / (nChains);
+                if (value > gameBoard.getMaxMoves())
+                    value = gameBoard.getMaxMoves();
+            }
+        }
     }
 
     public boolean testSwitchDownChain(GameBoard gameBoard, int[] pieceCoords)
@@ -261,10 +265,5 @@ public class CloseChainHeuristic extends Heuristic
         }
 
         return false;
-    }
-
-    public int compareTo(Heuristic h)
-    {
-        return this.value - h.value;
     }
 }
