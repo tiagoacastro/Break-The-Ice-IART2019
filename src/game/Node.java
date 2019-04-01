@@ -75,7 +75,9 @@ public abstract class Node implements Comparable<Node>
         this.parentNode = parentNode;
         this.operator = operator;
         this.searchOption = parentNode.getSearchOption();
-        this.heuristic = parentNode.getHeuristic().getNewHeuristic();
+        if (parentNode.heuristic != null) {
+            this.heuristic = parentNode.getHeuristic().getNewHeuristic();
+        }
     }
 
     /**
