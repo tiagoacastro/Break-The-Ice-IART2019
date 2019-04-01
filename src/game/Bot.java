@@ -77,6 +77,9 @@ public class Bot
 
                 if(movesDiff > 3)
                     movesDiff = 3;
+                
+                if(movesDiff < 0)
+                    movesDiff = 0;
 
                 System.out.println(3 - movesDiff + "/3 stars\n");
 
