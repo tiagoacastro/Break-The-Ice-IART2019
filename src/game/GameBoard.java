@@ -59,6 +59,14 @@ public class GameBoard
     }
 
     /**
+     * Getter for colors
+     * @return  colors
+     */
+    public int getColors() {
+        return colors;
+    }
+
+    /**
      * Moves a piece to the right if possible.
      * @param pieceCoords The coordinates of the piece to be moved.
      * @return A new GameBoard with the move performed or null if it was invalid.

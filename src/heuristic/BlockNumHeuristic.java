@@ -15,8 +15,6 @@ public class BlockNumHeuristic extends Heuristic
               return;
 
             this.value = (this.value * board.getMaxMoves()) / board.getBlocks();
-            if (value > board.getMaxMoves())
-                value = board.getMaxMoves();
       }
 
       /**
