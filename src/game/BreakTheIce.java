@@ -1,5 +1,6 @@
 package game;
 
+import java.io.*;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import heuristic.*;
@@ -59,32 +60,102 @@ public class BreakTheIce
     }
 
     /**
-     * Level selection interface.
+     * level selection interface.
      */
     private static void chooseLevel()
     {
         int option;
 
         System.out.println("+-----------------+");
-        System.out.println("| Level Selection |");
+        System.out.println("| level Selection |");
         System.out.println("+-----------------+");
-        System.out.println("|   1 - Level 1   |");
+        System.out.println("|   1 - level 1   |");
         System.out.println("+-----------------+");
-        System.out.println("|   2 - Level 2   |");
+        System.out.println("|   2 - level 2   |");
         System.out.println("+-----------------+");
-        System.out.println("|   3 - Level 3   |");
+        System.out.println("|   3 - level 3   |");
         System.out.println("+-----------------+");
-        System.out.println("|   4 - Level 4   |");
+        System.out.println("|   4 - level 4   |");
         System.out.println("+-----------------+");
-        System.out.println("|   5 - Level 5   |");
+        System.out.println("|   5 - level 5   |");
         System.out.println("+-----------------+");
-        System.out.println("|   6 - Level 6   |");
+        System.out.println("|   6 - level 6   |");
+        System.out.println("+-----------------+");
+        System.out.println("|  7 - Load level |");
         System.out.println("+-----------------+");
 
-        option = getOption(6);
+        option = getOption(7);
+        GameBoard board = null;
 
-        bot = new Bot(new GameNode(null, 0, 0, "root", 0, null, 0, getLevelSelected(option)));
+        if(option != 7)
+            board = getLevelSelected(option);
+        else
+            board = loadLevel();
+
+        bot = new Bot(new GameNode(null, 0, 0, "root", 0, null, 0, board));
         chooseMode();
+    }
+
+    private static GameBoard loadLevel(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("+----------------------------------------+");
+        System.out.println("|  Input the file name without extension |");
+        System.out.println("+----------------------------------------+");
+        String fileName = sc.nextLine();
+        File file = new File(System.getProperty("user.dir") + "/levels/" + fileName);
+        BufferedReader br = null;
+        try{
+            br = new BufferedReader(new FileReader(file));
+        } catch(FileNotFoundException e){
+            e.printStackTrace();
+            System.exit(-1);
+        }
+
+        String line;
+        char[][] board= new char[12][7];
+        int n = 0;
+        int optimalMoves, maxPlays=0, blocks=0, colors=0;
+        boolean purple=false, orange=false, red=false, blue=false, green=false, yellow=false;
+
+        try{
+            maxPlays = Integer.parseInt(br.readLine());
+            while ((line = br.readLine()) != null) {
+                char[] row = new char[7];
+                for(int i = 0; i < 7; i++) {
+                    char c = line.charAt(i);
+                    row[i] = c;
+                    if(c != '_'){
+                        blocks++;
+                        switch(c)
+                        {
+                            case 'p': purple = true; break;
+                            case 'o': orange = true; break;
+                            case 'r': red = true; break;
+                            case 'b': blue = true; break;
+                            case 'g': green = true; break;
+                            case 'y': yellow = true; break;
+                        }
+                    }
+                }
+                board[n] = row;
+                n++;
+            }
+        } catch(IOException e){
+            e.printStackTrace();
+            System.exit(-1);
+        }
+
+        if(purple) colors++;
+        if(orange) colors++;
+        if(red) colors++;
+        if(blue) colors++;
+        if(green) colors++;
+        if(yellow) colors++;
+
+        optimalMoves = maxPlays - 2;
+
+        return new GameBoard(board, maxPlays, optimalMoves, blocks, colors);
     }
 
     /**
