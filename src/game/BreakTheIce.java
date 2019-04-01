@@ -83,13 +83,15 @@ public class BreakTheIce
         System.out.println("+-----------------+");
         System.out.println("|   7 - level 7   |");
         System.out.println("+-----------------+");
-        System.out.println("|  8 - Load level |");
+        System.out.println("|   8 - level 8   |");
+        System.out.println("+-----------------+");
+        System.out.println("|  9 - Load level |");
         System.out.println("+-----------------+");
 
-        option = getOption(8);
+        option = getOption(9);
         GameBoard board = null;
 
-        if(option != 8)
+        if(option != 9)
             board = getLevelSelected(option);
         else
             board = loadLevel();
@@ -283,7 +285,7 @@ public class BreakTheIce
                 break;
 
             case 6:
-                maxPlays = 5;
+                maxPlays = 4;
                 board = new char[][] 
                 {
                     {'_', '_', '_', '_', '_', '_', '_'},
@@ -304,6 +306,27 @@ public class BreakTheIce
                 break;
 
             case 7:
+                maxPlays = 5;
+                board = new char[][] 
+                {
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', 'p', '_', '_', '_'},
+                    {'_', '_', '_', 'g', 'p', '_', '_'},
+                    {'_', '_', 'g', 'p', 'g', 'p', 'p'}
+                };
+                blocks = 8;
+                colors = 2;
+                break;
+
+            case 8:
                 maxPlays = 6;
                 board = new char[][] 
                 {

@@ -139,7 +139,7 @@ public class testingSuite
         Bot bot;
 
         if(boards.size() == 0)
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < 8; i++)
         {
             bot = new Bot(new GameNode(null, 0, 0, "root", 4, new BlockNumHeuristic(), 0, 
                 BreakTheIce.getLevelSelected(i + 1))); 
