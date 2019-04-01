@@ -96,6 +96,10 @@ public class BreakTheIce
         chooseMode();
     }
 
+    /**
+     * Loads level from input file
+     * @return board from the file
+     */
     private static GameBoard loadLevel(){
         Scanner sc = new Scanner(System.in);
 
