@@ -9,7 +9,7 @@ public abstract class Heuristic {
 	/**
 	 * The current value of the heuristic.
 	 */
-	protected int value;
+	int value;
 
 	/**
 	 * The possible colors in a board.

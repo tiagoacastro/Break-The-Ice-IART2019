@@ -14,7 +14,7 @@ public class BlockNumHeuristic extends Heuristic
             if(notPossibleBoard(boardChar))
               return;
 
-            this.value = (this.value * board.getMaxMoves()) / board.getBlocks();
+            this.value = (this.value / board.getBlocks()) * board.getMaxMoves();
       }
 
       /**
