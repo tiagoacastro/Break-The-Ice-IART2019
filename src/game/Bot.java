@@ -173,12 +173,12 @@ public class Bot
                 return true;
             }
 
-
-            if(visitedNodes.contains(currentNode.id)) 
-            {
-                visitedNode = true;
-                break;
-            }
+            for (int j = 0; j < visitedNodes.size(); j++)
+                if (currentNode.id.equals(visitedNodes.get(j))) 
+                {
+                    visitedNode = true;
+                    break;
+                }
 
             if (!visitedNode && currentNode.getDepth() < root.getGameBoard().getMaxMoves()) 
             {

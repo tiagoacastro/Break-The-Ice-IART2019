@@ -47,6 +47,8 @@ public class CloseChainHeuristic extends Heuristic
             }
         }
 
+        //System.out.println(value);
+
     }
 
     /**
