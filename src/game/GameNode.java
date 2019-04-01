@@ -173,7 +173,10 @@ public class GameNode extends Node
                 return true;
             }
         }
-        else
+        else {
+
+            analyzedNodes++;
+
             if(this.depth < depth)
             {
                 ArrayList<Node> children = this.expandNode();
@@ -187,6 +190,7 @@ public class GameNode extends Node
                     }
                 }
             }
+        }
         
         return false;
     }
