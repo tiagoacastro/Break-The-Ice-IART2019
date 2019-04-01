@@ -54,7 +54,7 @@ public class Bot
                 solutionFound = this.uniformCostSearch();
                 break;
             case 5:
-                solutionFound = root.greedySearch();
+                solutionFound = this.greedySearch();
                 break;
             case 6:
                 solutionFound = this.AStarSearch();
@@ -90,7 +90,7 @@ public class Bot
 
     /**
      * Breadth search.
-     * @return Flag indicating if the search was successfull or not.
+     * @return Flag indicating if the search was successful or not.
      */
     private boolean breadth()
     {
@@ -124,26 +124,36 @@ public class Bot
 
     /**
      * Uniform cost search.
-     * @return Flag indicating if the search was successfull or not.
+     * @return Flag indicating if the search was successful or not.
      */
     private boolean uniformCostSearch() {
         return aux(4);
     }
 
     /**
+     * Performs a greedy search on this node.
+     * @return Flag indicating if the search was successful or not.
+     */
+    private boolean greedySearch() {
+        return aux(5);
+    }
+
+    /**
      * A* search.
-     * @return Flag indicating if the search was successfull or not.
+     * @return Flag indicating if the search was successful or not.
      */
     private boolean AStarSearch()
     {
         return aux(6);
     }
 
+
     /**
      * Auxiliary function to searches using priority queues.
-     * @return Flag indicating if the search was successfull or not.
+     * @return Flag indicating if the search was successful or not.
      */
     private boolean aux(int i) {
+
         PriorityQueue<Node> activeNodes = new PriorityQueue<>();
         ArrayList<Node> activeNodesAR = new ArrayList<>();
         Node currentNode;
@@ -164,12 +174,10 @@ public class Bot
                     child.setSearchOption(i);
                     activeNodes.add(child);
                 }
-                activeNodesAR.clear();
-                activeNodesAR.trimToSize();
-            } else {
-                return false;
-            }
+            } 
 
+            activeNodesAR.clear();
+            activeNodesAR.trimToSize();
             activeNodes.poll();
         }
 

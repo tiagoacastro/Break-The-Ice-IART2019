@@ -193,43 +193,6 @@ public class GameNode extends Node
     }
 
     /**
-     * Performs a greedy search on this node.
-     * @return Flag indicating if the search was successfull or not.
-     */
-    public boolean greedySearch() 
-    {
-        PriorityQueue<Node> children = new PriorityQueue<>();
-
-        if(this.testGoal()) {
-
-            Node.solution.add(this.operator);
-            return true;
-
-        } else {
-
-            if(this.moves >= board.getMaxMoves())
-                return false;
-
-            ArrayList<Node> childrenAR = this.expandNode();
-            for(Node child: childrenAR) {
-                child.setSearchOption(5);
-                children.add(child);
-            }
-
-            while (!children.isEmpty()) {
-                if (children.poll().greedySearch()) {
-                    Node.solution.add(0, this.operator);
-                    return true;
-                }
-            }
-
-            return false;
-
-        }
-
-    }
-
-    /**
      * Tests if the goal of game has been accomplished in this node.
      * @return True if the game has been won and false otherwise.
      */

@@ -101,12 +101,6 @@ public abstract class Node implements Comparable<Node>
     public abstract boolean depthLimitedSearch(int depth);
 
     /**
-     * Performs a greedy search on this node.
-     * @return Flag indicating if the search was successfull or not.
-     */
-    public abstract boolean greedySearch();
-
-    /**
      * Tests if the goal of game has been accomplished in this node.
      * @return True if the game has been won and false otherwise.
      */
