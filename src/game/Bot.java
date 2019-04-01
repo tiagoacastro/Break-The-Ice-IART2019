@@ -154,7 +154,7 @@ public class Bot
      */
     private boolean aux(int i) {
 
-        PriorityQueue<Node> activeNodes = new PriorityQueue<>();
+        PriorityQueue<Node> activeNodes = new PriorityQueue<>(); 
         ArrayList<Node> activeNodesAR = new ArrayList<>();
         Node currentNode;
 

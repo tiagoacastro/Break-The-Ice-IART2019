@@ -53,20 +53,10 @@ public class testingSuite
      * Used to get statistical data regarding the different algorythms.
      */
     private static void testLevels()
-    {
-        HashMap<Integer, String> algTable = new HashMap<>();
-        long[] times = new long[10];
-        long startTime, endTime;
+    {        
         Bot bot;
 
-        algTable.put(1, "Breadth First");
-        algTable.put(2, "Depth First");
-        algTable.put(3, "Iterative Deepening");
-        algTable.put(4, "Uniform Cost");
-        algTable.put(5, "Greedy");
-        algTable.put(6, "A*");
-
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 6; i++)
         {
             bot = new Bot(new GameNode(null, 0, 0, "root", 0, BreakTheIce.getLevelSelected(i + 1))); 
 
@@ -81,37 +71,62 @@ public class testingSuite
 
             for(int j = 1; j <= 6; j++)
             {
-                for(int k = 0; k < 10; k++) //Average
-                {
-                    startTime = System.currentTimeMillis();
-                    bot.search(j, true);
-                    endTime = System.currentTimeMillis();
-                    times[k] = endTime - startTime;
-                }
-
-                int actualMoves = GameNode.getSolution().size();
-
-                if(GameNode.getSolution().get(0).equals("root"))
-                    actualMoves -= 1;
-
-                System.out.println(algTable.get(j) + " average(ms): " + calculateAverage(times) + "\n" + GameNode.analyzedNodes + " nodes visited (" + actualMoves + " moves performed - " + (actualMoves == bot.getRoot().getGameBoard().getOptimalMoves() ? " optimal solution)\n" : "non-optimal solution)\n"));
+                if(j == 5 || j == 6)
+                    for(int k = 0; k < 3; k++)
+                    {
+                        Heuristic.setCurrentHeuristic(k + 1);
+                        measureTime(bot, j, k+1);
+                    }
+                else
+                    measureTime(bot, j, 0);
             }
         }
-
     }
 
-    /**
-     * Calculates the average of a set of values.
-     * @param values The set of values.
-     * @return The average of the values.
-     */
-    private static long calculateAverage(long[] values)
+    private static void measureTime(Bot bot, int j, int k)
     {
-        long sum = 0;
+        HashMap<Integer, String> algTable = new HashMap<>();
+        long startTime, endTime;
+        String heuristic;
 
-        for(long value : values)
-            sum += value;
+        algTable.put(1, "Breadth First");
+        algTable.put(2, "Depth First");
+        algTable.put(3, "Iterative Deepening");
+        algTable.put(4, "Uniform Cost");
+        algTable.put(5, "Greedy");
+        algTable.put(6, "A*");
 
-        return sum / values.length;
+        startTime = System.currentTimeMillis();
+        bot.search(j, true);
+        endTime = System.currentTimeMillis();
+
+        int actualMoves = GameNode.getSolution().size();
+
+            if(GameNode.getSolution().get(0).equals("root"))
+                actualMoves -= 1;
+
+        switch(k)
+        {
+            case 1:
+                heuristic = " - Number of blocks";
+                break;
+
+            case 2:
+                heuristic = " - Number of Colors";
+                break;
+
+            case 3:
+                heuristic = " - Number of chains";
+                break;
+
+            default:
+                heuristic = "";
+                break;
+        }
+
+        System.out.println(algTable.get(j) + heuristic + "(ms): " + (endTime - startTime) + "\n"
+                + GameNode.analyzedNodes + " nodes visited (" + actualMoves + " moves performed - "
+                + (actualMoves == bot.getRoot().getGameBoard().getOptimalMoves() ? " optimal solution)\n"
+                        : " non-optimal solution)\n"));
     }
 }
