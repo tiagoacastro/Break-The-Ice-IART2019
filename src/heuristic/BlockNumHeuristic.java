@@ -2,6 +2,9 @@ package heuristic;
 
 import game.GameBoard;
 
+/**
+ * Heuristic based on the blocks left
+ */
 public class BlockNumHeuristic extends Heuristic 
 {
       /**

@@ -2,6 +2,9 @@ package heuristic;
 
 import game.GameBoard;
 
+/**
+ * Heuristic based on the colors left
+ */
 public class ColorHeuristic extends Heuristic {
     /**
      * Calculates the heuristic's value based on the colors and pieces left on the board.
