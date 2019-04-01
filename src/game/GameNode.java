@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import heuristic.*;
 
 /**
- * Represents an instance of a node in a search graph of a solution for a level in the game.
+ * Represents an instance of a node in a search graph of a solution for a moves2 in the game.
  */
 public class GameNode extends Node 
 {

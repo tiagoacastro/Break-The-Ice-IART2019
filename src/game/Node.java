@@ -18,7 +18,7 @@ public abstract class Node implements Comparable<Node>
     int depth;
 
     /**
-     * The path cost to reach this node (always 1 since from one depth level to the other all possible plays
+     * The path cost to reach this node (always 1 since from one depth moves2 to the other all possible plays
      * exhaust 1 move)
      */
     private int pathCost;
@@ -39,7 +39,7 @@ public abstract class Node implements Comparable<Node>
     String operator;
 
     /**
-     * List containing the solution to a level in order.
+     * List containing the solution to a moves2 in order.
      */
     protected static ArrayList<String> solution = new ArrayList<>();
 
@@ -169,7 +169,7 @@ public abstract class Node implements Comparable<Node>
 
     /**
      * Retrieves the current solution.
-     * @return The list containing the solution to a level.
+     * @return The list containing the solution to a moves2.
      */
     public static ArrayList<String> getSolution()
     {

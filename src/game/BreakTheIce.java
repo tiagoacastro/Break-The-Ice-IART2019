@@ -60,28 +60,28 @@ public class BreakTheIce
     }
 
     /**
-     * level selection interface.
+     * moves2 selection interface.
      */
     private static void chooseLevel()
     {
         int option;
 
         System.out.println("+-----------------+");
-        System.out.println("| level Selection |");
+        System.out.println("| moves2 Selection |");
         System.out.println("+-----------------+");
-        System.out.println("|   1 - level 1   |");
+        System.out.println("|   1 - moves2 1   |");
         System.out.println("+-----------------+");
-        System.out.println("|   2 - level 2   |");
+        System.out.println("|   2 - moves2 2   |");
         System.out.println("+-----------------+");
-        System.out.println("|   3 - level 3   |");
+        System.out.println("|   3 - moves2 3   |");
         System.out.println("+-----------------+");
-        System.out.println("|   4 - level 4   |");
+        System.out.println("|   4 - moves2 4   |");
         System.out.println("+-----------------+");
-        System.out.println("|   5 - level 5   |");
+        System.out.println("|   5 - moves2 5   |");
         System.out.println("+-----------------+");
-        System.out.println("|   6 - level 6   |");
+        System.out.println("|   6 - moves2 6   |");
         System.out.println("+-----------------+");
-        System.out.println("|  7 - Load level |");
+        System.out.println("|  7 - Load moves2 |");
         System.out.println("+-----------------+");
 
         option = getOption(7);
@@ -97,7 +97,7 @@ public class BreakTheIce
     }
 
     /**
-     * Loads level from input file
+     * Loads moves2 from input file
      * @return board from the file
      */
     private static GameBoard loadLevel(){
@@ -163,7 +163,7 @@ public class BreakTheIce
     }
 
     /**
-     * Returns a new GameBoard instance based on the level chosen previously.
+     * Returns a new GameBoard instance based on the moves2 chosen previously.
      * @param option The option chosen.
      * @return The new GameBoard.
      */
@@ -302,7 +302,7 @@ public class BreakTheIce
                 break;
 
             default:
-                System.out.println("Option not recognized in level selection");
+                System.out.println("Option not recognized in moves2 selection");
                 return null;
         }
 
