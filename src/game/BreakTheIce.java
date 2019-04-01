@@ -78,8 +78,10 @@ public class BreakTheIce
         System.out.println("+-----------------+");
         System.out.println("|   5 - Level 5   |");
         System.out.println("+-----------------+");
+        System.out.println("|   6 - Level 6   |");
+        System.out.println("+-----------------+");
 
-        option = getOption(5);
+        option = getOption(6);
 
         bot = new Bot(new GameNode(null, 0, 0, "root", 0, getLevelSelected(option)));
         chooseMode();
@@ -200,6 +202,27 @@ public class BreakTheIce
                     {'_', '_', 'g', 'p', 'g', 'p', 'p'}
                 };
                 blocks = 8;
+                colors = 2;
+                break;
+
+            case 6:
+                maxPlays = 6;
+                board = new char[][] 
+                {
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', '_', '_', '_', '_'},
+                    {'_', '_', '_', 'g', '_', '_', '_'},
+                    {'_', '_', '_', 'r', '_', '_', 'y'},
+                    {'_', '_', '_', 'r', 'y', 'r', 'r'},
+                    {'_', 'g', 'g', 'b', 'y', 'b', 'b'}
+                };
+                blocks = 13;
                 colors = 2;
                 break;
 
