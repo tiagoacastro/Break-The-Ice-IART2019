@@ -388,4 +388,24 @@ public class GameNode extends Node
     {
         return board.getBoard();
     }
+
+    public boolean isRepeated() {
+
+        //if parent null, if not compare
+
+        if (this.parentNode == null) {
+            return false;
+        } else if (this.board.isEqual(parentNode.getGameBoard())) {
+            return true;
+        }
+
+        //recursively call the function to check ancestor
+
+        if (this.parentNode.isRepeated()) {
+            return true;
+        }
+
+        return false;
+
+    }
 }

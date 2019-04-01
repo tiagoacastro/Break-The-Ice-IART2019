@@ -48,7 +48,7 @@ public class testingSuite
     }
 
     /**
-     * Used to get statistical data regarding the different algorythms.
+     * Used to get statistical data regarding the different algorithms.
      */
     private static void testLevels()
     {        

@@ -162,6 +162,8 @@ public class Bot
         while (!activeNodes.isEmpty()) {
             currentNode = activeNodes.peek();
 
+            System.out.println("Analyzed nodes: " + root.analyzedNodes + "\n");
+
             if (currentNode.testGoal()) {
                 activeNodes.poll().traceSolutionUp();
                 return true;
@@ -170,12 +172,13 @@ public class Bot
             if (currentNode.getDepth() < root.getGameBoard().getMaxMoves()) {
                 activeNodesAR.addAll(currentNode.expandNode());
                 for (Node child : activeNodesAR) {
-                    activeNodes.add(child);
+                    if (!child.isRepeated())
+                        activeNodes.add(child);
                 }
+                activeNodesAR.clear();
+                activeNodesAR.trimToSize();
             } 
 
-            activeNodesAR.clear();
-            activeNodesAR.trimToSize();
             activeNodes.poll();
         }
 

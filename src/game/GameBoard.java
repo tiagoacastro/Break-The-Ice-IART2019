@@ -831,4 +831,18 @@ public class GameBoard
 
         return count;
     }
+
+    public boolean isEqual(GameBoard b) {
+
+        for (int i = 0; i < 12; i++) {
+
+            for (int j = 0; j < 7; j++) {
+                if (b.board[i][j] != this.board[i][j])
+                    return false;
+            }
+
+        }
+
+        return true;
+    }
 }

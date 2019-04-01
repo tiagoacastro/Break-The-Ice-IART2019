@@ -110,6 +110,8 @@ public abstract class Node implements Comparable<Node>
      */
     public abstract boolean testGoal();
 
+    public abstract GameBoard getGameBoard();
+
     /**
      * Executes the moves indicated by the operators in the Solution array.
      */
@@ -124,6 +126,8 @@ public abstract class Node implements Comparable<Node>
      * Calculates the heuristic value.
      */
     public abstract void calculateHeuristic();
+
+    public abstract boolean isRepeated();
 
     /**
      * Retrieves the depth.
