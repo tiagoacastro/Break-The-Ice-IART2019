@@ -138,6 +138,7 @@ public class testingSuite
     {        
         Bot bot;
 
+        if(boards.size() == 0)
         for(int i = 0; i < 6; i++)
         {
             bot = new Bot(new GameNode(null, 0, 0, "root", 4, new BlockNumHeuristic(), 0, 
@@ -154,7 +155,7 @@ public class testingSuite
 
             if (aux(bot)) return;
         }
-
+        else
         for(GameBoard board : boards){
             bot = new Bot(new GameNode(null, 0, 0, "root", 4, new BlockNumHeuristic(), 0,
                     board));
