@@ -161,7 +161,7 @@ public abstract class Node implements Comparable<Node>
             case 5:
                 return this.heuristic.compareTo(o.heuristic);
             case 6:
-                return this.heuristic.compareTo(o.heuristic) + 3 * (this.depth - o.depth);
+                return this.heuristic.compareTo(o.heuristic) + this.depth - o.depth;
             default:
                 return 0;
         }
