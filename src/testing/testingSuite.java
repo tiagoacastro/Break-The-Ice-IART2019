@@ -68,7 +68,7 @@ public class testingSuite
 
         for(int i = 0; i < 5; i++)
         {
-            bot = new Bot(new GameNode(null, 0, 0, "root", 0, BreakTheIce.getLevelSelected(i + 1))); //review this
+            bot = new Bot(new GameNode(null, 0, 0, "root", 0, BreakTheIce.getLevelSelected(i + 1))); 
 
             try {
                 System.out.println("----- Testing with " + BreakTheIce.getLevelSelected(i + 1).getMaxMoves()
@@ -89,7 +89,12 @@ public class testingSuite
                     times[k] = endTime - startTime;
                 }
 
-                System.out.println(algTable.get(j) + " average(ms): " + calculateAverage(times) + "\n" + GameNode.analyzedNodes + " nodes visited\n");
+                int actualMoves = GameNode.getSolution().size();
+
+                if(GameNode.getSolution().get(0).equals("root"))
+                    actualMoves -= 1;
+
+                System.out.println(algTable.get(j) + " average(ms): " + calculateAverage(times) + "\n" + GameNode.analyzedNodes + " nodes visited (" + actualMoves + " moves performed - " + (actualMoves == bot.getRoot().getGameBoard().getOptimalMoves() ? " optimal solution)\n" : "non-optimal solution)\n"));
             }
         }
 
