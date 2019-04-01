@@ -49,15 +49,17 @@ public abstract class Node implements Comparable<Node>
      * @param depth The depth at which this node is at.
      * @param pathCost The path cost to reach this node.
      * @param operator This node's operator.
+     * @param searchOption This node's search option.
+     * @param heuristic This node's heuristic.
      */
-    Node(Node parentNode, int depth, int pathCost, String operator)
+    Node(Node parentNode, int depth, int pathCost, String operator, int searchOption, Heuristic heuristic)
     {
         this.parentNode = parentNode;
         this.depth = depth;
         this.pathCost = pathCost;
         this.searchOption = 0;
         this.operator = operator;
-        this.heuristic = Heuristic.createCurrentHeuristic();
+        this.heuristic = heuristic;
     }
 
     /**
@@ -72,8 +74,8 @@ public abstract class Node implements Comparable<Node>
         this.pathCost = 1;
         this.parentNode = parentNode;
         this.operator = operator;
-
-        this.heuristic = parentNode.getHeuristic();
+        this.searchOption = parentNode.getSearchOption();
+        this.heuristic = parentNode.getHeuristic().getNewHeuristic();
     }
 
     /**
@@ -115,6 +117,11 @@ public abstract class Node implements Comparable<Node>
      * Adds the correspondent node's operators to the Solution array all the way from the final/acceptance node.
      */
     public abstract void traceSolutionUp();
+
+    /**
+     * Calculates the heuristic value.
+     */
+    public abstract void calculateHeuristic();
 
     /**
      * Retrieves the depth.
@@ -163,6 +170,15 @@ public abstract class Node implements Comparable<Node>
     }
 
     /**
+     * Retrieves the search option.
+     * @return The search option.
+     */
+    public int getSearchOption()
+    {
+        return searchOption;
+    }
+
+    /**
      * Retrieves the current heuristic.
      * @return The current heuristic.
      */
@@ -170,4 +186,19 @@ public abstract class Node implements Comparable<Node>
     {
         return this.heuristic;
     }
+
+    public Heuristic getSameHeuristic()
+    {
+        return heuristic.getNewHeuristic();
+    }
+
+    /**
+     * Sets this node heuristic's engine.
+     * @param heuristic The new heuristic.
+     */
+    public void setHeuristic(Heuristic heuristic) 
+    {
+        this.heuristic = heuristic;
+        this.calculateHeuristic();
+    } 
 }

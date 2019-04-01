@@ -29,16 +29,21 @@ public class GameNode extends Node
      * @param depth The depth at which this node is at.
      * @param pathCost The path cost to reach this node.
      * @param operator This node's operator.
+     * @param heuristic This node's heuristic.
+     * @param searchOption This node's search option
      * @param moves The number of mobes performed to get to this node.
      * @param board The state of the board in this node.
      */
-    public GameNode(Node parentNode, int depth, int pathCost, String operator, int moves, GameBoard board)
+    public GameNode(Node parentNode, int depth, int pathCost, String operator,  
+        int searchOption, Heuristic heuristic, int moves, GameBoard board)
     {
-        super(parentNode, depth, pathCost, operator);
+        super(parentNode, depth, pathCost, operator, searchOption, heuristic);
 
         this.board = board;
         this.moves = moves;
-        this.heuristic.calculate(board);
+
+        if(this.heuristic != null)
+            this.calculateHeuristic();
     }
 
     /**
@@ -55,7 +60,9 @@ public class GameNode extends Node
 
         this.board = board;
         this.moves = moves;
-        this.heuristic.calculate(board);
+        
+        if(this.heuristic != null)
+            this.calculateHeuristic();
     }
 
     /**
@@ -103,6 +110,11 @@ public class GameNode extends Node
             }
 
         return nodeList;
+    }
+
+    public void calculateHeuristic()
+    {
+        this.heuristic.calculate(board);
     }
 
     /**
@@ -376,29 +388,4 @@ public class GameNode extends Node
     {
         return board.getBoard();
     }
-
-    /**
-     * Sets this node heuristic's engine.
-     */
-    public void setHeuristic() 
-    {
-        switch(Heuristic.getCurrentHeuristic()) {
-            case 1:
-                this.heuristic = new BlockNumHeuristic();
-                break;
-            case 2:
-                this.heuristic = new ColorHeuristic();
-                break;
-
-            case 3:
-                this.heuristic = new CloseChainHeuristic();
-                break;
-                
-            default:
-                this.heuristic = new BlockNumHeuristic();
-        }
-
-        this.heuristic.calculate(board);
-    } 
-
 }

@@ -147,7 +147,6 @@ public class Bot
         return aux(6);
     }
 
-
     /**
      * Auxiliary function to searches using priority queues.
      * @return Flag indicating if the search was successful or not.
@@ -171,7 +170,6 @@ public class Bot
             if (currentNode.getDepth() < root.getGameBoard().getMaxMoves()) {
                 activeNodesAR.addAll(currentNode.expandNode());
                 for (Node child : activeNodesAR) {
-                    child.setSearchOption(i);
                     activeNodes.add(child);
                 }
             } 

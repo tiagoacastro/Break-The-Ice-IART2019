@@ -46,6 +46,16 @@ public class CloseChainHeuristic extends Heuristic
                     value = gameBoard.getMaxMoves();
             }
         }
+
+    }
+
+    /**
+    * Returns a new instance of this heuristic.
+    * @return New instance of CloseChainsHeuristic.
+    */
+    public Heuristic getNewHeuristic()
+    {
+    return new CloseChainHeuristic();
     }
 
     /**

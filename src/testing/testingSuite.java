@@ -41,10 +41,8 @@ public class testingSuite
             {'_', '_', 'g', 'p', 'g', 'p', 'p'}
         }, 5, 3, 11, 2);
         int res = 0;
-
-        Heuristic.setCurrentHeuristic(4);
         
-        new GameNode(null, 0, 0, "root", 0, board);
+        new GameNode(null, 0, 0, "root", 4, new BlockNumHeuristic(), 1, board);
     
         System.out.println(res);
     }
@@ -58,7 +56,8 @@ public class testingSuite
 
         for(int i = 0; i < 6; i++)
         {
-            bot = new Bot(new GameNode(null, 0, 0, "root", 0, BreakTheIce.getLevelSelected(i + 1))); 
+            bot = new Bot(new GameNode(null, 0, 0, "root", 4, new BlockNumHeuristic(), 0, 
+                BreakTheIce.getLevelSelected(i + 1))); 
 
             try {
                 System.out.println("----- Testing with " + BreakTheIce.getLevelSelected(i + 1).getMaxMoves()
@@ -71,10 +70,29 @@ public class testingSuite
 
             for(int j = 1; j <= 6; j++)
             {
+                bot.getRoot().setSearchOption(j);
+
                 if(j == 5 || j == 6)
                     for(int k = 0; k < 3; k++)
                     {
-                        Heuristic.setCurrentHeuristic(k + 1);
+                        switch(k)
+                        {
+                            case 0:
+                                bot.getRoot().setHeuristic(new BlockNumHeuristic());
+                                break;
+
+                            case 1:
+                                bot.getRoot().setHeuristic(new ColorHeuristic());
+                                break;
+
+                            case 2:
+                                bot.getRoot().setHeuristic(new CloseChainHeuristic());
+                                break;
+
+                            default:
+                                System.out.println("k value doesn't match heuristic options");
+                                return;
+                        }
                         measureTime(bot, j, k+1);
                     }
                 else

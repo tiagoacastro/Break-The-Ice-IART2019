@@ -2,7 +2,7 @@ package game;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
-import heuristic.Heuristic;
+import heuristic.*;
 
 /**
  * Main instance of the game, serves as UI and starting point.
@@ -83,7 +83,7 @@ public class BreakTheIce
 
         option = getOption(6);
 
-        bot = new Bot(new GameNode(null, 0, 0, "root", 0, getLevelSelected(option)));
+        bot = new Bot(new GameNode(null, 0, 0, "root", 0, null, 0, getLevelSelected(option)));
         chooseMode();
     }
 
@@ -261,17 +261,18 @@ public class BreakTheIce
 
         option = getOption(6);
 
-        if(option == 5 || option == 6) {
-            chooseHeuristic();
-        }
-        bot.getRoot().setHeuristic();
+        bot.getRoot().setSearchOption(option);
+
+        if(option == 5 || option == 6)
+            chooseHeuristic(bot);
+            
         bot.search(option, false);
     }
 
     /**
      * Heuristic selection menu.
      */
-    private static void chooseHeuristic()
+    private static void chooseHeuristic(Bot bot)
     {
         int option;
 
@@ -286,7 +287,26 @@ public class BreakTheIce
         System.out.println("+----------------------------------+");
 
         option = getOption(3);
-        Heuristic.setCurrentHeuristic(option);
+
+        switch(option)
+        {
+            case 1:
+                bot.getRoot().setHeuristic(new BlockNumHeuristic());
+                break;
+
+            case 2:
+                bot.getRoot().setHeuristic(new ColorHeuristic());
+                break;
+
+            case 3:
+                bot.getRoot().setHeuristic(new CloseChainHeuristic());
+                break;
+
+            default:
+                System.out.println("Unknown heuristic");
+                return;
+        }
+        
     }
 
     /**

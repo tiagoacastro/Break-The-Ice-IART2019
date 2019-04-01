@@ -32,4 +32,13 @@ public class ColorHeuristic extends Heuristic {
           if (value > board.getMaxMoves())
             value = board.getMaxMoves();
       }
+
+      /**
+       * Returns a new instance of this heuristic.
+       * @return New instance of ColorHeuristic.
+       */
+      public Heuristic getNewHeuristic()
+      {
+        return new ColorHeuristic();
+      }
 }
