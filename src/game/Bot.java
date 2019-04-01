@@ -155,30 +155,48 @@ public class Bot
 
         PriorityQueue<Node> activeNodes = new PriorityQueue<>(); 
         ArrayList<Node> activeNodesAR = new ArrayList<>();
+        ArrayList<String> visitedNodes = new ArrayList<>();
         Node currentNode;
+        boolean visitedNode = false;
 
         activeNodes.add(root);
 
-        while (!activeNodes.isEmpty()) {
+        while (!activeNodes.isEmpty()) 
+        {
             currentNode = activeNodes.peek();
 
-            System.out.println("Analyzed nodes: " + root.analyzedNodes + "\n");
+            //System.out.println("Analyzed nodes: " + root.analyzedNodes + "\n");
 
-            if (currentNode.testGoal()) {
+            if (currentNode.testGoal()) 
+            {
                 activeNodes.poll().traceSolutionUp();
                 return true;
             }
 
-            if (currentNode.getDepth() < root.getGameBoard().getMaxMoves()) {
-                activeNodesAR.addAll(currentNode.expandNode());
-                for (Node child : activeNodesAR) {
-                    if (!child.isRepeated())
-                        activeNodes.add(child);
+            for (int j = 0; j < visitedNodes.size(); j++)
+                if (currentNode.id.equals(visitedNodes.get(j))) 
+                {
+                    visitedNode = true;
+                    break;
                 }
+
+            if (!visitedNode && currentNode.getDepth() < root.getGameBoard().getMaxMoves()) 
+            {
+                activeNodesAR.addAll(currentNode.expandNode());
+
+                for (Node child : activeNodesAR) 
+                {
+                    activeNodes.add(child);
+                        
+                }
+
                 activeNodesAR.clear();
                 activeNodesAR.trimToSize();
+
+                visitedNodes.add(currentNode.id);
             } 
 
+            visitedNode = false;
             activeNodes.poll();
         }
 

@@ -43,6 +43,8 @@ public abstract class Node implements Comparable<Node>
      */
     protected static ArrayList<String> solution = new ArrayList<>();
 
+    protected String id;
+
     /**
      * Constructor of the class with most members.
      * @param parentNode The parent node of this node.
@@ -60,6 +62,11 @@ public abstract class Node implements Comparable<Node>
         this.searchOption = 0;
         this.operator = operator;
         this.heuristic = heuristic;
+
+        if(parentNode == null)
+            this.id = operator;
+        else
+            this.id = parentNode.id + " -> " + operator;
     }
 
     /**
@@ -78,6 +85,8 @@ public abstract class Node implements Comparable<Node>
         if (parentNode.heuristic != null) {
             this.heuristic = parentNode.getHeuristic().getNewHeuristic();
         }
+
+        this.id = parentNode.id + " -> " + operator;
     }
 
     /**
