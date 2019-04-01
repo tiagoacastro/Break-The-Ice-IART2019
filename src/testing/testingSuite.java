@@ -119,16 +119,17 @@ public class testingSuite
             {'_', '_', '_', '_', '_', '_', '_'},
             {'_', '_', '_', '_', '_', '_', '_'},
             {'_', '_', '_', '_', '_', '_', '_'},
-            {'_', '_', '_', 'p', '_', '_', '_'},
-            {'_', '_', 'p', 'p', '_', '_', '_'},
-            {'_', '_', '_', 'g', 'p', '_', 'p'},
-            {'_', '_', 'g', 'p', 'g', 'p', 'p'}
+            {'_', '_', '_', '_', '_', '_', '_'},
+            {'_', '_', '_', 'y', 'b', '_', '_'},
+            {'_', '_', '_', 'b', 'y', '_', '_'},
+            {'_', '_', '_', 'y', 'b', '_', '_'}
         }, 5, 3, 11, 2);
         int res = 0;
+        int[] pieceCoords = new int[] {10, 4};
         
-        new GameNode(null, 0, 0, "root", 4, new BlockNumHeuristic(), 1, board);
-    
-        System.out.println(res);
+        GameNode root = new GameNode(null, 0, 0, "root", 4, new BlockNumHeuristic(), 1, board);
+
+        root.getGameBoard().switchPieceLeft(pieceCoords).printBoard();
     }
 
     /**

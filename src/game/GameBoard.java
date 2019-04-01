@@ -534,6 +534,7 @@ public class GameBoard
                 {
                     newBoard = copyBoard(testBoard);
                     recalculate = true;
+                    differentBoard = true;
 
                     if(showMove)
                         printBoard(newBoard);
@@ -684,11 +685,17 @@ public class GameBoard
                         
                 }
                 else
+                {
                     if(counter > 3)
+                    {
                         if(showMove)
                             newBoard[i][column] = '*';
                         else
                             newBoard[i][column] = '_';
+                    }
+                    
+                }
+                    
             }
             else 
             {
@@ -701,11 +708,11 @@ public class GameBoard
                         for(int j = 0; j < newBoard.length; j++)
                             if(newBoard[j][column] == '*')
                                 newBoard[j][column] = '_';
-
                         
                     }
 
                     newBoard = dropColumn(newBoard, column);
+
                     i += counter;
                 }
 
