@@ -32,8 +32,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="moves3" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/levels/moves3">
+      <file leaf-file-name="m3" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/levels/m3">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
@@ -42,8 +42,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="moves4" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/levels/moves4">
+      <file leaf-file-name="m4" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/levels/m4">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
               <caret line="12" column="3" lean-forward="false" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
@@ -52,8 +52,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="moves5" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/levels/moves5">
+      <file leaf-file-name="m5" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/levels/m5">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="168">
               <caret line="8" column="7" lean-forward="false" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
@@ -62,8 +62,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="moves6" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/levels/moves6">
+      <file leaf-file-name="m6" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/levels/m6">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="7" />
@@ -72,8 +72,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="moves7" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/levels/moves7">
+      <file leaf-file-name="m7" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/levels/m7">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="7" />
@@ -82,18 +82,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="moves8" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/levels/moves8">
+      <file leaf-file-name="m8" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/levels/m8">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+            <state relative-caret-position="189">
+              <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="moves2" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/levels/moves2">
+      <file leaf-file-name="m2" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/levels/m2">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
               <caret line="12" column="3" lean-forward="false" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
@@ -434,7 +434,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26680000" />
+    <option name="totallyTimeSpent" value="26835000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -843,7 +843,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/levels/moves2">
+    <entry file="file://$PROJECT_DIR$/levels/m2">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="12" column="3" lean-forward="false" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
@@ -851,7 +851,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/levels/moves3">
+    <entry file="file://$PROJECT_DIR$/levels/m3">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
@@ -859,7 +859,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/levels/moves4">
+    <entry file="file://$PROJECT_DIR$/levels/m4">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="12" column="3" lean-forward="false" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
@@ -867,7 +867,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/levels/moves5">
+    <entry file="file://$PROJECT_DIR$/levels/m5">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="8" column="7" lean-forward="false" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
@@ -875,7 +875,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/levels/moves6">
+    <entry file="file://$PROJECT_DIR$/levels/m6">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="7" />
@@ -883,7 +883,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/levels/moves7">
+    <entry file="file://$PROJECT_DIR$/levels/m7">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="7" />
@@ -891,10 +891,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/levels/moves8">
+    <entry file="file://$PROJECT_DIR$/levels/m8">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        <state relative-caret-position="189">
+          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
           <folding />
         </state>
       </provider>
