@@ -111,7 +111,7 @@ public class BreakTheIce
         System.out.println("|  Input the file name without extension |");
         System.out.println("+----------------------------------------+");
         String fileName = sc.nextLine();
-        File file = new File(System.getProperty("user.dir") + "/levels/" + fileName);
+        File file = new File("levels/" + fileName);
         BufferedReader br = null;
         try{
             br = new BufferedReader(new FileReader(file));

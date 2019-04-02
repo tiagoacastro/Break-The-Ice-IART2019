@@ -33,7 +33,7 @@ public class testingSuite
             String[] fileNames = files.split(" ");
 
             for (String fileName : fileNames) {
-                File file = new File(System.getProperty("user.dir") + "/levels/" + fileName);
+                File file = new File("levels/" + fileName);
                 BufferedReader br = null;
                 try {
                     br = new BufferedReader(new FileReader(file));
