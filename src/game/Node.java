@@ -154,17 +154,28 @@ public abstract class Node implements Comparable<Node>
      */
     public int compareTo(Node o) 
     {
+        double comparation;
+
         switch(this.searchOption) 
         {
             case 4:
-                return this.depth - o.depth;
+                comparation = this.depth - o.depth;
+                break;
             case 5:
-                return this.heuristic.compareTo(o.heuristic);
+                comparation = this.heuristic.compare(o.heuristic);
+                break;
             case 6:
-                return this.heuristic.compareTo(o.heuristic) + this.depth - o.depth;
+                comparation = this.heuristic.compare(o.heuristic) + this.depth - o.depth;
+                break;
             default:
                 return 0;
         }
+
+        if(comparation < 0)
+            return -1;
+        else if(comparation > 0)
+            return 1;
+        return 0;
     }
 
     /**
@@ -200,11 +211,6 @@ public abstract class Node implements Comparable<Node>
     public Heuristic getHeuristic()
     {
         return this.heuristic;
-    }
-
-    public Heuristic getSameHeuristic()
-    {
-        return heuristic.getNewHeuristic();
     }
 
     /**
