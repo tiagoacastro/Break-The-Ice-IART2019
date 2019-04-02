@@ -172,7 +172,7 @@ public class Bot
             activeNodes.poll();
             visitedNodes.add(currentNode.id);
 
-            if(currentNode.depth < root.getGameBoard().getMaxMoves())
+            if(currentNode.depth < root.getGameBoard().getMaxMoves() && !currentNode.isImpossibleState())
             {
                 children = currentNode.expandNode();
 
