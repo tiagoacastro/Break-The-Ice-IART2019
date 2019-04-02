@@ -1,5 +1,6 @@
 package game;
 
+import java.util.concurrent.TimeUnit;
 /**
  * Contains the actual playing board (matrix) and performs the moves and tests on it.
  */
@@ -91,7 +92,7 @@ public class GameBoard
             newBoard[newPieceCoords[0]][newPieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]]; // Switch place
 
             if(showMove)
-                printBoard(newBoard);
+                printBoardHighlightPiece(newBoard, newPieceCoords);
 
             // Make piece in question fall if that's the case
             if (newPieceCoords[0] < this.board.length - 1 && this.board[newPieceCoords[0] + 1][newPieceCoords[1]] == '_')
@@ -116,9 +117,6 @@ public class GameBoard
             if(testBoard != null)
             {
                 newBoard = testBoard;
-
-                if(showMove)
-                    printBoard(newBoard);
             }                
         }
 
@@ -158,7 +156,7 @@ public class GameBoard
             newBoard[newPieceCoords[0]][newPieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]]; //Switch place
 
             if(showMove)
-                printBoard(newBoard);
+                printBoardHighlightPiece(newBoard, newPieceCoords);
 
             //Make piece in question fall if that's the case
             if(newPieceCoords[0] < this.board.length - 1 && this.board[newPieceCoords[0] + 1][newPieceCoords[1]] == '_')
@@ -184,8 +182,6 @@ public class GameBoard
             {
                 newBoard = testBoard;
 
-                if(showMove)
-                    printBoard(newBoard);
             } 
                
         }
@@ -222,7 +218,7 @@ public class GameBoard
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0]][pieceCoords[1] - 1])
             {
                 if(showMove)
-                    printBoard(newBoard);
+                    printBoardHighlightPiece(newBoard, new int[] {pieceCoords[0], pieceCoords[1] - 1});
 
                 return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
             }
@@ -232,7 +228,7 @@ public class GameBoard
             newBoard[pieceCoords[0]][pieceCoords[1] - 1] = board[pieceCoords[0]][pieceCoords[1]];
             
             if(showMove)
-                printBoard(newBoard);
+                printBoardHighlightPiece(newBoard, new int[] {pieceCoords[0], pieceCoords[1] - 1});
         }
 
         testBoard = explodeAll(newBoard);
@@ -241,8 +237,6 @@ public class GameBoard
         {
             newBoard = testBoard;
 
-            if (showMove)
-                printBoard(newBoard);
         }
 
         return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
@@ -277,7 +271,7 @@ public class GameBoard
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0]][pieceCoords[1] + 1])
             {
                 if(showMove)
-                    printBoard(newBoard);
+                    printBoardHighlightPiece(newBoard, new int[] {pieceCoords[0], pieceCoords[1] + 1});
 
                 return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
             }
@@ -286,7 +280,7 @@ public class GameBoard
             newBoard[pieceCoords[0]][pieceCoords[1] + 1] = board[pieceCoords[0]][pieceCoords[1]];
             
             if(showMove)
-                printBoard(newBoard);
+                printBoardHighlightPiece(newBoard, new int[] {pieceCoords[0], pieceCoords[1] + 1});
         }
 
         testBoard = explodeAll(newBoard);
@@ -295,8 +289,6 @@ public class GameBoard
         {
             newBoard = testBoard;
 
-            if (showMove)
-                printBoard(newBoard);
         }
 
         return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
@@ -331,7 +323,7 @@ public class GameBoard
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0] - 1][pieceCoords[1]])
             {
                 if(showMove)
-                    printBoard(newBoard);
+                    printBoardHighlightPiece(newBoard, new int[] {pieceCoords[0] - 1, pieceCoords[1]});
 
                 return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
             }
@@ -340,7 +332,7 @@ public class GameBoard
             newBoard[pieceCoords[0] - 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]];
             
             if(showMove)
-                printBoard(newBoard);
+                printBoardHighlightPiece(newBoard, new int[] {pieceCoords[0] - 1, pieceCoords[1]});
         }
 
         testBoard = explodeAll(newBoard);
@@ -349,8 +341,6 @@ public class GameBoard
         {
             newBoard = testBoard;
 
-            if (showMove)
-                printBoard(newBoard);
         }
 
         return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
@@ -385,7 +375,7 @@ public class GameBoard
             if(board[pieceCoords[0]][pieceCoords[1]] == board[pieceCoords[0] + 1][pieceCoords[1]])
             {
                 if(showMove)
-                    printBoard(newBoard);
+                    printBoardHighlightPiece(newBoard, new int[] {pieceCoords[0] + 1, pieceCoords[1]});
 
                 return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
             }
@@ -394,7 +384,7 @@ public class GameBoard
             newBoard[pieceCoords[0] + 1][pieceCoords[1]] = board[pieceCoords[0]][pieceCoords[1]];
 
             if(showMove)
-                printBoard(newBoard); 
+                printBoardHighlightPiece(newBoard, new int[] {pieceCoords[0] + 1, pieceCoords[1]}); 
         }
 
         testBoard = explodeAll(newBoard);
@@ -403,8 +393,6 @@ public class GameBoard
         {
             newBoard = testBoard;
 
-            if (showMove)
-                printBoard(newBoard);
         }
 
         return new GameBoard(newBoard, this.maxMoves, this.optimalMoves, this.blocks, this.colors);
@@ -804,7 +792,44 @@ public class GameBoard
             System.out.print("\n");
         }
 
-        System.out.println("---------------");
+        try
+        {
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in sleep in print board");
+        }
+
+        System.out.print("\n");
+    }
+
+    /**
+     * Prints a board while highlighting a piece.
+     * @param board The board to print.
+     * @param pieceCoords The piece's coordinates.
+     */
+    private void printBoardHighlightPiece(char[][] board, int[] pieceCoords)
+    {
+        for(int i = 0; i < board.length; i++)
+        {
+            System.out.print("|");
+
+            for(int j = 0; j < board[i].length; j++)
+            {
+                if(i == pieceCoords[0] && j == pieceCoords[1])
+                    System.out.print(Character.toUpperCase(board[i][j]));
+                else
+                    System.out.print(board[i][j]);
+
+                System.out.print('|');
+            }
+
+            System.out.print("\n");
+        }
+
+        System.out.print("\n");
+            
     }
 
     /**
