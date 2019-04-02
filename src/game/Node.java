@@ -138,6 +138,8 @@ public abstract class Node implements Comparable<Node>
 
     public abstract boolean isRepeated();
 
+    public abstract boolean isImpossibleState();
+
     /**
      * Retrieves the depth.
      * @return The depth this node's at.

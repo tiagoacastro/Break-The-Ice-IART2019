@@ -123,7 +123,7 @@ public class GameNode extends Node
      */
     public boolean depthSearch()
     {
-        if(this.moves >= board.getMaxMoves())
+        if(this.moves >= board.getMaxMoves() || this.isImpossibleState())
             return false;
 
         if(!this.testGoal())
@@ -191,6 +191,10 @@ public class GameNode extends Node
 
             if(this.depth < depth)
             {
+
+                if(this.isImpossibleState())
+                    return false;
+
                 ArrayList<Node> children = this.expandNode();
 
                 for(Node n : children)
@@ -408,4 +412,47 @@ public class GameNode extends Node
         return false;
 
     }
+
+    public boolean isImpossibleState() {
+
+        int purple=0, orange=0, red=0, blue=0, green=0, yellow=0;
+
+        for (char[] line : this.board.getBoard())
+		{
+			for (char cell : line)
+			{
+				if(cell != '_')
+				{
+					switch(cell)
+					{
+						case 'p':
+							purple++;
+							break;
+						case 'o':
+							orange++;
+							break;
+						case 'r':
+							red++;
+							break;
+						case 'b':
+							blue++;
+							break;
+						case 'g':
+							green++;
+							break;
+						case 'y':
+							yellow++;
+							break;
+					}
+				}
+			}
+		}
+
+		if((purple | orange | red | blue | green | yellow) < 3 && (purple | orange | red | blue | green | yellow) > 0)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
 }

@@ -114,7 +114,8 @@ public class Bot
                     return true;
                 }
 
-                childrenNodes.addAll(n.expandNode());
+                if (!n.isImpossibleState())
+                    childrenNodes.addAll(n.expandNode());
             }
 
             activeNodes.clear();
@@ -183,7 +184,7 @@ public class Bot
                     break;
                 }
 
-            if (!visitedNode && currentNode.getDepth() < root.getGameBoard().getMaxMoves()) 
+            if (!visitedNode && currentNode.getDepth() < root.getGameBoard().getMaxMoves() && !currentNode.isImpossibleState()) 
             {
                 activeNodesAR.addAll(currentNode.expandNode());
 
