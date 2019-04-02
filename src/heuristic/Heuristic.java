@@ -9,7 +9,7 @@ public abstract class Heuristic {
 	/**
 	 * The current value of the heuristic.
 	 */
-	int value;
+	public double value;
 
 	/**
 	 * The possible colors in a board.
@@ -21,7 +21,7 @@ public abstract class Heuristic {
 	 */
 	Heuristic()
 	{ 
-		this.value = 0; 
+		this.value = 0;
 	}
 	
 	/**
@@ -37,11 +37,11 @@ public abstract class Heuristic {
 	public abstract Heuristic getNewHeuristic();
 
 	/**
-	 * CompareTo for comparation purposes
+	 * Compare for comparation purposes
 	 * @param h heuristic to compare to
 	 * @return difference
 	 */
-	public int compareTo(Heuristic h) {
+	public double compare(Heuristic h) {
 		return this.value - h.value;
 	}
 
@@ -86,7 +86,7 @@ public abstract class Heuristic {
 
 		if((purple | orange | red | blue | green | yellow) < 3 && (purple | orange | red | blue | green | yellow) > 0)
 		{
-			this.value = Integer.MAX_VALUE;
+			this.value = Double.MAX_VALUE;
 			return true;
 		}
 		else

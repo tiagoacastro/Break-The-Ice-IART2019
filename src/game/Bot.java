@@ -148,21 +148,85 @@ public class Bot
      */
     private boolean AStarSearch()
     {
-        return aux(6);
+        PriorityQueue<Node> activeNodes = new PriorityQueue<>(); 
+        ArrayList<Node> children = new ArrayList<>();
+        ArrayList<String> visitedNodes = new ArrayList<>();
+        Node currentNode;
+        boolean active = false, visited = false;
+
+        root.setSearchOption(6);
+        activeNodes.add(root);
+
+        while (!activeNodes.isEmpty()) 
+        {
+            currentNode = activeNodes.peek();
+
+            //System.out.println("Analyzed nodes: " + GameNode.analyzedNodes + " | Current id: " + currentNode.id + "\n");
+
+            if (currentNode.testGoal()) 
+            {
+                activeNodes.poll().traceSolutionUp();
+                return true;
+            }
+
+            activeNodes.poll();
+            visitedNodes.add(currentNode.id);
+
+            if(currentNode.depth < root.getGameBoard().getMaxMoves())
+            {
+                children = currentNode.expandNode();
+
+                for(Node child: children)
+                {
+                    for(String id: visitedNodes)
+                        if(id.equals(child.id))
+                        {
+                            visited = true;
+                            break;
+                        }
+    
+                    if(visited)
+                    {
+                        visited = false;
+                        continue;
+                    }
+    
+                    for(Node n: activeNodes)
+                        if(n.id.equals(child.id))
+                        {
+                            active = true;
+                            break;
+                        }
+    
+                    if(!active)
+                        activeNodes.add(child);
+    
+                    active = false;
+                }
+            }
+            
+
+            children.clear();
+            children.trimToSize();
+
+        }
+
+        return false;
     }
 
     /**
      * Auxiliary function to searches using priority queues.
      * @return Flag indicating if the search was successful or not.
      */
-    private boolean aux(int i) {
-
+    private boolean aux(int i) 
+    {
         PriorityQueue<Node> activeNodes = new PriorityQueue<>(); 
         ArrayList<Node> activeNodesAR = new ArrayList<>();
         ArrayList<String> visitedNodes = new ArrayList<>();
         Node currentNode;
         boolean visitedNode = false;
 
+        root.setSearchOption(i);
         activeNodes.add(root);
 
         while (!activeNodes.isEmpty()) 
