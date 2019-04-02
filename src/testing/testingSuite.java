@@ -45,11 +45,11 @@ public class testingSuite
                 String line;
                 char[][] board = new char[12][7];
                 int n = 0;
-                int optimalMoves, maxPlays = 0, blocks = 0, colors = 0;
+                int optimalMoves=0, maxPlays, blocks = 0, colors = 0;
                 boolean purple = false, orange = false, red = false, blue = false, green = false, yellow = false;
 
                 try {
-                    maxPlays = Integer.parseInt(br.readLine());
+                    optimalMoves = Integer.parseInt(br.readLine());
                     while ((line = br.readLine()) != null) {
                         char[] row = new char[7];
                         for (int i = 0; i < 7; i++) {
@@ -94,7 +94,7 @@ public class testingSuite
                 if (green) colors++;
                 if (yellow) colors++;
 
-                optimalMoves = maxPlays - 2;
+                maxPlays = optimalMoves + 2;
 
                 boards.add(new GameBoard(board, maxPlays, optimalMoves, blocks, colors));
             }
