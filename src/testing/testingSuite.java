@@ -22,9 +22,9 @@ public class testingSuite
     {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("+----------------------------------------------------------------------------+");
-        System.out.println("|  Input the file names separated by space without extension (ENTER to skip) |");
-        System.out.println("+----------------------------------------------------------------------------+");
+        System.out.println("+----------------------------------------------------------+");
+        System.out.println("|  Input the file names separated by space (ENTER to skip) |");
+        System.out.println("+----------------------------------------------------------+");
         String files = sc.nextLine();
 
         boards = new ArrayList<>();

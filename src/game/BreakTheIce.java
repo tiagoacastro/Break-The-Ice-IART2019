@@ -107,9 +107,9 @@ public class BreakTheIce
     private static GameBoard loadLevel(){
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("+----------------------------------------+");
-        System.out.println("|  Input the file name without extension |");
-        System.out.println("+----------------------------------------+");
+        System.out.println("+----------------------+");
+        System.out.println("|  Enter the file name |");
+        System.out.println("+----------------------+");
         String fileName = sc.nextLine();
         File file = new File(fileName);
         BufferedReader br = null;
