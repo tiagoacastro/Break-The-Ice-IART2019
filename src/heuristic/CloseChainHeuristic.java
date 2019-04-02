@@ -46,6 +46,9 @@ public class CloseChainHeuristic extends Heuristic
             {
                 value = blocksLeft / (blocksInChains);
 
+                if(value == 0)
+                    value = 1;
+
                 if (value > gameBoard.getMaxMoves())
                     value = gameBoard.getMaxMoves();
             }
