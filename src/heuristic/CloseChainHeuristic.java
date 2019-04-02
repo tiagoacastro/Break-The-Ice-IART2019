@@ -7,6 +7,7 @@ import game.GameBoard;
  */
 public class CloseChainHeuristic extends Heuristic
 {
+    private int blocksInChains = 0;
     /**
      * Calculates the heuristic's value based on the number of chains that are able to be formed with just one move
      * and the number of blocks remaining.
@@ -17,6 +18,7 @@ public class CloseChainHeuristic extends Heuristic
         char[][] board = gameBoard.getBoard();
         int[] pieceCoords = new int[2];
         int nChains = 0, blocksLeft = GameBoard.getBlocksLeft(board);
+        blocksInChains = 0;
 
         if(notPossibleBoard(board))
             return;
@@ -36,19 +38,20 @@ public class CloseChainHeuristic extends Heuristic
 
         if(blocksLeft == 0)
             value = 0;
-        else{
+        else
+        {
             if(nChains == 0)
                 value = 2;
-            else {
-                value = blocksLeft / (nChains);
+            else 
+            {
+                value = blocksLeft / (blocksInChains);
 
                 if (value > gameBoard.getMaxMoves())
                     value = gameBoard.getMaxMoves();
             }
         }
 
-        //System.out.println(value);
-
+        //System.out.println(blocksInChains + " - " + value);
     }
 
     /**
@@ -288,15 +291,25 @@ public class CloseChainHeuristic extends Heuristic
     {
         char currentColor = '_';
         int counter = 1;
+        boolean chainFound = false;
 
         for(int i = 0; i < board[line].length; i++)
         {
             if(board[line][i] == currentColor && board[line][i] != '_')
             {
-                counter++;
+                counter++;   
 
                 if(counter == 3)
-                    return true;   
+                {
+                    chainFound = true;
+                    blocksInChains += 3;
+                }  
+                else
+                    if(counter > 3)
+                    {
+                        blocksInChains++;
+                        counter++;
+                    }
             }
             else
             {
@@ -305,6 +318,9 @@ public class CloseChainHeuristic extends Heuristic
             }
         }
 
+        if(chainFound)
+            return true;
+        
         return false;
     }
 
@@ -318,15 +334,25 @@ public class CloseChainHeuristic extends Heuristic
     {
         char currentColor = '_';
         int counter = 1;
+        boolean chainFound = false;
 
         for(int i = board.length - 1; i >= 0; i--)
         {
             if(board[i][column] == currentColor && board[i][column] != '_')
             {
-                counter++;
+                counter++; 
 
                 if(counter == 3)
-                    return true;
+                {
+                    chainFound = true;
+                    blocksInChains += 3;
+                }
+                else
+                    if(counter > 3)
+                    {
+                        blocksInChains++;
+                        counter++;
+                    }           
             }
             else 
             {
@@ -335,6 +361,9 @@ public class CloseChainHeuristic extends Heuristic
             }
         }
 
+        if(chainFound)
+            return true;
+        
         return false;
     }
 }

@@ -162,6 +162,7 @@ public class Bot
         Node currentNode;
         boolean visitedNode = false;
 
+        root.setSearchOption(i);
         activeNodes.add(root);
 
         while (!activeNodes.isEmpty()) 
