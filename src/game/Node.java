@@ -168,6 +168,7 @@ public abstract class Node implements Comparable<Node>
                 break;
             case 6:
                 comparation = this.heuristic.compare(o.heuristic) + (this.depth - o.depth);
+                break;
             default:
                 return 0;
         }
