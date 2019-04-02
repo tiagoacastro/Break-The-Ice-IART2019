@@ -1,4 +1,4 @@
-How to compile/run (from inside the src folder):
+How to compile/run (if the source code is inside a java project and from inside the src folder):
 
 Game: javac game/*.java
       javac heuristic/*.java
