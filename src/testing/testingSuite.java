@@ -32,8 +32,9 @@ public class testingSuite
         if(files.length() > 0) {
             String[] fileNames = files.split(" ");
 
-            for (String fileName : fileNames) {
-                File file = new File("levels/" + fileName);
+            for (String fileName : fileNames) 
+            {
+                File file = new File(fileName);
                 BufferedReader br = null;
                 try {
                     br = new BufferedReader(new FileReader(file));
